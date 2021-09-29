@@ -40,4 +40,9 @@ public class FireStationService implements CrudService<FireStation> {
             return null;
         }
     }
+
+    @Override
+    public void deleteByName(String firstName, String lastName) {
+
+    }
 }

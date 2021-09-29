@@ -45,4 +45,10 @@ public class PersonService implements CrudService<Person> {
            return null;
        }
     }
+
+    @Override
+    public void deleteByName(String firstName, String lastName) {
+        Optional<Person> p1 = repository.findByFirstNameAndLastName(firstName, lastName);
+        p1.ifPresent(p -> repository.delete(p));
+    }
 }

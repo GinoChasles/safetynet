@@ -12,4 +12,6 @@ public interface CrudService<T> {
 
     T update(long id, T t);
 
+    void deleteByName(String firstName, String lastName);
+
 }

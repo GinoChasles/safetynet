@@ -2,6 +2,7 @@ package com.safety.safetynet.service;
 
 import com.safety.safetynet.model.FireStation;
 import com.safety.safetynet.model.MedicalRecord;
+import com.safety.safetynet.model.Person;
 import com.safety.safetynet.repository.MedicalRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,4 +44,11 @@ public class MedicalRecordService implements CrudService<MedicalRecord> {
             return null;
         }
     }
+
+    @Override
+    public void deleteByName(String firstName, String lastName) {
+        Optional<MedicalRecord> p1 = repository.findByFirstNameAndLastName(firstName, lastName);
+        p1.ifPresent(p -> repository.delete(p));
+    }
+
 }
