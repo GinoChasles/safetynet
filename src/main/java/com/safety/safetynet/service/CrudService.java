@@ -1,5 +1,6 @@
 package com.safety.safetynet.service;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CrudService<T> {
@@ -13,5 +14,7 @@ public interface CrudService<T> {
     T update(long id, T t);
 
     void deleteByName(String firstName, String lastName);
+
+    List<T> findAll();
 
 }

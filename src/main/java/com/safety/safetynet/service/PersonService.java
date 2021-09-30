@@ -5,6 +5,8 @@ import com.safety.safetynet.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,5 +52,10 @@ public class PersonService implements CrudService<Person> {
     public void deleteByName(String firstName, String lastName) {
         Optional<Person> p1 = repository.findByFirstNameAndLastName(firstName, lastName);
         p1.ifPresent(p -> repository.delete(p));
+    }
+
+    @Override
+    public List<Person> findAll() {
+        return repository.findAll();
     }
 }

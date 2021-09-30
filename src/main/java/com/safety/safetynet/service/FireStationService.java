@@ -5,6 +5,7 @@ import com.safety.safetynet.repository.FireStationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -44,5 +45,10 @@ public class FireStationService implements CrudService<FireStation> {
     @Override
     public void deleteByName(String firstName, String lastName) {
 
+    }
+
+    @Override
+    public List<FireStation> findAll() {
+        return repository.findAll();
     }
 }

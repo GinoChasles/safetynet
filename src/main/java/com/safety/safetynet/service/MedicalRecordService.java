@@ -7,6 +7,7 @@ import com.safety.safetynet.repository.MedicalRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,6 +50,11 @@ public class MedicalRecordService implements CrudService<MedicalRecord> {
     public void deleteByName(String firstName, String lastName) {
         Optional<MedicalRecord> p1 = repository.findByFirstNameAndLastName(firstName, lastName);
         p1.ifPresent(p -> repository.delete(p));
+    }
+
+    @Override
+    public List<MedicalRecord> findAll() {
+        return repository.findAll();
     }
 
 }
