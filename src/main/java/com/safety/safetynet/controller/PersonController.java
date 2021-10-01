@@ -24,6 +24,15 @@ public class PersonController {
         }
     }
 
+    @GetMapping("/person/{id}")
+    public ResponseEntity<Optional<Person>> findById(@PathVariable(value = "id") long id) {
+        Optional<Person> result = personService.findById(id);
+        if(result.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok().body(result);
+        }
+    }
     @PostMapping("/person")
     public ResponseEntity<Person> addPerson(@RequestBody Person person) {
         return ResponseEntity.ok(personService.insert(person));
@@ -49,4 +58,14 @@ public class PersonController {
             return ResponseEntity.accepted().build();
         }
     }
+
+//    @GetMapping("/firestation?stationNumber={stationNumber}")
+//    public ResponseEntity<List<Person>> getPersonByStationNumber(@PathVariable(value = "stationNumber") long id) {
+//        List<Person> result = personService.findByNumberStation(id);
+//        if(result.isEmpty()) {
+//            return ResponseEntity.notFound().build();
+//        } else {
+//            return ResponseEntity.ok().body(result);
+//        }
+//    }
 }

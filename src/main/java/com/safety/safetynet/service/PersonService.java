@@ -58,4 +58,8 @@ public class PersonService implements CrudService<Person> {
     public List<Person> findAll() {
         return repository.findAll();
     }
+
+//    public List<Person> findByNumberStation(long id) {
+//        return repository.findByStationNumber(id);
+//    }
 }

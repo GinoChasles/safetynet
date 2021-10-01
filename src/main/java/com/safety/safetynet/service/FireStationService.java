@@ -34,7 +34,7 @@ public class FireStationService implements CrudService<FireStation> {
         Optional<FireStation> fireStation1 = this.findById(id);
         if (fireStation1.isPresent()) {
             FireStation fireStationToUpdate = fireStation1.get();
-            fireStationToUpdate.setStation(fireStation.getStation());
+            fireStationToUpdate.setStationNumber(fireStation.getStationNumber());
 
             return repository.save(fireStationToUpdate);
         } else {

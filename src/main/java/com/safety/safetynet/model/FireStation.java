@@ -10,7 +10,7 @@ public class FireStation {
     private Long id;
 
     String address;
-    int station;
+    int stationNumber;
 
     @OneToOne
     private Person person;
@@ -31,12 +31,12 @@ public class FireStation {
         this.address = address;
     }
 
-    public int getStation() {
-        return station;
+    public int getStationNumber() {
+        return stationNumber;
     }
 
-    public void setStation(int station) {
-        this.station = station;
+    public void setStationNumber(int station) {
+        this.stationNumber = station;
     }
 
     public Person getPerson() {
