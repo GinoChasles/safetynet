@@ -1,7 +1,9 @@
 package com.safety.safetynet.controller;
 
 import com.safety.safetynet.model.FireStation;
+import com.safety.safetynet.model.Person;
 import com.safety.safetynet.service.FireStationService;
+import com.safety.safetynet.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,8 @@ import java.util.Optional;
 public class FireStationController {
     @Autowired
     private FireStationService fireStationService;
+    @Autowired
+    private PersonService personService;
 
     @GetMapping(value = "/firestation")
     public ResponseEntity<List<FireStation>> findAll() {
@@ -47,6 +51,16 @@ public class FireStationController {
         } else {
             fireStationService.delete(fireStation.get().getId());
             return ResponseEntity.accepted().build();
+        }
+    }
+
+    @GetMapping("/firestation?stationNumber={stationNumber}")
+    public ResponseEntity<List<Person>> getPersonByStationNumber(@PathVariable(value = "stationNumber") long id) {
+        List<Person> result = personService.findByNumberStation(id);
+        if(result.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok().body(result);
         }
     }
 }

@@ -59,13 +59,5 @@ public class PersonController {
         }
     }
 
-//    @GetMapping("/firestation?stationNumber={stationNumber}")
-//    public ResponseEntity<List<Person>> getPersonByStationNumber(@PathVariable(value = "stationNumber") long id) {
-//        List<Person> result = personService.findByNumberStation(id);
-//        if(result.isEmpty()) {
-//            return ResponseEntity.notFound().build();
-//        } else {
-//            return ResponseEntity.ok().body(result);
-//        }
-//    }
+
 }

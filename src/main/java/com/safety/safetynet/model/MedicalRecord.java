@@ -7,7 +7,6 @@ import java.util.List;
 @Entity
 public class MedicalRecord {
     @Id
-    @GeneratedValue
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -15,6 +14,8 @@ public class MedicalRecord {
     private String lastName;
     private Date birthdate;
 
+    @ElementCollection
+    private List<String> medicationstest;
     @OneToMany
     private List<Medication> medications;
 

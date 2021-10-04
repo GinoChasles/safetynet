@@ -15,5 +15,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     Optional<Person> findByFirstNameAndLastName(String firstName, String lastName);
 
 //    @Query("select u.firstName, u.lastName, u.phone from Person u where FireStation.stationNumber = :id and u.address = FireStation.address")
-//    List<Person> findByStationNumber(@Param("id") long id);
+    @Query("select u from Person u join u.fireStation as f where f.stationNumber=?1")
+    List<Person> findPersonByStationNumber(@Param("id") long id);
 }

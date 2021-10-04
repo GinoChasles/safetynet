@@ -1,11 +1,13 @@
 package com.safety.safetynet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
 public class FireStation {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -13,6 +15,7 @@ public class FireStation {
     int stationNumber;
 
     @OneToOne
+    @JsonIgnore
     private Person person;
 
     public Long getId() {
