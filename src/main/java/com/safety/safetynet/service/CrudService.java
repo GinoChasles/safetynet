@@ -1,5 +1,7 @@
 package com.safety.safetynet.service;
 
+import com.safety.safetynet.model.FireStation;
+
 import java.util.List;
 import java.util.Optional;
 

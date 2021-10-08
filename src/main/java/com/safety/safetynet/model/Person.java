@@ -19,13 +19,12 @@ public class Person {
    private String phone;
    private String email;
 
-   @OneToOne
-   @JsonIgnore
-   private MedicalRecord medicalRecord;
+//   @OneToOne
+//   private MedicalRecord medicalRecord;
 
-   @OneToOne
-   @JsonIgnore
-   private FireStation fireStation;
+//   @ManyToOne
+//   @JoinColumn(name = "address", insertable = false, updatable = false)
+//   private FireStation fireStation;
 
    public Long getId() {
       return id;
@@ -91,11 +90,11 @@ public class Person {
       this.email = email;
    }
 
-   public MedicalRecord getMedicalRecord() {
-      return medicalRecord;
-   }
-
-   public void setMedicalRecord(MedicalRecord medicalRecord) {
-      this.medicalRecord = medicalRecord;
-   }
+//   public MedicalRecord getMedicalRecord() {
+//      return medicalRecord;
+//   }
+//
+//   public void setMedicalRecord(MedicalRecord medicalRecord) {
+//      this.medicalRecord = medicalRecord;
+//   }
 }

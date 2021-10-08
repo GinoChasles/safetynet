@@ -59,5 +59,9 @@ public class PersonController {
         }
     }
 
-
+//    @DeleteMapping("/person/firstname/{firstname}/lastname/{lastname}")
+//    public ResponseEntity<Person> deleteByFirstnameAndLastName(@PathVariable(value = "firstname")
+//                     String firstName, @PathVariable(value = "lastname") String lastname) {
+//
+//    }
 }

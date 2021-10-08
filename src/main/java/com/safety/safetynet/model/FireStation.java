@@ -3,6 +3,7 @@ package com.safety.safetynet.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class FireStation {
@@ -12,11 +13,10 @@ public class FireStation {
     private Long id;
 
     String address;
-    int stationNumber;
+    long stationNumber;
 
-    @OneToOne
-    @JsonIgnore
-    private Person person;
+//    @OneToMany(mappedBy = "address")
+//    private List<Person> person;
 
     public Long getId() {
         return id;
@@ -34,19 +34,19 @@ public class FireStation {
         this.address = address;
     }
 
-    public int getStationNumber() {
+    public long getStationNumber() {
         return stationNumber;
     }
 
-    public void setStationNumber(int station) {
+    public void setStationNumber(long station) {
         this.stationNumber = station;
     }
 
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
+//    public List<Person> getPerson() {
+//        return person;
+//    }
+//
+//    public void setPerson(List<Person> person) {
+//        this.person = person;
+//    }
 }

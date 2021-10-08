@@ -37,8 +37,8 @@ public class MedicalRecordService implements CrudService<MedicalRecord> {
         if (mr1.isPresent()) {
             MedicalRecord medicalRecordToUpdate = mr1.get();
             medicalRecordToUpdate.setBirthdate(medicalRecord.getBirthdate());
-            medicalRecordToUpdate.setMedications(medicalRecord.getMedications());
-            medicalRecordToUpdate.setAllergies(medicalRecord.getAllergies());
+//            medicalRecordToUpdate.setMedications(medicalRecord.getMedications());
+//            medicalRecordToUpdate.setAllergies(medicalRecord.getAllergies());
 
             return repository.save(medicalRecordToUpdate);
         } else {
@@ -56,5 +56,6 @@ public class MedicalRecordService implements CrudService<MedicalRecord> {
     public List<MedicalRecord> findAll() {
         return repository.findAll();
     }
+
 
 }

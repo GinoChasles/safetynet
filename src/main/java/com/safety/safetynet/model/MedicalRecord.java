@@ -1,26 +1,31 @@
 package com.safety.safetynet.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+
 public class MedicalRecord {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
     private String firstName;
     private String lastName;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date birthdate;
 
     @ElementCollection
     private List<String> medicationstest;
-    @OneToMany
-    private List<Medication> medications;
-
-    @OneToMany
-    private List<Allergie> allergies;
+//    @OneToMany
+//    private List<Medication> medications;
+//
+//    @OneToMany
+//    private List<Allergie> allergies;
 
     public Long getId() {
         return id;
@@ -53,19 +58,19 @@ public class MedicalRecord {
         this.birthdate = birthdate;
     }
 
-    public List<Medication> getMedications() {
-        return medications;
-    }
-
-    public void setMedications(List<Medication> medications) {
-        this.medications = medications;
-    }
-
-    public List<Allergie> getAllergies() {
-        return allergies;
-    }
-
-    public void setAllergies(List<Allergie> allergies) {
-        this.allergies = allergies;
-    }
+//    public List<Medication> getMedications() {
+//        return medications;
+//    }
+//
+//    public void setMedications(List<Medication> medications) {
+//        this.medications = medications;
+//    }
+//
+//    public List<Allergie> getAllergies() {
+//        return allergies;
+//    }
+//
+//    public void setAllergies(List<Allergie> allergies) {
+//        this.allergies = allergies;
+//    }
 }
