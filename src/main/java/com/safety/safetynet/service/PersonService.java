@@ -99,13 +99,6 @@ public class PersonService implements CrudService<Person> {
 
     public ChildAlert findChildAlert(String address) {
         List<Person> personList = repository.findAllByAddress(address);
-        List<Person> personList2 = repository.findByAddress(address);
-        List<Person> personList3 = repository.findPersonByAddressContaining(address);
-        List<Person> personList4 = repository.findPersonByAddress(address);
-        System.out.print("person list " + personList);
-        System.out.print("person list2 " + personList2);
-        System.out.print("person list3 " + personList3);
-        System.out.print("person list4 " + personList4);
         ChildAlert result = new ChildAlert();
         List<Person> adult = new ArrayList<>();
         for(Person person : personList) {

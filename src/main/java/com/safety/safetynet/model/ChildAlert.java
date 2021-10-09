@@ -2,6 +2,7 @@ package com.safety.safetynet.model;
 
 import java.util.List;
 
+
 public class ChildAlert {
     String firstName;
     String lastName;

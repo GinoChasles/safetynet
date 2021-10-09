@@ -21,7 +21,4 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query("select p from Person p where p.address = :address")
     List<Person> findAllByAddress(String address);
 
-    List<Person> findPersonByAddressContaining(String address);
-    List<Person> findPersonByAddress(String address);
-    List<Person> findByAddress(String address);
 }
