@@ -120,4 +120,16 @@ public class PersonService implements CrudService<Person> {
 //        }
         return result;
     }
+
+    public CommunityEmail createCommunityEmail(String city) {
+        List<Person> personList = repository.findAllByCity(city);
+        CommunityEmail result = new CommunityEmail();
+        List<String> email = new ArrayList<>();
+
+        for(Person p : personList) {
+            email.add(p.getEmail());
+        }
+        result.setEmail(email);
+        return result;
+    }
 }

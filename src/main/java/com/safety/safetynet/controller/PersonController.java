@@ -1,6 +1,7 @@
 package com.safety.safetynet.controller;
 
 import com.safety.safetynet.model.ChildAlert;
+import com.safety.safetynet.model.CommunityEmail;
 import com.safety.safetynet.model.Person;
 import com.safety.safetynet.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,16 @@ public class PersonController {
             return ResponseEntity.notFound().build();
         } else {
             return ResponseEntity.ok().body(result);
+        }
+    }
+
+    @GetMapping(value = "communityEmail", params = "city")
+    public ResponseEntity<CommunityEmail> getCommunityEmail(@RequestParam("city") String city) {
+        CommunityEmail result = personService.createCommunityEmail(city);
+        if(result == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(result);
         }
     }
 //    @DeleteMapping("/person/firstname/{firstname}/lastname/{lastname}")
