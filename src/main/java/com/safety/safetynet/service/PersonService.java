@@ -1,9 +1,6 @@
 package com.safety.safetynet.service;
 
-import com.safety.safetynet.model.FireStation;
-import com.safety.safetynet.model.FireStationCoverage;
-import com.safety.safetynet.model.Person;
-import com.safety.safetynet.model.PersonInfos;
+import com.safety.safetynet.model.*;
 import com.safety.safetynet.repository.MedicalRecordRepository;
 import com.safety.safetynet.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -78,26 +77,54 @@ public class PersonService implements CrudService<Person> {
 
         for(Person person : personList) {
             PersonInfos personInfos = new PersonInfos();
-            DateFormat formatter = new SimpleDateFormat("ddMMyyyy");
-            Date birthdate = medicalRecordRepository.findBirthDateByFirstNameAndLastName(person.getFirstName(), person.getLastName());
-            Date now = new Date();
-            int d1 = Integer.parseInt(formatter.format(birthdate));
-            int d2 = Integer.parseInt(formatter.format(now));
-            int age = (d2 - d1) / 10000;
+            LocalDate birthdate = medicalRecordRepository.findBirthDateByFirstNameAndLastName(person.getFirstName(), person.getLastName());
+            LocalDate now = LocalDate.now();
+            int age = Period.between(birthdate,now).getYears();
             personInfos.setFirstName(person.getFirstName());
             personInfos.setLastName(person.getLastName());
             personInfos.setAddress(person.getAddress());
             personInfos.setPhone(person.getPhone());
             result.add(personInfos);
+            System.out.print("age de " + person + " est de " + age);
         if(age < 18) {
-            fireStationCoverage.setChild(fireStationCoverage.getChild()+1);
+            fireStationCoverage.setChild(fireStationCoverage.getChild() + 1);
         } else {
-            fireStationCoverage.setAdult(fireStationCoverage.getAdult()+1);
+            fireStationCoverage.setAdult(fireStationCoverage.getAdult() + 1);
         }
         }
         fireStationCoverage.setPersonInfosList(result);
 
         return fireStationCoverage;
+    }
 
+    public ChildAlert findChildAlert(String address) {
+        List<Person> personList = repository.findAllByAddress(address);
+        List<Person> personList2 = repository.findByAddress(address);
+        List<Person> personList3 = repository.findPersonByAddressContaining(address);
+        List<Person> personList4 = repository.findPersonByAddress(address);
+        System.out.print("person list " + personList);
+        System.out.print("person list2 " + personList2);
+        System.out.print("person list3 " + personList3);
+        System.out.print("person list4 " + personList4);
+        ChildAlert result = new ChildAlert();
+        List<Person> adult = new ArrayList<>();
+        for(Person person : personList) {
+            LocalDate birthdate = medicalRecordRepository.findBirthDateByFirstNameAndLastName(person.getFirstName(), person.getLastName());
+            LocalDate now = LocalDate.now();
+            int age = Period.between(birthdate,now).getYears();
+
+            if(age > 18) {
+                adult.add(person);
+            } else {
+                result.setFirstName(person.getFirstName());
+                result.setLastName(person.getLastName());
+                result.setAge(age);
+                result.setFamily(adult);
+            }
+        }
+//        if(result.getFirstName().isEmpty()){
+//            result = new ChildAlert();
+//        }
+        return result;
     }
 }

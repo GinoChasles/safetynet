@@ -12,8 +12,8 @@ public class FireStation {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    String address;
-    long stationNumber;
+    private String address;
+    private long stationNumber;
 
 //    @OneToMany(mappedBy = "address")
 //    private List<Person> person;

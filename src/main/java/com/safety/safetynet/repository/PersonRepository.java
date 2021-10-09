@@ -15,11 +15,13 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     Optional<Person> findByFirstNameAndLastName(String firstName, String lastName);
 
-//    @Query("select u.firstName, u.lastName, u.phone from Person u where FireStation.stationNumber = :id and u.address = FireStation.address")
-//    @Query("select u from Person u join u.fireStation as f where f.stationNumber=?1")
-//    List<Person> findPersonByStationNumber(@Param("id") long id);
-
-//    List<Person> findAllByFireStation(FireStation fireStation);
 
     List<Person> findAllByAddressIn(List<String> addresses);
+
+    @Query("select p from Person p where p.address = :address")
+    List<Person> findAllByAddress(String address);
+
+    List<Person> findPersonByAddressContaining(String address);
+    List<Person> findPersonByAddress(String address);
+    List<Person> findByAddress(String address);
 }
