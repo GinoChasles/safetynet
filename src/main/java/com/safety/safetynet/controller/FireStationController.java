@@ -1,9 +1,6 @@
 package com.safety.safetynet.controller;
 
-import com.safety.safetynet.model.FireStation;
-import com.safety.safetynet.model.FireStationCoverage;
-import com.safety.safetynet.model.Person;
-import com.safety.safetynet.model.PersonInfos;
+import com.safety.safetynet.model.*;
 import com.safety.safetynet.service.FireStationService;
 import com.safety.safetynet.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,4 +65,14 @@ public class FireStationController {
                 return ResponseEntity.ok().body(result);
             }
         }
+
+    @GetMapping(value = "/phoneAlert", params = "firestation")
+    public ResponseEntity<PhoneAlert> getPhoneAlert(@RequestParam("firestation") long stationNumber) {
+        PhoneAlert result = fireStationService.createPhoneAlert(stationNumber);
+        if(result == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(result);
+        }
+    }
 }

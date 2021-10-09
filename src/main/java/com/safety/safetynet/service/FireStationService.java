@@ -1,9 +1,6 @@
 package com.safety.safetynet.service;
 
-import com.safety.safetynet.model.FireStation;
-import com.safety.safetynet.model.FireStationCoverage;
-import com.safety.safetynet.model.Person;
-import com.safety.safetynet.model.PersonInfos;
+import com.safety.safetynet.model.*;
 import com.safety.safetynet.repository.FireStationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,6 +71,22 @@ public class FireStationService implements CrudService<FireStation> {
         // pour chaque personne on vient créer les infos d'une personne
 
         result = personService.createPersonInfoToStationNumber(personList);
+        return result;
+    }
+
+    public PhoneAlert createPhoneAlert(long stationNumber) {
+        List<FireStation> fireStationList = repository.findAllByStationNumber(stationNumber);
+        List<String> phoneList = new ArrayList<>();
+        List<String> addresses = new ArrayList<>();
+        PhoneAlert result = new PhoneAlert();
+        for(FireStation f : fireStationList) {
+            addresses.add(f.getAddress());
+        }
+        List<Person> personList = personService.findAllByAdressIn(addresses);
+        for(Person p : personList) {
+            phoneList.add(p.getPhone());
+        }
+        result.setPhoneList(phoneList);
         return result;
     }
 }
