@@ -75,4 +75,14 @@ public class FireStationController {
             return ResponseEntity.ok(result);
         }
     }
+
+    @GetMapping(value = "flood/stations", params = "stationNumber")
+    public ResponseEntity<Flood> getFlood(@RequestParam("stationNumber") List<Long> stationNumberList) {
+        Flood result = fireStationService.createFlood(stationNumberList);
+        if(result == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(result);
+        }
+    }
 }

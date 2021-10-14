@@ -89,4 +89,10 @@ public class FireStationService implements CrudService<FireStation> {
         result.setPhoneList(phoneList);
         return result;
     }
+
+    public Flood createFlood(List<Long> stationNumberList) {
+        Flood result = new Flood();
+
+        return result;
+    }
 }

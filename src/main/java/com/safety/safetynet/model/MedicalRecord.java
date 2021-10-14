@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,12 +20,9 @@ public class MedicalRecord {
     private LocalDate birthdate;
 
     @ElementCollection
-    private List<String> medicationstest;
-//    @OneToMany
-//    private List<Medication> medications;
-//
-//    @OneToMany
-//    private List<Allergie> allergies;
+    private List<String> medications;
+    @ElementCollection
+    private List<String> allergies;
 
     public Long getId() {
         return id;
@@ -59,19 +55,19 @@ public class MedicalRecord {
         this.birthdate = birthdate;
     }
 
-//    public List<Medication> getMedications() {
-//        return medications;
-//    }
-//
-//    public void setMedications(List<Medication> medications) {
-//        this.medications = medications;
-//    }
-//
-//    public List<Allergie> getAllergies() {
-//        return allergies;
-//    }
-//
-//    public void setAllergies(List<Allergie> allergies) {
-//        this.allergies = allergies;
-//    }
+    public List<String> getMedications() {
+        return medications;
+    }
+
+    public void setMedications(List<String> medications) {
+        this.medications = medications;
+    }
+
+    public List<String> getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(List<String> allergies) {
+        this.allergies = allergies;
+    }
 }

@@ -2,6 +2,7 @@ package com.safety.safetynet.controller;
 
 import com.safety.safetynet.model.ChildAlert;
 import com.safety.safetynet.model.CommunityEmail;
+import com.safety.safetynet.model.Fire;
 import com.safety.safetynet.model.Person;
 import com.safety.safetynet.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,11 +65,7 @@ public class PersonController {
     @GetMapping(value = "/childAlert", params = "address")
     public ResponseEntity<ChildAlert> getChildAlert(@RequestParam(value = "address") String address) {
         ChildAlert result = personService.findChildAlert(address);
-        if(result == null){
-            return ResponseEntity.notFound().build();
-        } else {
-            return ResponseEntity.ok().body(result);
-        }
+        return ResponseEntity.ok().body(result);
     }
 
     @GetMapping(value = "communityEmail", params = "city")
@@ -80,9 +77,14 @@ public class PersonController {
             return ResponseEntity.ok(result);
         }
     }
-//    @DeleteMapping("/person/firstname/{firstname}/lastname/{lastname}")
-//    public ResponseEntity<Person> deleteByFirstnameAndLastName(@PathVariable(value = "firstname")
-//                     String firstName, @PathVariable(value = "lastname") String lastname) {
-//
-//    }
+
+    @GetMapping(value = "fire", params = "address")
+    public ResponseEntity<List<Fire>> getFire(@RequestParam("address") String address) {
+        List<Fire> result = personService.createFire(address);
+        if(result.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(result);
+        }
+    }
 }

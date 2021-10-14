@@ -1,17 +1,14 @@
 package com.safety.safetynet.service;
 
 import com.safety.safetynet.model.*;
+import com.safety.safetynet.repository.FireStationRepository;
 import com.safety.safetynet.repository.MedicalRecordRepository;
 import com.safety.safetynet.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +18,8 @@ public class PersonService implements CrudService<Person> {
     PersonRepository repository;
     @Autowired
     MedicalRecordRepository medicalRecordRepository;
+    @Autowired
+    FireStationRepository fireStationRepository;
 
     @Override
     public Optional<Person> findById(long id) {
@@ -99,7 +98,7 @@ public class PersonService implements CrudService<Person> {
 
     public ChildAlert findChildAlert(String address) {
         List<Person> personList = repository.findAllByAddress(address);
-        ChildAlert result = new ChildAlert();
+        ChildAlert result = null;
         List<Person> adult = new ArrayList<>();
         for(Person person : personList) {
             LocalDate birthdate = medicalRecordRepository.findBirthDateByFirstNameAndLastName(person.getFirstName(), person.getLastName());
@@ -109,15 +108,13 @@ public class PersonService implements CrudService<Person> {
             if(age > 18) {
                 adult.add(person);
             } else {
+                result = new ChildAlert();
                 result.setFirstName(person.getFirstName());
                 result.setLastName(person.getLastName());
                 result.setAge(age);
                 result.setFamily(adult);
             }
         }
-//        if(result.getFirstName().isEmpty()){
-//            result = new ChildAlert();
-//        }
         return result;
     }
 
@@ -131,5 +128,33 @@ public class PersonService implements CrudService<Person> {
         }
         result.setEmail(email);
         return result;
+    }
+
+    public List<Fire> createFire(String address) {
+        List<Person> personList = repository.findAllByAddress(address);
+        List<Fire> resultList = new ArrayList<Fire>();
+
+        for(Person p : personList) {
+            Fire result = new Fire();
+            FireStation fireStation = fireStationRepository.findFireStationByAddress(address);
+            Optional<MedicalRecord> medicalRecord = medicalRecordRepository.findByFirstNameAndLastName(p.getFirstName(), p.getLastName());
+
+            LocalDate birthdate = medicalRecordRepository.findBirthDateByFirstNameAndLastName(p.getFirstName(), p.getLastName());
+            LocalDate now = LocalDate.now();
+            int age = Period.between(birthdate,now).getYears();
+
+            result.setFirstName(p.getFirstName());
+            result.setLastName(p.getLastName());
+            result.setPhone(p.getPhone());
+            result.setAge(age);
+            result.setStationNumber(fireStation.getStationNumber());
+
+            if(medicalRecord.isPresent()) {
+                result.setMedications(medicalRecord.get().getMedications());
+                result.setAllergies(medicalRecord.get().getAllergies());
+            }
+            resultList.add(result);
+        }
+        return resultList;
     }
 }

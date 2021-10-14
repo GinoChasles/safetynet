@@ -1,8 +1,6 @@
 package com.safety.safetynet.service;
 
-import com.safety.safetynet.model.FireStation;
 import com.safety.safetynet.model.MedicalRecord;
-import com.safety.safetynet.model.Person;
 import com.safety.safetynet.repository.MedicalRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,8 +35,8 @@ public class MedicalRecordService implements CrudService<MedicalRecord> {
         if (mr1.isPresent()) {
             MedicalRecord medicalRecordToUpdate = mr1.get();
             medicalRecordToUpdate.setBirthdate(medicalRecord.getBirthdate());
-//            medicalRecordToUpdate.setMedications(medicalRecord.getMedications());
-//            medicalRecordToUpdate.setAllergies(medicalRecord.getAllergies());
+            medicalRecordToUpdate.setMedications(medicalRecord.getMedications());
+            medicalRecordToUpdate.setAllergies(medicalRecord.getAllergies());
 
             return repository.save(medicalRecordToUpdate);
         } else {
