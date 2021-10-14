@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -77,8 +78,8 @@ public class FireStationController {
     }
 
     @GetMapping(value = "flood/stations", params = "stationNumber")
-    public ResponseEntity<Flood> getFlood(@RequestParam("stationNumber") List<Long> stationNumberList) {
-        Flood result = fireStationService.createFlood(stationNumberList);
+    public ResponseEntity<Map<String,List<Flood>>> getFlood(@RequestParam("stationNumber") List<Long> stationNumberList) {
+        Map<String, List<Flood>> result = fireStationService.createFlood(stationNumberList);
         if(result == null) {
             return ResponseEntity.notFound().build();
         } else {
