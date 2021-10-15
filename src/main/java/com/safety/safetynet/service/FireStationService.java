@@ -43,7 +43,7 @@ public class FireStationService implements CrudService<FireStation> {
         Optional<FireStation> fireStation1 = this.findById(id);
         if (fireStation1.isPresent()) {
             FireStation fireStationToUpdate = fireStation1.get();
-            fireStationToUpdate.setStationNumber(fireStation.getStationNumber());
+            fireStationToUpdate.setStation(fireStation.getStation());
 
             return repository.save(fireStationToUpdate);
         } else {
@@ -65,7 +65,7 @@ public class FireStationService implements CrudService<FireStation> {
     //get persons by stationnumber
     public FireStationCoverage findAllByFireStationNumber(long stationNumber) {
         //on récupère les stations dont le stationNumber correspond
-        List<FireStation> fireStations = repository.findAllByStationNumber(stationNumber);
+        List<FireStation> fireStations = repository.findAllByStation(stationNumber);
         List<String> addresses = new ArrayList<>();
         FireStationCoverage result = new FireStationCoverage();
         //on ajout les adresses des stations dans une liste
@@ -81,7 +81,7 @@ public class FireStationService implements CrudService<FireStation> {
     }
 
     public PhoneAlert createPhoneAlert(long stationNumber) {
-        List<FireStation> fireStationList = repository.findAllByStationNumber(stationNumber);
+        List<FireStation> fireStationList = repository.findAllByStation(stationNumber);
         List<String> phoneList = new ArrayList<>();
         List<String> addresses = new ArrayList<>();
         PhoneAlert result = new PhoneAlert();
@@ -101,7 +101,7 @@ public class FireStationService implements CrudService<FireStation> {
 
         List<Flood> floodList = new ArrayList<Flood>();
         for (long el : stationNumberList) {
-            FireStation fireStation = repository.findFireStationByStationNumber(el);
+            FireStation fireStation = repository.findFireStationByStation(el);
             List<Person> personList = personRepository.findAllByAddress(fireStation.getAddress());
 
             for (Person p : personList) {

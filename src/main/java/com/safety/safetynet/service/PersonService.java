@@ -147,7 +147,7 @@ public class PersonService implements CrudService<Person> {
             result.setLastName(p.getLastName());
             result.setPhone(p.getPhone());
             result.setAge(age);
-            result.setStationNumber(fireStation.getStationNumber());
+            result.setStationNumber(fireStation.getStation());
 
             if(medicalRecord.isPresent()) {
                 result.setMedications(medicalRecord.get().getMedications());
