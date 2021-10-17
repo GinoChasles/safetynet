@@ -1,132 +1,24 @@
 package com.safety.safetynet.service;
 
-import com.safety.safetynet.model.*;
-import com.safety.safetynet.repository.FireStationRepository;
-import com.safety.safetynet.repository.MedicalRecordRepository;
-import com.safety.safetynet.repository.PersonRepository;
-import org.springframework.stereotype.Service;
+import com.safety.safetynet.model.FireStation;
+import com.safety.safetynet.model.FireStationCoverage;
+import com.safety.safetynet.model.Flood;
+import com.safety.safetynet.model.PhoneAlert;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-@Service
-public class FireStationService implements CrudService<FireStation> {
-    FireStationRepository repository;
-    PersonService personService;
-    PersonRepository personRepository;
-    MedicalRecordRepository medicalRecordRepository;
-
-    public FireStationService(FireStationRepository repository, PersonService personService, PersonRepository personRepository, MedicalRecordRepository medicalRecordRepository) {
-        this.repository = repository;
-        this.personService = personService;
-        this.personRepository = personRepository;
-        this.medicalRecordRepository = medicalRecordRepository;
-    }
-
-    @Override
-    public Optional<FireStation> findById(long id) {
-        return repository.findById(id);
-    }
-
-    @Override
-    public FireStation insert(FireStation fireStation) {
-        return repository.save(fireStation);
-    }
-
-    @Override
-    public void delete(long id) {
-        Optional<FireStation> fireStation = this.findById(id);
-        fireStation.ifPresent(station -> repository.delete(station));
-    }
-
-    @Override
-    public FireStation update(long id, FireStation fireStation) {
-        Optional<FireStation> fireStation1 = this.findById(id);
-        if (fireStation1.isPresent()) {
-            FireStation fireStationToUpdate = fireStation1.get();
-            fireStationToUpdate.setStation(fireStation.getStation());
-
-            return repository.save(fireStationToUpdate);
-        } else {
-            return null;
-        }
-    }
-
-    @Override
-    public void deleteByName(String firstName, String lastName) {
-
-    }
-
-    @Override
-    public List<FireStation> findAll() {
-        return repository.findAll();
-    }
+public interface FireStationService {
+    Optional<FireStation> findById(long id);
+    FireStation insert(FireStation fireStation);
+    void delete(long id);
+    FireStation update(long id, FireStation fireStation);
+    void deleteByName(String firstName, String lastName);
+    List<FireStation> findAll();
+    FireStationCoverage findAllByFireStationNumber(long stationNumber);
+    PhoneAlert createPhoneAlert(long stationNumber);
+    List<Map<String, List<Flood>>> createFlood(List<Long> stationNumberList);
 
 
-    //get persons by stationnumber
-    public FireStationCoverage findAllByFireStationNumber(long stationNumber) {
-        //on récupère les stations dont le stationNumber correspond
-        List<FireStation> fireStations = repository.findAllByStation(stationNumber);
-        List<String> addresses = new ArrayList<>();
-        FireStationCoverage result = new FireStationCoverage();
-        //on ajout les adresses des stations dans une liste
-        for (int i = 0; i < fireStations.size(); i++) {
-            addresses.add(fireStations.get(i).getAddress());
-        }
-        //on récupère les personnes dont l'adresse correspond aux adresses des firestations
-        List<Person> personList = personService.findAllByAdressIn(addresses);
-        // pour chaque personne on vient créer les infos d'une personne
-
-        result = personService.createPersonInfoToStationNumber(personList);
-        return result;
-    }
-
-    public PhoneAlert createPhoneAlert(long stationNumber) {
-        List<FireStation> fireStationList = repository.findAllByStation(stationNumber);
-        List<String> phoneList = new ArrayList<>();
-        List<String> addresses = new ArrayList<>();
-        PhoneAlert result = new PhoneAlert();
-        for (FireStation f : fireStationList) {
-            addresses.add(f.getAddress());
-        }
-        List<Person> personList = personService.findAllByAdressIn(addresses);
-        for (Person p : personList) {
-            phoneList.add(p.getPhone());
-        }
-        result.setPhoneList(phoneList);
-        return result;
-    }
-
-    public Map<String, List<Flood>> createFlood(List<Long> stationNumberList) {
-        Map<String, List<Flood>> result = new HashMap<String, List<Flood>>();
-
-        List<Flood> floodList = new ArrayList<Flood>();
-        for (long el : stationNumberList) {
-            FireStation fireStation = repository.findFireStationByStation(el);
-            List<Person> personList = personRepository.findAllByAddress(fireStation.getAddress());
-
-            for (Person p : personList) {
-                Flood flood = new Flood();
-                Optional<MedicalRecords> medicalRecord = medicalRecordRepository.findByFirstNameAndLastName(p.getFirstName(), p.getLastName());
-
-                LocalDate birthdate = medicalRecordRepository.findBirthDateByFirstNameAndLastName(p.getFirstName(), p.getLastName());
-                LocalDate now = LocalDate.now();
-                int age = Period.between(birthdate, now).getYears();
-
-                flood.setFirstName(p.getFirstName());
-                flood.setLastName(p.getLastName());
-                flood.setPhone(p.getPhone());
-                flood.setAge(age);
-
-                if (medicalRecord.isPresent()) {
-                    flood.setMedications(medicalRecord.get().getMedications());
-                    flood.setAllergies(medicalRecord.get().getAllergies());
-                }
-                floodList.add(flood);
-            }
-                result.put(fireStation.getAddress(), floodList);
-        }
-        return result;
-    }
 }
