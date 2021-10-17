@@ -20,15 +20,20 @@ public class SafetynetApplication {
 		SpringApplication.run(SafetynetApplication.class, args);
 	}
 	@Bean
-	CommandLineRunner runner(PersonRepository personService, FireStationRepository fireStationService, MedicalRecordRepository medicalRecordService) {
+	CommandLineRunner runner(PersonRepository personRepository, FireStationRepository fireStationRepository, MedicalRecordRepository medicalRecordRepository) {
 		return args -> {
 			JsonReaderWriter jsonReaderWriter = new JsonReaderWriter();
-			DataObject dataObject = new DataObject();
+			DataObject dataObject;
 			dataObject = jsonReaderWriter.read();
-			personService.saveAll(dataObject.getPersons());
-			fireStationService.saveAll(dataObject.getFirestations());
-			medicalRecordService.saveAll(dataObject.getMedicalrecords());
-
+			try {
+				personRepository.saveAll(dataObject.getPersons());
+				fireStationRepository.saveAll(dataObject.getFirestations());
+				medicalRecordRepository.saveAll(dataObject.getMedicalrecords());
+				System.out.println("Data saved !");
+			} catch (Exception e){
+				e.printStackTrace();
+				System.out.println("Data don't saved !");
+			}
 		};
 	}
 }

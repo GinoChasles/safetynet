@@ -1,44 +1,46 @@
 package com.safety.safetynet.service;
 
-import com.safety.safetynet.model.MedicalRecord;
+import com.safety.safetynet.model.MedicalRecords;
 import com.safety.safetynet.repository.MedicalRecordRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MedicalRecordService implements CrudService<MedicalRecord> {
-    @Autowired
+public class MedicalRecordService implements CrudService<MedicalRecords> {
     MedicalRecordRepository repository;
 
+    public MedicalRecordService(MedicalRecordRepository repository) {
+        this.repository = repository;
+    }
+
     @Override
-    public Optional<MedicalRecord> findById(long id) {
+    public Optional<MedicalRecords> findById(long id) {
         return repository.findById(id);
     }
 
     @Override
-    public MedicalRecord insert(MedicalRecord medicalRecord) {
-        return repository.save(medicalRecord);
+    public MedicalRecords insert(MedicalRecords medicalRecords) {
+        return repository.save(medicalRecords);
     }
 
     @Override
     public void delete(long id) {
-        Optional<MedicalRecord> medicalRecord = this.findById(id);
+        Optional<MedicalRecords> medicalRecord = this.findById(id);
         medicalRecord.ifPresent(m -> repository.delete(m));
     }
 
     @Override
-    public MedicalRecord update(long id, MedicalRecord medicalRecord) {
-        Optional<MedicalRecord> mr1 = this.findById(id);
+    public MedicalRecords update(long id, MedicalRecords medicalRecords) {
+        Optional<MedicalRecords> mr1 = this.findById(id);
         if (mr1.isPresent()) {
-            MedicalRecord medicalRecordToUpdate = mr1.get();
-            medicalRecordToUpdate.setBirthdate(medicalRecord.getBirthdate());
-            medicalRecordToUpdate.setMedications(medicalRecord.getMedications());
-            medicalRecordToUpdate.setAllergies(medicalRecord.getAllergies());
+            MedicalRecords medicalRecordsToUpdate = mr1.get();
+            medicalRecordsToUpdate.setBirthdate(medicalRecords.getBirthdate());
+            medicalRecordsToUpdate.setMedications(medicalRecords.getMedications());
+            medicalRecordsToUpdate.setAllergies(medicalRecords.getAllergies());
 
-            return repository.save(medicalRecordToUpdate);
+            return repository.save(medicalRecordsToUpdate);
         } else {
             return null;
         }
@@ -46,12 +48,12 @@ public class MedicalRecordService implements CrudService<MedicalRecord> {
 
     @Override
     public void deleteByName(String firstName, String lastName) {
-        Optional<MedicalRecord> p1 = repository.findByFirstNameAndLastName(firstName, lastName);
+        Optional<MedicalRecords> p1 = repository.findByFirstNameAndLastName(firstName, lastName);
         p1.ifPresent(p -> repository.delete(p));
     }
 
     @Override
-    public List<MedicalRecord> findAll() {
+    public List<MedicalRecords> findAll() {
         return repository.findAll();
     }
 

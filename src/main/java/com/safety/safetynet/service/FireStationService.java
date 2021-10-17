@@ -4,7 +4,6 @@ import com.safety.safetynet.model.*;
 import com.safety.safetynet.repository.FireStationRepository;
 import com.safety.safetynet.repository.MedicalRecordRepository;
 import com.safety.safetynet.repository.PersonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -13,14 +12,17 @@ import java.util.*;
 
 @Service
 public class FireStationService implements CrudService<FireStation> {
-    @Autowired
     FireStationRepository repository;
-    @Autowired
     PersonService personService;
-    @Autowired
     PersonRepository personRepository;
-    @Autowired
     MedicalRecordRepository medicalRecordRepository;
+
+    public FireStationService(FireStationRepository repository, PersonService personService, PersonRepository personRepository, MedicalRecordRepository medicalRecordRepository) {
+        this.repository = repository;
+        this.personService = personService;
+        this.personRepository = personRepository;
+        this.medicalRecordRepository = medicalRecordRepository;
+    }
 
     @Override
     public Optional<FireStation> findById(long id) {
@@ -106,7 +108,7 @@ public class FireStationService implements CrudService<FireStation> {
 
             for (Person p : personList) {
                 Flood flood = new Flood();
-                Optional<MedicalRecord> medicalRecord = medicalRecordRepository.findByFirstNameAndLastName(p.getFirstName(), p.getLastName());
+                Optional<MedicalRecords> medicalRecord = medicalRecordRepository.findByFirstNameAndLastName(p.getFirstName(), p.getLastName());
 
                 LocalDate birthdate = medicalRecordRepository.findBirthDateByFirstNameAndLastName(p.getFirstName(), p.getLastName());
                 LocalDate now = LocalDate.now();

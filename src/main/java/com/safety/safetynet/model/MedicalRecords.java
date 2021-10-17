@@ -2,14 +2,19 @@ package com.safety.safetynet.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-
-public class MedicalRecord {
+@Proxy(lazy = true)
+public class MedicalRecords {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -21,10 +26,21 @@ public class MedicalRecord {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
     private LocalDate birthdate;
 
-    @ElementCollection
-    private List<String> medications;
-    @ElementCollection
-    private List<String> allergies;
+
+//    @ElementCollection
+//    @JsonIgnore
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @LazyCollection(LazyCollectionOption.FALSE)
+//    @Fetch(value = FetchMode.JOIN)
+    private List<Medications> medications;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @Fetch(value = FetchMode.JOIN)
+//    @JsonIgnore
+//    @LazyCollection(LazyCollectionOption.FALSE)
+    private Set<Allergies> allergies;
 
     public Long getId() {
         return id;
@@ -57,19 +73,19 @@ public class MedicalRecord {
         this.birthdate = birthdate;
     }
 
-    public List<String> getMedications() {
+    public List<Medications> getMedications() {
         return medications;
     }
 
-    public void setMedications(List<String> medications) {
+    public void setMedications(List<Medications> medications) {
         this.medications = medications;
     }
 
-    public List<String> getAllergies() {
+    public Set<Allergies> getAllergies() {
         return allergies;
     }
 
-    public void setAllergies(List<String> allergies) {
+    public void setAllergies(Set<Allergies> allergies) {
         this.allergies = allergies;
     }
 }

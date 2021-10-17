@@ -1,6 +1,7 @@
 package com.safety.safetynet.model;
 
 import java.util.List;
+import java.util.Set;
 
 public class Fire {
     private long stationNumber;
@@ -8,13 +9,13 @@ public class Fire {
     private String lastName;
     private String phone;
     private int age;
-    private List<String> medications;
-    private List<String> allergies;
+    private List<Medications> medications;
+    private Set<Allergies> allergies;
 
     public Fire() {
     }
 
-    public Fire(long stationNumber, String firstName, String lastName, String phone, int age, List<String> medications, List<String> allergies) {
+    public Fire(long stationNumber, String firstName, String lastName, String phone, int age, List<Medications> medications, Set<Allergies> allergies) {
         this.stationNumber = stationNumber;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -64,19 +65,19 @@ public class Fire {
         this.age = age;
     }
 
-    public List<String> getMedications() {
+    public List<Medications> getMedications() {
         return medications;
     }
 
-    public void setMedications(List<String> medications) {
+    public void setMedications(List<Medications> medications) {
         this.medications = medications;
     }
 
-    public List<String> getAllergies() {
+    public Set<Allergies> getAllergies() {
         return allergies;
     }
 
-    public void setAllergies(List<String> allergies) {
+    public void setAllergies(Set<Allergies> allergies) {
         this.allergies = allergies;
     }
 }

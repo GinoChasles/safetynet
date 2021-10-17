@@ -4,7 +4,6 @@ import com.safety.safetynet.model.*;
 import com.safety.safetynet.repository.FireStationRepository;
 import com.safety.safetynet.repository.MedicalRecordRepository;
 import com.safety.safetynet.repository.PersonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.Period;
@@ -14,12 +13,15 @@ import java.util.Optional;
 
 @Service
 public class PersonService implements CrudService<Person> {
-    @Autowired
-    PersonRepository repository;
-    @Autowired
-    MedicalRecordRepository medicalRecordRepository;
-    @Autowired
-    FireStationRepository fireStationRepository;
+    private static PersonRepository repository;
+    private static MedicalRecordRepository medicalRecordRepository;
+    private static FireStationRepository fireStationRepository;
+
+    public PersonService(PersonRepository repository, MedicalRecordRepository medicalRecordRepository, FireStationRepository fireStationRepository){
+        this.repository = repository;
+        this.medicalRecordRepository = medicalRecordRepository;
+        this.fireStationRepository = fireStationRepository;
+    }
 
     @Override
     public Optional<Person> findById(long id) {
@@ -40,15 +42,14 @@ public class PersonService implements CrudService<Person> {
     @Override
     public Person update(long id, Person person) {
        Optional<Person> p1 = this.findById(id);
+
        if(p1.isPresent()){
            Person personToUpdate = p1.get();
            personToUpdate.setAddress(person.getAddress());
            personToUpdate.setCity(person.getCity());
            personToUpdate.setEmail(person.getEmail());
-//           personToUpdate.setMedicalRecord(person.getMedicalRecord());
            personToUpdate.setPhone(person.getPhone());
            personToUpdate.setZip(person.getZip());
-
            return repository.save(personToUpdate);
        } else {
            return null;
@@ -137,7 +138,7 @@ public class PersonService implements CrudService<Person> {
         for(Person p : personList) {
             Fire result = new Fire();
             FireStation fireStation = fireStationRepository.findFireStationByAddress(address);
-            Optional<MedicalRecord> medicalRecord = medicalRecordRepository.findByFirstNameAndLastName(p.getFirstName(), p.getLastName());
+            Optional<MedicalRecords> medicalRecord = medicalRecordRepository.findByFirstNameAndLastName(p.getFirstName(), p.getLastName());
 
             LocalDate birthdate = medicalRecordRepository.findBirthDateByFirstNameAndLastName(p.getFirstName(), p.getLastName());
             LocalDate now = LocalDate.now();
@@ -156,5 +157,9 @@ public class PersonService implements CrudService<Person> {
             resultList.add(result);
         }
         return resultList;
+    }
+
+    public List<Person> insertAll(List<Person> personList) {
+        return repository.saveAll(personList);
     }
 }

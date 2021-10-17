@@ -1,16 +1,17 @@
 package com.safety.safetynet.model;
 
 import java.util.List;
+import java.util.Set;
 
 public class Flood {
     private String firstName;
     private String lastName;
     private int age;
     private String phone;
-    private List<String> medications;
-    private List<String> allergies;
+    private List<Medications> medications;
+    private Set<Allergies> allergies;
 
-    public Flood(String firstName, String lastName, int age, String phone, List<String> medications, List<String> allergies) {
+    public Flood(String firstName, String lastName, int age, String phone, List<Medications> medications, Set<Allergies> allergies) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -54,19 +55,19 @@ public class Flood {
         this.phone = phone;
     }
 
-    public List<String> getMedications() {
+    public List<Medications> getMedications() {
         return medications;
     }
 
-    public void setMedications(List<String> medications) {
+    public void setMedications(List<Medications> medications) {
         this.medications = medications;
     }
 
-    public List<String> getAllergies() {
+    public Set<Allergies> getAllergies() {
         return allergies;
     }
 
-    public void setAllergies(List<String> allergies) {
+    public void setAllergies(Set<Allergies> allergies) {
         this.allergies = allergies;
     }
 }

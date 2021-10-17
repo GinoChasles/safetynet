@@ -1,6 +1,6 @@
 package com.safety.safetynet.controller;
 
-import com.safety.safetynet.model.MedicalRecord;
+import com.safety.safetynet.model.MedicalRecords;
 import com.safety.safetynet.service.MedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +15,8 @@ public class MedicalRecordController {
     private MedicalRecordService medicalRecordService;
 
     @GetMapping("/medicalrecord")
-    public ResponseEntity<List<MedicalRecord>> findAll() {
-        List<MedicalRecord> result = medicalRecordService.findAll();
+    public ResponseEntity<List<MedicalRecords>> findAll() {
+        List<MedicalRecords> result = medicalRecordService.findAll();
         if(result.isEmpty()) {
             return ResponseEntity.notFound().build();
         } else {
@@ -25,23 +25,23 @@ public class MedicalRecordController {
     }
 
     @PostMapping("/medicalrecord")
-    public ResponseEntity<MedicalRecord> addMedicalRecord(@RequestBody MedicalRecord medicalRecord) {
-        return ResponseEntity.ok(medicalRecordService.insert(medicalRecord));
+    public ResponseEntity<MedicalRecords> addMedicalRecord(@RequestBody MedicalRecords medicalRecords) {
+        return ResponseEntity.ok(medicalRecordService.insert(medicalRecords));
     }
 
     @PutMapping("medicalrecord/{id}")
-    public ResponseEntity<MedicalRecord> update(@PathVariable(value = "id") long id, MedicalRecord medicalRecord) {
-        MedicalRecord medicalRecord1 = medicalRecordService.update(id, medicalRecord);
-        if(medicalRecord1 == null) {
+    public ResponseEntity<MedicalRecords> update(@PathVariable(value = "id") long id, MedicalRecords medicalRecords) {
+        MedicalRecords medicalRecords1 = medicalRecordService.update(id, medicalRecords);
+        if(medicalRecords1 == null) {
             return ResponseEntity.notFound().build();
         } else {
-            return ResponseEntity.ok().body(medicalRecord1);
+            return ResponseEntity.ok().body(medicalRecords1);
         }
     }
 
     @DeleteMapping("medicalrecord/{id}")
-    public ResponseEntity<MedicalRecord> delete(@PathVariable(value = "id") long id) {
-        Optional<MedicalRecord> medicalRecord = medicalRecordService.findById(id);
+    public ResponseEntity<MedicalRecords> delete(@PathVariable(value = "id") long id) {
+        Optional<MedicalRecords> medicalRecord = medicalRecordService.findById(id);
         if(medicalRecord.isEmpty()) {
             return ResponseEntity.notFound().build();
         } else {
