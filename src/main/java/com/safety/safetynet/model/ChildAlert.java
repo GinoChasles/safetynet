@@ -4,43 +4,23 @@ import java.util.List;
 
 
 public class ChildAlert {
-    String firstName;
-    String lastName;
-    int age;
+    List<Child> children;
     List<Person> family;
 
     public ChildAlert() {
     }
 
-    public ChildAlert(String firstName, String lastName, int age, List<Person> family) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
+    public ChildAlert(List<Child> children, List<Person> family) {
+        this.children = children;
         this.family = family;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public List<Child> getChildren() {
+        return children;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
+    public void setChildren(List<Child> children) {
+        this.children = children;
     }
 
     public List<Person> getFamily() {

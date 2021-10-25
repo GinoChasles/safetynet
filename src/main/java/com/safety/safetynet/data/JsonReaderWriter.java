@@ -20,8 +20,7 @@ public class JsonReaderWriter {
     public DataObject read() {
         DataObject dataObject = new DataObject();
         ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule())
-        .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
-                .configure(MapperFeature.DEFAULT_VIEW_INCLUSION, true);
+        .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
         ;
 //        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 //        objectMapper.setDateFormat(df);

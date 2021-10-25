@@ -5,6 +5,8 @@ import com.safety.safetynet.data.JsonReaderWriter;
 import com.safety.safetynet.service.FireStationServiceImpl;
 import com.safety.safetynet.service.MedicalRecordServiceImpl;
 import com.safety.safetynet.service.PersonServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class SafetyInterceptor implements HandlerInterceptor {
-//    private static Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     private static PersonServiceImpl personServiceImpl;
     private static MedicalRecordServiceImpl medicalRecordServiceImpl;
     private static FireStationServiceImpl fireStationServiceImpl;
@@ -45,22 +47,17 @@ public class SafetyInterceptor implements HandlerInterceptor {
             (HttpServletRequest request, HttpServletResponse response, Object
                     handler, Exception exception) throws Exception {
 
-        JsonReaderWriter jsonReaderWriter = new JsonReaderWriter();
-
-
-
-        DataObject dataObject = new DataObject();
-        try {
-            dataObject.setPersons(personServiceImpl.findAll());
-            dataObject.setFirestations(fireStationServiceImpl.findAll());
-            dataObject.setMedicalrecords(medicalRecordServiceImpl.findAll());
-
-            jsonReaderWriter.write(dataObject);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-                System.out.println("after Handle method is Calling");
-
-//        logger.info("Request and Response is completed");
+//        JsonReaderWriter jsonReaderWriter = new JsonReaderWriter();
+//        DataObject dataObject = new DataObject();
+//        try {
+//            dataObject.setPersons(personServiceImpl.findAll());
+//            dataObject.setFirestations(fireStationServiceImpl.findAll());
+//            dataObject.setMedicalrecords(medicalRecordServiceImpl.findAll());
+//
+//            jsonReaderWriter.write(dataObject);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        logger.info("Request and Response is completed");
     }
 }

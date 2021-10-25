@@ -18,7 +18,6 @@ public class MedicalRecords {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    @JsonIgnore
     private Long id;
 
     private String firstName;
@@ -26,20 +25,25 @@ public class MedicalRecords {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
     private LocalDate birthdate;
 
-
-//    @ElementCollection
-//    @JsonIgnore
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "medicalRecords")
+//    @ManyToMany(targetEntity = Medications.class, mappedBy = "medicalRecords")
+    @ManyToMany
+    @JoinTable(name = "medicalRecords_medications",
+            joinColumns = {@JoinColumn(name = "medicalRecords_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "medications_id", referencedColumnName = "id")})
 //    @LazyCollection(LazyCollectionOption.FALSE)
 //    @Fetch(value = FetchMode.JOIN)
     private List<Medications> medications;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @Fetch(value = FetchMode.JOIN)
-//    @JsonIgnore
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicalRecords")
 //    @LazyCollection(LazyCollectionOption.FALSE)
+//    @Fetch(value = FetchMode.JOIN)
+//    @JsonIgnore
+//    @ManyToMany(targetEntity = Allergies.class, mappedBy = "medicalRecords")
+    @ManyToMany
+    @JoinTable(name = "medicalRecords_allergies",
+    joinColumns = {@JoinColumn(name = "medicalRecords_id", referencedColumnName = "id")},
+    inverseJoinColumns = {@JoinColumn(name = "allergies_id", referencedColumnName = "id")})
     private Set<Allergies> allergies;
 
     public Long getId() {

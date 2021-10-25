@@ -17,7 +17,7 @@ public class PersonServiceImpl implements PersonService {
     private static MedicalRecordRepository medicalRecordRepository;
     private static FireStationRepository fireStationRepository;
 
-    public PersonServiceImpl(PersonRepository repository, MedicalRecordRepository medicalRecordRepository, FireStationRepository fireStationRepository){
+    public PersonServiceImpl(final PersonRepository repository, final MedicalRecordRepository medicalRecordRepository, final FireStationRepository fireStationRepository){
         this.repository = repository;
         this.medicalRecordRepository = medicalRecordRepository;
         this.fireStationRepository = fireStationRepository;
@@ -99,7 +99,8 @@ public class PersonServiceImpl implements PersonService {
 
     public ChildAlert findChildAlert(String address) {
         List<Person> personList = repository.findAllByAddress(address);
-        ChildAlert result = null;
+        ChildAlert result = new ChildAlert();
+        List<Child> children = new ArrayList<>();
         List<Person> adult = new ArrayList<>();
         for(Person person : personList) {
             LocalDate birthdate = medicalRecordRepository.findBirthDateByFirstNameAndLastName(person.getFirstName(), person.getLastName());
@@ -109,13 +110,17 @@ public class PersonServiceImpl implements PersonService {
             if(age > 18) {
                 adult.add(person);
             } else {
-                result = new ChildAlert();
-                result.setFirstName(person.getFirstName());
-                result.setLastName(person.getLastName());
-                result.setAge(age);
-                result.setFamily(adult);
+                Child child = new Child();
+
+                child.setFirstName(person.getFirstName());
+                child.setLastName(person.getLastName());
+                child.setAge(age);
+                children.add(child);
+
             }
         }
+                result.setChildren(children);
+                result.setFamily(adult);
         return result;
     }
 

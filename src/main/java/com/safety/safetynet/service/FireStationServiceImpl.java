@@ -101,7 +101,7 @@ public class FireStationServiceImpl implements FireStationService {
 
     @Override
     public List<Map<String, List<Flood>>> createFlood(List<Long> stationNumberList) {
-        List<Map<String, List<Flood>>> result2 = null;
+        List<Map<String, List<Flood>>> result2 = new ArrayList<>();
         Map<String, List<Flood>> result = new HashMap<>();
 
         List<Flood> floodList = new ArrayList<Flood>();
