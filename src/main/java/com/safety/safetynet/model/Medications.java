@@ -1,10 +1,7 @@
 package com.safety.safetynet.model;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -17,10 +14,8 @@ public class Medications {
 
     String medication;
 
-
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "medical_records_id")
-    @ManyToMany(targetEntity = MedicalRecords.class, mappedBy = "medications")
+    @ManyToMany(targetEntity = MedicalRecords.class, mappedBy = "medications", fetch = FetchType.LAZY)
+    @JsonBackReference
     Set<MedicalRecords> medicalRecords;
 
     public Medications(String medication) {

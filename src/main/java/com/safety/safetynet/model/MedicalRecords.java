@@ -2,6 +2,7 @@ package com.safety.safetynet.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -41,6 +42,7 @@ public class MedicalRecords {
 //    @JsonIgnore
 //    @ManyToMany(targetEntity = Allergies.class, mappedBy = "medicalRecords")
     @ManyToMany
+//    @JsonManagedReference
     @JoinTable(name = "medicalRecords_allergies",
     joinColumns = {@JoinColumn(name = "medicalRecords_id", referencedColumnName = "id")},
     inverseJoinColumns = {@JoinColumn(name = "allergies_id", referencedColumnName = "id")})

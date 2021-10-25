@@ -8,16 +8,14 @@ public class Flood {
     private String lastName;
     private int age;
     private String phone;
-    private List<Medications> medications;
-    private Set<Allergies> allergies;
+    private MedicalRecords medicalRecords;
 
-    public Flood(String firstName, String lastName, int age, String phone, List<Medications> medications, Set<Allergies> allergies) {
+    public Flood(String firstName, String lastName, int age, String phone, MedicalRecords medications) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.phone = phone;
-        this.medications = medications;
-        this.allergies = allergies;
+        this.medicalRecords = medications;
     }
 
     public Flood() {
@@ -55,19 +53,11 @@ public class Flood {
         this.phone = phone;
     }
 
-    public List<Medications> getMedications() {
-        return medications;
+    public MedicalRecords getMedicalRecords() {
+        return medicalRecords;
     }
 
-    public void setMedications(List<Medications> medications) {
-        this.medications = medications;
-    }
-
-    public Set<Allergies> getAllergies() {
-        return allergies;
-    }
-
-    public void setAllergies(Set<Allergies> allergies) {
-        this.allergies = allergies;
+    public void setMedicalRecords(MedicalRecords medicalRecords) {
+        this.medicalRecords = medicalRecords;
     }
 }

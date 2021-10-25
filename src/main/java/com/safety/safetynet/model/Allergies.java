@@ -1,9 +1,9 @@
 package com.safety.safetynet.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -12,14 +12,12 @@ public class Allergies {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-//    @JsonIgnore
     private Long id;
 
     String allergies;
 
-    @ManyToMany(fetch = FetchType.EAGER, targetEntity = MedicalRecords.class, mappedBy = "allergies")
-//    @JoinColumn(name = "medical_records_id")
-//    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = MedicalRecords.class, mappedBy = "allergies")
+    @JsonBackReference
     Set<MedicalRecords> medicalRecords;
 
     public Allergies() {
