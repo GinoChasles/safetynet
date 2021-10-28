@@ -13,6 +13,9 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 
+/**
+ * The type Fire station service.
+ */
 @Service
 public class FireStationServiceImpl implements FireStationService {
     private final FireStationRepository repository;
@@ -20,6 +23,14 @@ public class FireStationServiceImpl implements FireStationService {
     private final PersonRepository personRepository;
     private final MedicalRecordRepository medicalRecordRepository;
 
+    /**
+     * Instantiates a new Fire station service.
+     *
+     * @param repository              the repository
+     * @param personServiceImpl       the person service
+     * @param personRepository        the person repository
+     * @param medicalRecordRepository the medical record repository
+     */
     public FireStationServiceImpl(FireStationRepository repository, PersonServiceImpl personServiceImpl, PersonRepository personRepository, MedicalRecordRepository medicalRecordRepository) {
         this.repository = repository;
         this.personServiceImpl = personServiceImpl;

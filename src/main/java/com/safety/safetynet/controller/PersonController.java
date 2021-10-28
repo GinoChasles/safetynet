@@ -13,16 +13,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Person controller.
+ */
 @RestController
 public class PersonController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final PersonServiceImpl personServiceImpl;
 
+    /**
+     * Instantiates a new Person controller.
+     *
+     * @param personServiceImpl the person service
+     */
     public PersonController(PersonServiceImpl personServiceImpl) {
         this.personServiceImpl = personServiceImpl;
     }
 
+    /**
+     * Find all response entity.
+     *
+     * @return the response entity
+     */
     @GetMapping("/person")
     public ResponseEntity<List<Person>> findAll() {
         logger.info("Recherche de la liste des personnes");
@@ -36,6 +49,12 @@ public class PersonController {
         }
     }
 
+    /**
+     * Find by id response entity.
+     *
+     * @param id the id
+     * @return the response entity
+     */
     @GetMapping("/person/{id}")
     public ResponseEntity<Optional<Person>> findById(@PathVariable(value = "id") long id) {
         logger.info("Recherche d'une personne par l'id: " + id);
@@ -48,12 +67,26 @@ public class PersonController {
             return ResponseEntity.ok().body(result);
         }
     }
+
+    /**
+     * Add person response entity.
+     *
+     * @param person the person
+     * @return the response entity
+     */
     @PostMapping("/person")
     public ResponseEntity<Person> addPerson(@RequestBody Person person) {
         logger.info("Création d'une personne");
         return ResponseEntity.ok(personServiceImpl.insert(person));
     }
 
+    /**
+     * Update response entity.
+     *
+     * @param id     the id
+     * @param person the person
+     * @return the response entity
+     */
     @PutMapping("/person/{id]")
     public ResponseEntity<Person> update(@PathVariable(value = "id") long id, @RequestBody Person person) {
         logger.info("modification de la personne à l'id " + id);
@@ -67,6 +100,12 @@ public class PersonController {
         }
     }
 
+    /**
+     * Delete response entity.
+     *
+     * @param id the id
+     * @return the response entity
+     */
     @DeleteMapping("/person/{id}")
     public ResponseEntity<Person> delete(@PathVariable(value = "id") long id) {
         logger.info("Demande de suppression de la personne à l'id " + id);
@@ -82,6 +121,12 @@ public class PersonController {
         }
     }
 
+    /**
+     * Gets child alert.
+     *
+     * @param address the address
+     * @return the child alert
+     */
     @GetMapping(value = "/childAlert", params = "address")
     public ResponseEntity<ChildAlert> getChildAlert(@RequestParam(value = "address") String address) {
         logger.info("recherche des enfants habitant à l'addresse: " + address);
@@ -95,6 +140,12 @@ public class PersonController {
         }
     }
 
+    /**
+     * Gets community email.
+     *
+     * @param city the city
+     * @return the community email
+     */
     @GetMapping(value = "communityEmail", params = "city")
     public ResponseEntity<CommunityEmail> getCommunityEmail(@RequestParam("city") String city) {
         logger.info("Recherche de la liste d'email des personnes habitant dans la ville: " + city);
@@ -108,6 +159,12 @@ public class PersonController {
         }
     }
 
+    /**
+     * Gets fire.
+     *
+     * @param address the address
+     * @return the fire
+     */
     @GetMapping(value = "fire", params = "address")
     public ResponseEntity<List<Fire>> getFire(@RequestParam("address") String address) {
         logger.info("Recherche des personnes habitants à l'adresse: " + address);

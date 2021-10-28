@@ -7,10 +7,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Medical record service.
+ */
 @Service
 public class MedicalRecordServiceImpl implements MedicalRecordService {
+    /**
+     * The Repository.
+     */
     MedicalRecordRepository repository;
 
+    /**
+     * Instantiates a new Medical record service.
+     *
+     * @param repository the repository
+     */
     public MedicalRecordServiceImpl(MedicalRecordRepository repository) {
         this.repository = repository;
     }

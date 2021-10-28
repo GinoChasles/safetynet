@@ -14,9 +14,17 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+/**
+ * The type Json reader writer.
+ */
 @Component
 public class JsonReaderWriter {
 
+    /**
+     * Read data object.
+     *
+     * @return the data object
+     */
     public DataObject read() {
         DataObject dataObject = new DataObject();
         ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule())
@@ -27,16 +35,18 @@ public class JsonReaderWriter {
         try {
             dataObject = objectMapper.readValue(new File("src/main/resources/data.json"), DataObject.class);
 
-        } catch (StreamReadException e) {
-            e.printStackTrace();
-        } catch (DatabindException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return dataObject;
     }
 
+    /**
+     * Write.
+     *
+     * @param dataObject the data object
+     * @throws JsonProcessingException the json processing exception
+     */
     public void write(DataObject dataObject) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule())
                 .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
@@ -46,8 +56,6 @@ public class JsonReaderWriter {
 
         try {
             objectMapper.writeValue(new File("src/main/resources/data.json"), dataObject);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

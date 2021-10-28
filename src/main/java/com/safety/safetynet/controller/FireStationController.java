@@ -15,19 +15,36 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * The type Fire station controller.
+ */
 @RestController
 public class FireStationController {
 
     private final FireStationServiceImpl fireStationServiceImpl;
     private final PersonServiceImpl personServiceImpl;
+    /**
+     * The Logger.
+     */
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
+    /**
+     * Instantiates a new Fire station controller.
+     *
+     * @param fireStationServiceImpl the fire station service
+     * @param personServiceImpl      the person service
+     */
     public FireStationController(FireStationServiceImpl fireStationServiceImpl, PersonServiceImpl personServiceImpl) {
         this.fireStationServiceImpl = fireStationServiceImpl;
         this.personServiceImpl = personServiceImpl;
     }
 
+    /**
+     * Find all response entity.
+     *
+     * @return the response entity
+     */
     @GetMapping(value = "/firestation")
     public ResponseEntity<List<FireStation>> findAll() {
         logger.info("Recherche de la liste des fireStations.");
@@ -40,6 +57,13 @@ public class FireStationController {
             return ResponseEntity.ok().body(result);
         }
     }
+
+    /**
+     * Find by id response entity.
+     *
+     * @param id the id
+     * @return the response entity
+     */
     @GetMapping("/firestation/{id}")
     public ResponseEntity<Optional<FireStation>> findById(@PathVariable(value = "id") long id) {
         logger.info("recherche de la caserne avec l'id: " + id);
@@ -48,11 +72,17 @@ public class FireStationController {
             logger.error("not found");
             return ResponseEntity.notFound().build();
         } else {
-            logger.info("caserne trouvée");
+            logger.info("caserne trouvée: " + result);
             return ResponseEntity.ok().body(result);
         }
     }
 
+    /**
+     * Add fire station response entity.
+     *
+     * @param fireStation the fire station
+     * @return the response entity
+     */
     @PostMapping(value = "/firestation")
     public ResponseEntity<FireStation> addFireStation(@RequestBody FireStation fireStation) {
         logger.info("Création d'une fireStation");
@@ -60,6 +90,13 @@ public class FireStationController {
         return ResponseEntity.ok(fireStationServiceImpl.insert(fireStation));
     }
 
+    /**
+     * Update response entity.
+     *
+     * @param id          the id
+     * @param fireStation the fire station
+     * @return the response entity
+     */
     @PutMapping(value = "/firestation/{id}")
     public ResponseEntity<FireStation> update(@PathVariable(value = "id") long id, FireStation fireStation) {
         logger.info("Mise à jour d'une fireStation lancée.");
@@ -73,6 +110,12 @@ public class FireStationController {
         }
     }
 
+    /**
+     * Delete response entity.
+     *
+     * @param id the id
+     * @return the response entity
+     */
     @DeleteMapping(value = "/firestation/{id}")
     public ResponseEntity<FireStation> delete(@PathVariable(value = "id") long id) {
         logger.info("Suppression en cours de la firestation: " + id);
@@ -87,6 +130,12 @@ public class FireStationController {
         }
     }
 
+    /**
+     * Gets person by station number.
+     *
+     * @param id the id
+     * @return the person by station number
+     */
     @GetMapping(value = "/firestation", params = "stationNumber")
     public ResponseEntity<FireStationCoverage> getPersonByStationNumber(@RequestParam(value = "stationNumber") long id) {
         logger.info("Recherche des personnes couvertes par la caserne n° " + id);
@@ -100,6 +149,12 @@ public class FireStationController {
             }
         }
 
+    /**
+     * Gets phone alert.
+     *
+     * @param stationNumber the station number
+     * @return the phone alert
+     */
     @GetMapping(value = "/phoneAlert", params = "firestation")
     public ResponseEntity<PhoneAlert> getPhoneAlert(@RequestParam("firestation") long stationNumber) {
         logger.info("Recherche des numéros de téléphones desservies par la caserne n°" + stationNumber);
@@ -113,6 +168,12 @@ public class FireStationController {
         }
     }
 
+    /**
+     * Gets flood.
+     *
+     * @param stationNumberList the station number list
+     * @return the flood
+     */
     @GetMapping(value = "flood/stations", params = "stationNumber")
     public ResponseEntity<List<Map<String,List<Flood>>>> getFlood(@RequestParam("stationNumber") List<Long> stationNumberList) {
         logger.info("Recherche des foyers desservis par la ou les casernes n°" + stationNumberList);

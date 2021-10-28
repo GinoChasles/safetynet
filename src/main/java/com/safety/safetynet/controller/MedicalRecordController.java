@@ -10,15 +10,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Medical record controller.
+ */
 @RestController
 public class MedicalRecordController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final MedicalRecordServiceImpl medicalRecordServiceImpl;
 
+    /**
+     * Instantiates a new Medical record controller.
+     *
+     * @param medicalRecordServiceImpl the medical record service
+     */
     public MedicalRecordController(MedicalRecordServiceImpl medicalRecordServiceImpl) {
         this.medicalRecordServiceImpl = medicalRecordServiceImpl;
     }
 
+    /**
+     * Find all response entity.
+     *
+     * @return the response entity
+     */
     @GetMapping("/medicalrecord")
     public ResponseEntity<List<MedicalRecords>> findAll() {
         logger.info("Recherche de la liste des medicalRecords");
@@ -32,6 +45,12 @@ public class MedicalRecordController {
         }
     }
 
+    /**
+     * Find by id response entity.
+     *
+     * @param id the id
+     * @return the response entity
+     */
     @GetMapping("/medicalrecord/{id}")
     public ResponseEntity<Optional<MedicalRecords>> findById(@PathVariable(value = "id") long id) {
         logger.info("recherche d'un medicalRecord par l'id: " + id);
@@ -44,12 +63,26 @@ public class MedicalRecordController {
             return ResponseEntity.ok().body(result);
         }
     }
+
+    /**
+     * Add medical record response entity.
+     *
+     * @param medicalRecords the medical records
+     * @return the response entity
+     */
     @PostMapping("/medicalrecord")
     public ResponseEntity<MedicalRecords> addMedicalRecord(@RequestBody MedicalRecords medicalRecords) {
         logger.info("Création d'un medicalrecord.");
         return ResponseEntity.ok(medicalRecordServiceImpl.insert(medicalRecords));
     }
 
+    /**
+     * Update response entity.
+     *
+     * @param id             the id
+     * @param medicalRecords the medical records
+     * @return the response entity
+     */
     @PutMapping("medicalrecord/{id}")
     public ResponseEntity<MedicalRecords> update(@PathVariable(value = "id") long id, MedicalRecords medicalRecords) {
         logger.info("Modification du medicalrecord n°"+id);
@@ -63,6 +96,12 @@ public class MedicalRecordController {
         }
     }
 
+    /**
+     * Delete response entity.
+     *
+     * @param id the id
+     * @return the response entity
+     */
     @DeleteMapping("medicalrecord/{id}")
     public ResponseEntity<MedicalRecords> delete(@PathVariable(value = "id") long id) {
         logger.info("Demande de suppression du medicalrecord n°" + id);

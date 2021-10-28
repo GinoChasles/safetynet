@@ -12,12 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Person service.
+ */
 @Service
 public class PersonServiceImpl implements PersonService {
     private static PersonRepository repository;
     private static MedicalRecordRepository medicalRecordRepository;
     private static FireStationRepository fireStationRepository;
 
+    /**
+     * Instantiates a new Person service.
+     *
+     * @param repository              the repository
+     * @param medicalRecordRepository the medical record repository
+     * @param fireStationRepository   the fire station repository
+     */
     public PersonServiceImpl(final PersonRepository repository, final MedicalRecordRepository medicalRecordRepository, final FireStationRepository fireStationRepository){
         this.repository = repository;
         this.medicalRecordRepository = medicalRecordRepository;
