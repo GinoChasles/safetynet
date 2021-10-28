@@ -8,6 +8,7 @@ import com.safety.safetynet.model.Medications;
 import com.safety.safetynet.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -55,5 +56,11 @@ public class SafetynetApplication {
 				System.out.println("Data don't saved !");
 			}
 		};
+	}
+	@Bean
+	InMemoryHttpTraceRepository httptrace() {
+
+		return new InMemoryHttpTraceRepository();
+
 	}
 }
