@@ -3,7 +3,6 @@ package com.safety.safetynet;
 import com.safety.safetynet.data.DataObject;
 import com.safety.safetynet.data.JsonReaderWriter;
 import com.safety.safetynet.model.Allergies;
-import com.safety.safetynet.model.MedicalRecords;
 import com.safety.safetynet.model.Medications;
 import com.safety.safetynet.repository.*;
 import org.springframework.boot.CommandLineRunner;
