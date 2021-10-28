@@ -1,4 +1,4 @@
-package com.safety.safetynet.model;
+package com.safety.safetynet.dto;
 
 import java.util.List;
 
@@ -39,4 +39,14 @@ public class FireStationCoverage {
     public void setAdult(long adult) {
         this.adult = adult;
     }
+
+    @Override
+    public String toString() {
+        return "FireStationCoverage{" +
+                "personInfosList=" + personInfosList.toString() +
+                ", child=" + child +
+                ", adult=" + adult +
+                '}';
+    }
+
 }

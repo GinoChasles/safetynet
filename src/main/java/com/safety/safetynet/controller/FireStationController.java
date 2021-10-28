@@ -1,9 +1,13 @@
 package com.safety.safetynet.controller;
 
+import com.safety.safetynet.dto.FireStationCoverage;
+import com.safety.safetynet.dto.Flood;
+import com.safety.safetynet.dto.PhoneAlert;
 import com.safety.safetynet.model.*;
 import com.safety.safetynet.service.FireStationServiceImpl;
 import com.safety.safetynet.service.PersonServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,74 +17,111 @@ import java.util.Optional;
 
 @RestController
 public class FireStationController {
-    @Autowired
-    private FireStationServiceImpl fireStationServiceImpl;
-    @Autowired
-    private PersonServiceImpl personServiceImpl;
+
+    private final FireStationServiceImpl fireStationServiceImpl;
+    private final PersonServiceImpl personServiceImpl;
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
+    public FireStationController(FireStationServiceImpl fireStationServiceImpl, PersonServiceImpl personServiceImpl) {
+        this.fireStationServiceImpl = fireStationServiceImpl;
+        this.personServiceImpl = personServiceImpl;
+    }
 
     @GetMapping(value = "/firestation")
     public ResponseEntity<List<FireStation>> findAll() {
+        logger.info("Recherche de la liste des fireStations.");
         List<FireStation> result = fireStationServiceImpl.findAll();
         if (result.isEmpty()) {
+            logger.error("Not found.");
             return ResponseEntity.notFound().build();
         } else {
+            logger.info("Liste des casernes: " + result);
+            return ResponseEntity.ok().body(result);
+        }
+    }
+    @GetMapping("/firestation/{id}")
+    public ResponseEntity<Optional<FireStation>> findById(@PathVariable(value = "id") long id) {
+        logger.info("recherche de la caserne avec l'id: " + id);
+        Optional<FireStation> result = fireStationServiceImpl.findById(id);
+        if(result.isEmpty()) {
+            logger.error("not found");
+            return ResponseEntity.notFound().build();
+        } else {
+            logger.info("caserne trouvée");
             return ResponseEntity.ok().body(result);
         }
     }
 
     @PostMapping(value = "/firestation")
     public ResponseEntity<FireStation> addFireStation(@RequestBody FireStation fireStation) {
+        logger.info("Création d'une fireStation");
+
         return ResponseEntity.ok(fireStationServiceImpl.insert(fireStation));
     }
 
     @PutMapping(value = "/firestation/{id}")
     public ResponseEntity<FireStation> update(@PathVariable(value = "id") long id, FireStation fireStation) {
+        logger.info("Mise à jour d'une fireStation lancée.");
         FireStation fireStation1 = fireStationServiceImpl.update(id, fireStation);
         if (fireStation1 == null) {
+            logger.error("Pas de fireStation correspondant à l'id :" + id);
             return ResponseEntity.notFound().build();
         } else {
+            logger.info("FireStation mis à jour: " + fireStation);
             return ResponseEntity.ok().body(fireStation1);
         }
     }
 
     @DeleteMapping(value = "/firestation/{id}")
     public ResponseEntity<FireStation> delete(@PathVariable(value = "id") long id) {
+        logger.info("Suppression en cours de la firestation: " + id);
         Optional<FireStation> fireStation = fireStationServiceImpl.findById(id);
         if (fireStation.isEmpty()) {
+            logger.error("Aucune fireStation trouvée");
             return ResponseEntity.notFound().build();
         } else {
             fireStationServiceImpl.delete(fireStation.get().getId());
+            logger.info("FireStation " + id + " supprimée.");
             return ResponseEntity.accepted().build();
         }
     }
 
     @GetMapping(value = "/firestation", params = "stationNumber")
     public ResponseEntity<FireStationCoverage> getPersonByStationNumber(@RequestParam(value = "stationNumber") long id) {
+        logger.info("Recherche des personnes couvertes par la caserne n° " + id);
         FireStationCoverage result = fireStationServiceImpl.findAllByFireStationNumber(id);
-
             if (result == null) {
+                logger.error("aucune personnes trouvées.");
                 return ResponseEntity.notFound().build();
             } else {
+                logger.info("Liste des personnes couvertes: " + result);
                 return ResponseEntity.ok().body(result);
             }
         }
 
     @GetMapping(value = "/phoneAlert", params = "firestation")
     public ResponseEntity<PhoneAlert> getPhoneAlert(@RequestParam("firestation") long stationNumber) {
+        logger.info("Recherche des numéros de téléphones desservies par la caserne n°" + stationNumber);
         PhoneAlert result = fireStationServiceImpl.createPhoneAlert(stationNumber);
         if(result == null) {
+            logger.error("Aucun numéro trouvé");
             return ResponseEntity.notFound().build();
         } else {
+            logger.info("Liste des numéros trouvées à la caserner n°" + stationNumber + " : " + result);
             return ResponseEntity.ok(result);
         }
     }
 
     @GetMapping(value = "flood/stations", params = "stationNumber")
     public ResponseEntity<List<Map<String,List<Flood>>>> getFlood(@RequestParam("stationNumber") List<Long> stationNumberList) {
+        logger.info("Recherche des foyers desservis par la ou les casernes n°" + stationNumberList);
         List<Map<String, List<Flood>>> result = fireStationServiceImpl.createFlood(stationNumberList);
         if(result == null) {
+            logger.error("Aucun foyer trouvée.");
             return ResponseEntity.notFound().build();
         } else {
+            logger.info("Liste des foyers desservis: " + result);
             return ResponseEntity.ok(result);
         }
     }

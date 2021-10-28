@@ -5,6 +5,8 @@ import com.safety.safetynet.data.JsonReaderWriter;
 import com.safety.safetynet.model.Allergies;
 import com.safety.safetynet.model.Medications;
 import com.safety.safetynet.repository.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
@@ -26,6 +28,8 @@ public class SafetynetApplication {
 			JsonReaderWriter jsonReaderWriter = new JsonReaderWriter();
 			DataObject dataObject;
 			dataObject = jsonReaderWriter.read();
+			Logger logger = LoggerFactory.getLogger(this.getClass());
+
 			try {
 				personRepository.saveAll(dataObject.getPersons());
 				fireStationRepository.saveAll(dataObject.getFirestations());
@@ -49,10 +53,10 @@ public class SafetynetApplication {
 				allergiesRepository.saveAll(allergiesList);
 
 				medicalRecordRepository.saveAll(dataObject.getMedicalrecords());
-				System.out.println("Data saved !");
+				logger.info("data saved!");
 			} catch (Exception e){
-				e.printStackTrace();
-				System.out.println("Data don't saved !");
+//				e.printStackTrace();
+				logger.error("Data don't saved !", e);
 			}
 		};
 	}

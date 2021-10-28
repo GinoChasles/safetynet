@@ -1,9 +1,9 @@
 package com.safety.safetynet.service;
 
 import com.safety.safetynet.model.FireStation;
-import com.safety.safetynet.model.FireStationCoverage;
-import com.safety.safetynet.model.Flood;
-import com.safety.safetynet.model.PhoneAlert;
+import com.safety.safetynet.dto.FireStationCoverage;
+import com.safety.safetynet.dto.Flood;
+import com.safety.safetynet.dto.PhoneAlert;
 
 import java.util.List;
 import java.util.Map;

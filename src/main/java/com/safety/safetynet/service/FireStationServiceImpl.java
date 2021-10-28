@@ -1,5 +1,8 @@
 package com.safety.safetynet.service;
 
+import com.safety.safetynet.dto.FireStationCoverage;
+import com.safety.safetynet.dto.Flood;
+import com.safety.safetynet.dto.PhoneAlert;
 import com.safety.safetynet.model.*;
 import com.safety.safetynet.repository.FireStationRepository;
 import com.safety.safetynet.repository.MedicalRecordRepository;
@@ -12,10 +15,10 @@ import java.util.*;
 
 @Service
 public class FireStationServiceImpl implements FireStationService {
-    FireStationRepository repository;
-    PersonServiceImpl personServiceImpl;
-    PersonRepository personRepository;
-    MedicalRecordRepository medicalRecordRepository;
+    private final FireStationRepository repository;
+    private final PersonServiceImpl personServiceImpl;
+    private final PersonRepository personRepository;
+    private final MedicalRecordRepository medicalRecordRepository;
 
     public FireStationServiceImpl(FireStationRepository repository, PersonServiceImpl personServiceImpl, PersonRepository personRepository, MedicalRecordRepository medicalRecordRepository) {
         this.repository = repository;
@@ -123,7 +126,10 @@ public class FireStationServiceImpl implements FireStationService {
                     flood.setPhone(p.getPhone());
                     flood.setAge(age);
 
-                    medicalRecord.ifPresent(flood::setMedicalRecords);
+                    if(medicalRecord.isPresent()) {
+                        flood.setAllergies(medicalRecord.get().getAllergies());
+                        flood.setMedications(medicalRecord.get().getMedications());
+                    }
                     floodList.add(flood);
                 }
 

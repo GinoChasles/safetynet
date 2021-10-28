@@ -1,4 +1,7 @@
-package com.safety.safetynet.model;
+package com.safety.safetynet.dto;
+
+import com.safety.safetynet.dto.Child;
+import com.safety.safetynet.model.Person;
 
 import java.util.List;
 
@@ -29,5 +32,13 @@ public class ChildAlert {
 
     public void setFamily(List<Person> family) {
         this.family = family;
+    }
+
+    @Override
+    public String toString() {
+        return "ChildAlert{" +
+                "children=" + children.toString() +
+                ", family=" + family.toString() +
+                '}';
     }
 }

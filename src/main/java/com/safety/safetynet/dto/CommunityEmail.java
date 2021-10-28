@@ -1,4 +1,4 @@
-package com.safety.safetynet.model;
+package com.safety.safetynet.dto;
 
 import java.util.List;
 
@@ -18,5 +18,12 @@ public class CommunityEmail {
 
     public void setEmail(List<String> email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "CommunityEmail{" +
+                "email=" + email +
+                '}';
     }
 }

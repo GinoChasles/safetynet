@@ -9,14 +9,11 @@ public class FireStation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-//    @JsonIgnore
     private Long id;
 
     private String address;
     private long station;
 
-//    @OneToMany(mappedBy = "address")
-//    private List<Person> person;
 
     public Long getId() {
         return id;
@@ -42,11 +39,11 @@ public class FireStation {
         this.station = station;
     }
 
-//    public List<Person> getPerson() {
-//        return person;
-//    }
-//
-//    public void setPerson(List<Person> person) {
-//        this.person = person;
-//    }
+    @Override
+    public String toString() {
+        return "FireStation{" +
+                "address='" + address + '\'' +
+                ", station=" + station +
+                '}';
+    }
 }

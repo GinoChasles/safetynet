@@ -1,36 +1,30 @@
-package com.safety.safetynet.model;
+package com.safety.safetynet.dto;
+
+import com.safety.safetynet.model.Allergies;
+import com.safety.safetynet.model.MedicalRecords;
+import com.safety.safetynet.model.Medications;
 
 import java.util.List;
 import java.util.Set;
 
-public class Fire {
-    private long stationNumber;
+public class Flood {
     private String firstName;
     private String lastName;
-    private String phone;
     private int age;
+    private String phone;
     private List<Medications> medications;
     private Set<Allergies> allergies;
 
-    public Fire() {
-    }
-
-    public Fire(long stationNumber, String firstName, String lastName, String phone, int age, List<Medications> medications, Set<Allergies> allergies) {
-        this.stationNumber = stationNumber;
+    public Flood(String firstName, String lastName, int age, String phone, List<Medications> medications, Set<Allergies> allergies) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phone = phone;
         this.age = age;
+        this.phone = phone;
         this.medications = medications;
         this.allergies = allergies;
     }
 
-    public long getStationNumber() {
-        return stationNumber;
-    }
-
-    public void setStationNumber(long stationNumber) {
-        this.stationNumber = stationNumber;
+    public Flood() {
     }
 
     public String getFirstName() {
@@ -49,20 +43,20 @@ public class Fire {
         this.lastName = lastName;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public int getAge() {
         return age;
     }
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public List<Medications> getMedications() {
@@ -79,5 +73,17 @@ public class Fire {
 
     public void setAllergies(Set<Allergies> allergies) {
         this.allergies = allergies;
+    }
+
+    @Override
+    public String toString() {
+        return "Flood{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", phone='" + phone + '\'' +
+                ", medications=" + medications.toString() +
+                ", allergies=" + allergies.toString() +
+                '}';
     }
 }

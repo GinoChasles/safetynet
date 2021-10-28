@@ -1,6 +1,5 @@
 package com.safety.safetynet.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -9,7 +8,6 @@ public class Person {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name = "id", nullable = false)
-   @JsonIgnore
    private Long id;
 
    private String firstName;
@@ -20,12 +18,6 @@ public class Person {
    private String phone;
    private String email;
 
-//   @OneToOne
-//   private MedicalRecord medicalRecord;
-
-//   @ManyToOne
-//   @JoinColumn(name = "address", insertable = false, updatable = false)
-//   private FireStation fireStation;
 
    public Long getId() {
       return id;
@@ -91,11 +83,17 @@ public class Person {
       this.email = email;
    }
 
-//   public MedicalRecord getMedicalRecord() {
-//      return medicalRecord;
-//   }
-//
-//   public void setMedicalRecord(MedicalRecord medicalRecord) {
-//      this.medicalRecord = medicalRecord;
-//   }
+   @Override
+   public String toString() {
+      return "Person{" +
+              "id=" + id +
+              ", firstName='" + firstName + '\'' +
+              ", lastName='" + lastName + '\'' +
+              ", address='" + address + '\'' +
+              ", city='" + city + '\'' +
+              ", zip=" + zip +
+              ", phone='" + phone + '\'' +
+              ", email='" + email + '\'' +
+              '}';
+   }
 }

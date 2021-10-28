@@ -51,25 +51,12 @@ public class Allergies {
         this.id = id;
     }
 
-    //    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Allergies allergies1 = (Allergies) o;
-//        return Objects.equals(id, allergies1.id) && Objects.equals(allergies, allergies1.allergies) && Objects.equals(medicalRecords, allergies1.medicalRecords);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id, allergies, medicalRecords);
-//    }
 
     @Override
     public String toString() {
         return "Allergies{" +
-
+                "id=" + id +
                 ", allergies='" + allergies + '\'' +
-                ", medicalRecords=" + medicalRecords +
                 '}';
     }
 }

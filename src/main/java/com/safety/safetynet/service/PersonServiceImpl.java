@@ -1,5 +1,6 @@
 package com.safety.safetynet.service;
 
+import com.safety.safetynet.dto.*;
 import com.safety.safetynet.model.*;
 import com.safety.safetynet.repository.FireStationRepository;
 import com.safety.safetynet.repository.MedicalRecordRepository;

@@ -1,4 +1,4 @@
-package com.safety.safetynet.model;
+package com.safety.safetynet.dto;
 
 public class PersonInfos {
     String firstName;
@@ -48,4 +48,13 @@ public class PersonInfos {
         this.phone = phone;
     }
 
+    @Override
+    public String toString() {
+        return "PersonInfos{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 }

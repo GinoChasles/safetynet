@@ -1,4 +1,4 @@
-package com.safety.safetynet.model;
+package com.safety.safetynet.dto;
 
 import java.util.List;
 
@@ -18,5 +18,12 @@ public class PhoneAlert {
 
     public void setPhoneList(List<String> phoneList) {
         this.phoneList = phoneList;
+    }
+
+    @Override
+    public String toString() {
+        return "PhoneAlert{" +
+                "phoneList=" + phoneList +
+                '}';
     }
 }

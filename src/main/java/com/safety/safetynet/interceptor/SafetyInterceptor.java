@@ -1,7 +1,5 @@
 package com.safety.safetynet.interceptor;
 
-import com.safety.safetynet.data.DataObject;
-import com.safety.safetynet.data.JsonReaderWriter;
 import com.safety.safetynet.service.FireStationServiceImpl;
 import com.safety.safetynet.service.MedicalRecordServiceImpl;
 import com.safety.safetynet.service.PersonServiceImpl;
@@ -58,6 +56,6 @@ public class SafetyInterceptor implements HandlerInterceptor {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-        logger.info("Request and Response is completed");
+//        logger.info("Request and Response is completed");
     }
 }

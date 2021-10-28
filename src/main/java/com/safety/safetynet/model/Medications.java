@@ -50,18 +50,7 @@ public class Medications {
         this.id = id;
     }
 
-    //    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Medications that = (Medications) o;
-//        return Objects.equals(id, that.id) && medication.equals(that.medication) && Objects.equals(medicalRecords, that.medicalRecords);
-//    }
 
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id, medication, medicalRecords);
-//    }
 
     @Override
     public String toString() {
