@@ -11,14 +11,14 @@ import java.util.List;
  * The interface Fire station repository.
  */
 @Repository
-public interface FireStationRepository extends JpaRepository<FireStation, Long> {
+public interface FireStationRepository extends JpaRepository<FireStation, Integer> {
     /**
      * Find all by station list.
      *
      * @param stationNumber the station number
      * @return the list
      */
-    List<FireStation> findAllByStation(long stationNumber);
+    List<FireStation> findAllByStation(int stationNumber);
 
     /**
      * Find all by address list.
@@ -42,5 +42,5 @@ public interface FireStationRepository extends JpaRepository<FireStation, Long> 
      * @param stationNumber the station number
      * @return the list
      */
-    List<FireStation> findFireStationByStation(long stationNumber);
+    List<FireStation> findFireStationByStation(int stationNumber);
 }

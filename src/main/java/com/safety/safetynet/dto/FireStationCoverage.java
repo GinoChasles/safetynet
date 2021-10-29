@@ -4,10 +4,10 @@ import java.util.List;
 
 public class FireStationCoverage {
     List<PersonInfos> personInfosList;
-    long child;
-    long adult;
+    int child;
+    int adult;
 
-    public FireStationCoverage(List<PersonInfos> personInfosList, long child, long adult) {
+    public FireStationCoverage(List<PersonInfos> personInfosList, int child, int adult) {
         this.personInfosList = personInfosList;
         this.child = child;
         this.adult = adult;
@@ -24,19 +24,19 @@ public class FireStationCoverage {
         this.personInfosList = personInfosList;
     }
 
-    public long getChild() {
+    public int getChild() {
         return child;
     }
 
-    public void setChild(long child) {
+    public void setChild(int child) {
         this.child = child;
     }
 
-    public long getAdult() {
+    public int getAdult() {
         return adult;
     }
 
-    public void setAdult(long adult) {
+    public void setAdult(int adult) {
         this.adult = adult;
     }
 

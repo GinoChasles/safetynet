@@ -12,7 +12,7 @@ import java.util.Optional;
  * The interface Medical record repository.
  */
 @Repository
-public interface MedicalRecordRepository extends JpaRepository<MedicalRecords, Long> {
+public interface MedicalRecordRepository extends JpaRepository<MedicalRecords, Integer> {
     /**
      * Find by first name and last name optional.
      *

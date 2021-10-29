@@ -39,7 +39,7 @@ public class FireStationServiceImpl implements FireStationService {
     }
 
     @Override
-    public Optional<FireStation> findById(long id) {
+    public Optional<FireStation> findById(int id) {
         return repository.findById(id);
     }
 
@@ -49,17 +49,18 @@ public class FireStationServiceImpl implements FireStationService {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(int id) {
         Optional<FireStation> fireStation = this.findById(id);
         fireStation.ifPresent(station -> repository.delete(station));
     }
 
     @Override
-    public FireStation update(long id, FireStation fireStation) {
+    public FireStation update(int id, FireStation fireStation) {
         Optional<FireStation> fireStation1 = this.findById(id);
         if (fireStation1.isPresent()) {
             FireStation fireStationToUpdate = fireStation1.get();
             fireStationToUpdate.setStation(fireStation.getStation());
+            fireStationToUpdate.setAddress(fireStation.getAddress());
 
             return repository.save(fireStationToUpdate);
         } else {
@@ -79,7 +80,7 @@ public class FireStationServiceImpl implements FireStationService {
 
     @Override
     //get persons by stationnumber
-    public FireStationCoverage findAllByFireStationNumber(long stationNumber) {
+    public FireStationCoverage findAllByFireStationNumber(int stationNumber) {
         //on récupère les stations dont le stationNumber correspond
         List<FireStation> fireStations = repository.findAllByStation(stationNumber);
         List<String> addresses = new ArrayList<>();
@@ -97,7 +98,7 @@ public class FireStationServiceImpl implements FireStationService {
     }
 
     @Override
-    public PhoneAlert createPhoneAlert(long stationNumber) {
+    public PhoneAlert createPhoneAlert(int stationNumber) {
         List<FireStation> fireStationList = repository.findAllByStation(stationNumber);
         List<String> phoneList = new ArrayList<>();
         List<String> addresses = new ArrayList<>();
@@ -114,12 +115,12 @@ public class FireStationServiceImpl implements FireStationService {
     }
 
     @Override
-    public List<Map<String, List<Flood>>> createFlood(List<Long> stationNumberList) {
+    public List<Map<String, List<Flood>>> createFlood(List<Integer> stationNumberList) {
         List<Map<String, List<Flood>>> result2 = new ArrayList<>();
         Map<String, List<Flood>> result = new HashMap<>();
         List<Flood> floodList = new ArrayList<>();
 
-        for (long el : stationNumberList) {
+        for (int el : stationNumberList) {
             List<FireStation> fireStation = repository.findFireStationByStation(el);
             for (FireStation f : fireStation) {
                 List<Person> personList = personRepository.findAllByAddress(f.getAddress());

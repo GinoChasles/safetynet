@@ -10,7 +10,7 @@ public class Medications {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private int id;
 
     String medication;
 
@@ -42,11 +42,11 @@ public class Medications {
         this.medicalRecords = medicalRecords;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

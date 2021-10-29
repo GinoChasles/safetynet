@@ -15,7 +15,7 @@ public interface MedicalRecordService {
      * @param id the id
      * @return the optional
      */
-    Optional<MedicalRecords> findById(long id);
+    Optional<MedicalRecords> findById(int id);
 
     /**
      * Insert medical records.
@@ -30,7 +30,7 @@ public interface MedicalRecordService {
      *
      * @param id the id
      */
-    void delete(long id);
+    void delete(int id);
 
     /**
      * Update medical records.
@@ -39,7 +39,7 @@ public interface MedicalRecordService {
      * @param medicalRecords the medical records
      * @return the medical records
      */
-    MedicalRecords update(long id, MedicalRecords medicalRecords);
+    MedicalRecords update(int id, MedicalRecords medicalRecords);
 
     /**
      * Delete by name.

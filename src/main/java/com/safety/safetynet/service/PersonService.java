@@ -19,7 +19,7 @@ public interface PersonService {
      * @param id the id
      * @return the optional
      */
-    Optional<Person> findById(long id);
+    Optional<Person> findById(int id);
 
     /**
      * Insert person.
@@ -34,7 +34,7 @@ public interface PersonService {
      *
      * @param id the id
      */
-    void delete(long id);
+    void delete(int id);
 
     /**
      * Update person.
@@ -43,7 +43,7 @@ public interface PersonService {
      * @param person the person
      * @return the person
      */
-    Person update(long id, Person person);
+    Person update(int id, Person person);
 
     /**
      * Delete by name.

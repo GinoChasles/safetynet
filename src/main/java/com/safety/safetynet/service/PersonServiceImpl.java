@@ -35,7 +35,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Optional<Person> findById(long id) {
+    public Optional<Person> findById(int id) {
         return repository.findById(id);
     }
 
@@ -45,13 +45,13 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(int id) {
         Optional<Person> person = this.findById(id);
         person.ifPresent(p -> repository.delete(p));
     }
 
     @Override
-    public Person update(long id, Person person) {
+    public Person update(int id, Person person) {
        Optional<Person> p1 = this.findById(id);
 
        if(p1.isPresent()){

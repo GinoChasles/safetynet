@@ -14,7 +14,7 @@ import java.util.Optional;
  * The interface Person repository.
  */
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface PersonRepository extends JpaRepository<Person, Integer> {
 
     /**
      * Find by first name and last name optional.

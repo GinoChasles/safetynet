@@ -22,6 +22,7 @@ public class SafetynetApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SafetynetApplication.class, args);
 	}
+
 	@Bean
 	CommandLineRunner runner(PersonRepository personRepository, FireStationRepository fireStationRepository, MedicalRecordRepository medicalRecordRepository, MedicationRepository medicationRepository, AllergiesRepository allergiesRepository) {
 		return args -> {

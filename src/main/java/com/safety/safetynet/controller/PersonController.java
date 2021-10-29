@@ -56,7 +56,7 @@ public class PersonController {
      * @return the response entity
      */
     @GetMapping("/person/{id}")
-    public ResponseEntity<Optional<Person>> findById(@PathVariable(value = "id") long id) {
+    public ResponseEntity<Optional<Person>> findById(@PathVariable(value = "id") int id) {
         logger.info("Recherche d'une personne par l'id: " + id);
         Optional<Person> result = personServiceImpl.findById(id);
         if(result.isEmpty()) {
@@ -88,7 +88,7 @@ public class PersonController {
      * @return the response entity
      */
     @PutMapping("/person/{id]")
-    public ResponseEntity<Person> update(@PathVariable(value = "id") long id, @RequestBody Person person) {
+    public ResponseEntity<Person> update(@PathVariable(value = "id") int id, @RequestBody Person person) {
         logger.info("modification de la personne à l'id " + id);
         Person person1 = personServiceImpl.update(id, person);
         if(person1 == null) {
@@ -107,7 +107,7 @@ public class PersonController {
      * @return the response entity
      */
     @DeleteMapping("/person/{id}")
-    public ResponseEntity<Person> delete(@PathVariable(value = "id") long id) {
+    public ResponseEntity<Person> delete(@PathVariable(value = "id") int id) {
         logger.info("Demande de suppression de la personne à l'id " + id);
         Optional<Person> person = personServiceImpl.findById(id);
         if(person.isEmpty()) {

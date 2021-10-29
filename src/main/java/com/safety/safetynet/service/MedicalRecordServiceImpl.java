@@ -27,7 +27,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     }
 
     @Override
-    public Optional<MedicalRecords> findById(long id) {
+    public Optional<MedicalRecords> findById(int id) {
         return repository.findById(id);
     }
 
@@ -37,13 +37,13 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(int id) {
         Optional<MedicalRecords> medicalRecord = this.findById(id);
         medicalRecord.ifPresent(m -> repository.delete(m));
     }
 
     @Override
-    public MedicalRecords update(long id, MedicalRecords medicalRecords) {
+    public MedicalRecords update(int id, MedicalRecords medicalRecords) {
         Optional<MedicalRecords> mr1 = this.findById(id);
         if (mr1.isPresent()) {
             MedicalRecords medicalRecordsToUpdate = mr1.get();

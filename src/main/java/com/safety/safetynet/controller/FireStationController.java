@@ -65,7 +65,7 @@ public class FireStationController {
      * @return the response entity
      */
     @GetMapping("/firestation/{id}")
-    public ResponseEntity<Optional<FireStation>> findById(@PathVariable(value = "id") long id) {
+    public ResponseEntity<Optional<FireStation>> findById(@PathVariable(value = "id") int id) {
         logger.info("recherche de la caserne avec l'id: " + id);
         Optional<FireStation> result = fireStationServiceImpl.findById(id);
         if(result.isEmpty()) {
@@ -98,14 +98,14 @@ public class FireStationController {
      * @return the response entity
      */
     @PutMapping(value = "/firestation/{id}")
-    public ResponseEntity<FireStation> update(@PathVariable(value = "id") long id, FireStation fireStation) {
+    public ResponseEntity<FireStation> update(@PathVariable(value = "id") int id, @RequestBody FireStation fireStation) {
         logger.info("Mise à jour d'une fireStation lancée.");
         FireStation fireStation1 = fireStationServiceImpl.update(id, fireStation);
         if (fireStation1 == null) {
             logger.error("Pas de fireStation correspondant à l'id :" + id);
             return ResponseEntity.notFound().build();
         } else {
-            logger.info("FireStation mis à jour: " + fireStation);
+            logger.info("FireStation mis à jour");
             return ResponseEntity.ok().body(fireStation1);
         }
     }
@@ -117,7 +117,7 @@ public class FireStationController {
      * @return the response entity
      */
     @DeleteMapping(value = "/firestation/{id}")
-    public ResponseEntity<FireStation> delete(@PathVariable(value = "id") long id) {
+    public ResponseEntity<FireStation> delete(@PathVariable(value = "id") int id) {
         logger.info("Suppression en cours de la firestation: " + id);
         Optional<FireStation> fireStation = fireStationServiceImpl.findById(id);
         if (fireStation.isEmpty()) {
@@ -137,10 +137,10 @@ public class FireStationController {
      * @return the person by station number
      */
     @GetMapping(value = "/firestation", params = "stationNumber")
-    public ResponseEntity<FireStationCoverage> getPersonByStationNumber(@RequestParam(value = "stationNumber") long id) {
+    public ResponseEntity<FireStationCoverage> getPersonByStationNumber(@RequestParam(value = "stationNumber") int id) {
         logger.info("Recherche des personnes couvertes par la caserne n° " + id);
         FireStationCoverage result = fireStationServiceImpl.findAllByFireStationNumber(id);
-            if (result == null) {
+            if (result.getPersonInfosList().isEmpty()) {
                 logger.error("aucune personnes trouvées.");
                 return ResponseEntity.notFound().build();
             } else {
@@ -156,10 +156,10 @@ public class FireStationController {
      * @return the phone alert
      */
     @GetMapping(value = "/phoneAlert", params = "firestation")
-    public ResponseEntity<PhoneAlert> getPhoneAlert(@RequestParam("firestation") long stationNumber) {
+    public ResponseEntity<PhoneAlert> getPhoneAlert(@RequestParam("firestation") int stationNumber) {
         logger.info("Recherche des numéros de téléphones desservies par la caserne n°" + stationNumber);
         PhoneAlert result = fireStationServiceImpl.createPhoneAlert(stationNumber);
-        if(result == null) {
+        if(result.getPhoneList().isEmpty()) {
             logger.error("Aucun numéro trouvé");
             return ResponseEntity.notFound().build();
         } else {
@@ -175,10 +175,10 @@ public class FireStationController {
      * @return the flood
      */
     @GetMapping(value = "flood/stations", params = "stationNumber")
-    public ResponseEntity<List<Map<String,List<Flood>>>> getFlood(@RequestParam("stationNumber") List<Long> stationNumberList) {
+    public ResponseEntity<List<Map<String,List<Flood>>>> getFlood(@RequestParam("stationNumber") List<Integer> stationNumberList) {
         logger.info("Recherche des foyers desservis par la ou les casernes n°" + stationNumberList);
         List<Map<String, List<Flood>>> result = fireStationServiceImpl.createFlood(stationNumberList);
-        if(result == null) {
+        if(result.isEmpty()) {
             logger.error("Aucun foyer trouvée.");
             return ResponseEntity.notFound().build();
         } else {

@@ -19,7 +19,7 @@ public class MedicalRecords {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private int id;
 
     private String firstName;
     private String lastName;
@@ -48,11 +48,11 @@ public class MedicalRecords {
     inverseJoinColumns = {@JoinColumn(name = "allergies_id", referencedColumnName = "id")})
     private Set<Allergies> allergies;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getFirstName() {

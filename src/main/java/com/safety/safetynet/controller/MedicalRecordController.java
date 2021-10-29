@@ -52,7 +52,7 @@ public class MedicalRecordController {
      * @return the response entity
      */
     @GetMapping("/medicalrecord/{id}")
-    public ResponseEntity<Optional<MedicalRecords>> findById(@PathVariable(value = "id") long id) {
+    public ResponseEntity<Optional<MedicalRecords>> findById(@PathVariable(value = "id") int id) {
         logger.info("recherche d'un medicalRecord par l'id: " + id);
         Optional<MedicalRecords> result = medicalRecordServiceImpl.findById(id);
         if(result.isEmpty()) {
@@ -84,7 +84,7 @@ public class MedicalRecordController {
      * @return the response entity
      */
     @PutMapping("medicalrecord/{id}")
-    public ResponseEntity<MedicalRecords> update(@PathVariable(value = "id") long id, MedicalRecords medicalRecords) {
+    public ResponseEntity<MedicalRecords> update(@PathVariable(value = "id") int id, MedicalRecords medicalRecords) {
         logger.info("Modification du medicalrecord n°"+id);
         MedicalRecords medicalRecords1 = medicalRecordServiceImpl.update(id, medicalRecords);
         if(medicalRecords1 == null) {
@@ -103,7 +103,7 @@ public class MedicalRecordController {
      * @return the response entity
      */
     @DeleteMapping("medicalrecord/{id}")
-    public ResponseEntity<MedicalRecords> delete(@PathVariable(value = "id") long id) {
+    public ResponseEntity<MedicalRecords> delete(@PathVariable(value = "id") int id) {
         logger.info("Demande de suppression du medicalrecord n°" + id);
         Optional<MedicalRecords> medicalRecord = medicalRecordServiceImpl.findById(id);
         if(medicalRecord.isEmpty()) {

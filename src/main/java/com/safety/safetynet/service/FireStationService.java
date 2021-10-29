@@ -19,7 +19,7 @@ public interface FireStationService {
      * @param id the id
      * @return the optional
      */
-    Optional<FireStation> findById(long id);
+    Optional<FireStation> findById(int id);
 
     /**
      * Insert fire station.
@@ -34,7 +34,7 @@ public interface FireStationService {
      *
      * @param id the id
      */
-    void delete(long id);
+    void delete(int id);
 
     /**
      * Update fire station.
@@ -43,7 +43,7 @@ public interface FireStationService {
      * @param fireStation the fire station
      * @return the fire station
      */
-    FireStation update(long id, FireStation fireStation);
+    FireStation update(int id, FireStation fireStation);
 
     /**
      * Delete by name.
@@ -66,7 +66,7 @@ public interface FireStationService {
      * @param stationNumber the station number
      * @return the fire station coverage
      */
-    FireStationCoverage findAllByFireStationNumber(long stationNumber);
+    FireStationCoverage findAllByFireStationNumber(int stationNumber);
 
     /**
      * Create phone alert phone alert.
@@ -74,7 +74,7 @@ public interface FireStationService {
      * @param stationNumber the station number
      * @return the phone alert
      */
-    PhoneAlert createPhoneAlert(long stationNumber);
+    PhoneAlert createPhoneAlert(int stationNumber);
 
     /**
      * Create flood list.
@@ -82,7 +82,7 @@ public interface FireStationService {
      * @param stationNumberList the station number list
      * @return the list
      */
-    List<Map<String, List<Flood>>> createFlood(List<Long> stationNumberList);
+    List<Map<String, List<Flood>>> createFlood(List<Integer> stationNumberList);
 
 
 }

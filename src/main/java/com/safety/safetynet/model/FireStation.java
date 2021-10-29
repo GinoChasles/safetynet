@@ -1,6 +1,5 @@
 package com.safety.safetynet.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -9,17 +8,31 @@ public class FireStation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private int id;
 
     private String address;
-    private long station;
+    private int station;
 
+    public FireStation(String address, int station) {
+        this.address = address;
+        this.station = station;
+    }
 
-    public Long getId() {
+    public FireStation(int id, String address, int station) {
+        this.id = id;
+        this.address = address;
+        this.station = station;
+    }
+
+    public FireStation() {
+
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -31,11 +44,11 @@ public class FireStation {
         this.address = address;
     }
 
-    public long getStation() {
+    public int getStation() {
         return station;
     }
 
-    public void setStation(long station) {
+    public void setStation(int station) {
         this.station = station;
     }
 

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Fire {
-    private long stationNumber;
+    private int stationNumber;
     private String firstName;
     private String lastName;
     private String phone;
@@ -18,7 +18,7 @@ public class Fire {
     public Fire() {
     }
 
-    public Fire(long stationNumber, String firstName, String lastName, String phone, int age, List<Medications> medications, Set<Allergies> allergies) {
+    public Fire(int stationNumber, String firstName, String lastName, String phone, int age, List<Medications> medications, Set<Allergies> allergies) {
         this.stationNumber = stationNumber;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,11 +28,11 @@ public class Fire {
         this.allergies = allergies;
     }
 
-    public long getStationNumber() {
+    public int getStationNumber() {
         return stationNumber;
     }
 
-    public void setStationNumber(long stationNumber) {
+    public void setStationNumber(int stationNumber) {
         this.stationNumber = stationNumber;
     }
 
