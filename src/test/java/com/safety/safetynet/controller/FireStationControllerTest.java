@@ -7,14 +7,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safety.safetynet.SafetynetApplication;
 import com.safety.safetynet.model.FireStation;
-import com.safety.safetynet.service.FireStationServiceImpl;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.annotation.Order;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.http.MediaType;
@@ -76,4 +72,26 @@ public class FireStationControllerTest {
                 .delete("/firestation/14"))
                 .andExpect(status().isAccepted());
     }
+
+    @Test
+    @Order(6)
+    public void getPersonByStationNumberTest() throws Exception {
+        mockMvc.perform(get("/firestation?stationNumber=3"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @Order(7)
+    public void getPhoneAlertTest() throws Exception {
+        mockMvc.perform(get("/phoneAlert?firestation=3"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @Order(8)
+    public void getFloodTest() throws Exception {
+        mockMvc.perform(get("/flood/stations?stationNumber=3"))
+                .andExpect(status().isOk());
+    }
+
 }

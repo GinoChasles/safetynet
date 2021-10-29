@@ -111,7 +111,7 @@ public class MedicalRecordController {
             return ResponseEntity.notFound().build();
         } else {
             medicalRecordServiceImpl.delete(medicalRecord.get().getId());
-            logger.info("MedicalRecord n°" + id + "a été supprimé");
+            logger.info("MedicalRecord n°" + id + " a été supprimé");
             return ResponseEntity.accepted().build();
         }
     }

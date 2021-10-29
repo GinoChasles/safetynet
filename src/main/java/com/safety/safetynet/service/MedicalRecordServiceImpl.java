@@ -50,6 +50,8 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
             medicalRecordsToUpdate.setBirthdate(medicalRecords.getBirthdate());
             medicalRecordsToUpdate.setMedications(medicalRecords.getMedications());
             medicalRecordsToUpdate.setAllergies(medicalRecords.getAllergies());
+            medicalRecordsToUpdate.setFirstName(medicalRecords.getFirstName());
+            medicalRecordsToUpdate.setLastName(medicalRecords.getLastName());
 
             return repository.save(medicalRecordsToUpdate);
         } else {

@@ -20,6 +20,7 @@ public class Allergies {
     @JsonBackReference
     Set<MedicalRecords> medicalRecords;
 
+
     public Allergies() {
     }
 

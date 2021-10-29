@@ -48,6 +48,19 @@ public class MedicalRecords {
     inverseJoinColumns = {@JoinColumn(name = "allergies_id", referencedColumnName = "id")})
     private Set<Allergies> allergies;
 
+    public MedicalRecords(int id, String firstName, String lastName, LocalDate birthdate, List<Medications> medications, Set<Allergies> allergies) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthdate = birthdate;
+        this.medications = medications;
+        this.allergies = allergies;
+    }
+
+    public MedicalRecords() {
+
+    }
+
     public int getId() {
         return id;
     }
