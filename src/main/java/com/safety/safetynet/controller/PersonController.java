@@ -87,7 +87,7 @@ public class PersonController {
      * @param person the person
      * @return the response entity
      */
-    @PutMapping("/person/{id]")
+    @PutMapping("/person/{id}")
     public ResponseEntity<Person> update(@PathVariable(value = "id") int id, @RequestBody Person person) {
         logger.info("modification de la personne à l'id " + id);
         Person person1 = personServiceImpl.update(id, person);
@@ -131,7 +131,7 @@ public class PersonController {
     public ResponseEntity<ChildAlert> getChildAlert(@RequestParam(value = "address") String address) {
         logger.info("recherche des enfants habitant à l'addresse: " + address);
         ChildAlert result = personServiceImpl.findChildAlert(address);
-        if(result != null) {
+        if(!result.getChildren().isEmpty()) {
             logger.info("Liste d'enfant habitant à l'adresse " + address + " : " + result);
             return ResponseEntity.ok().body(result);
         } else {
@@ -150,7 +150,7 @@ public class PersonController {
     public ResponseEntity<CommunityEmail> getCommunityEmail(@RequestParam("city") String city) {
         logger.info("Recherche de la liste d'email des personnes habitant dans la ville: " + city);
         CommunityEmail result = personServiceImpl.createCommunityEmail(city);
-        if(result == null) {
+        if(result.getEmail().isEmpty()) {
             logger.error("not found");
             return ResponseEntity.notFound().build();
         } else {

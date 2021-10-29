@@ -61,6 +61,8 @@ public class PersonServiceImpl implements PersonService {
            personToUpdate.setEmail(person.getEmail());
            personToUpdate.setPhone(person.getPhone());
            personToUpdate.setZip(person.getZip());
+           personToUpdate.setLastName(person.getLastName());
+           personToUpdate.setFirstName(person.getFirstName());
            return repository.save(personToUpdate);
        } else {
            return null;
