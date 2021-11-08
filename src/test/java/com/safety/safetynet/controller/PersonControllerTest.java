@@ -70,18 +70,22 @@ public class PersonControllerTest {
     }
 
     @Test
+    @Order(6)
+
     public void getChildAlertTest() throws Exception {
         mockMvc.perform(get("/childAlert?address=1509 Culver St"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @Order(7)
     public void getCommunityEmailTest() throws Exception {
         mockMvc.perform(get("/communityEmail?city=Culver"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @Order(8)
     public void getFireTest() throws Exception {
         mockMvc.perform(get("/fire?address=1509 Culver St"))
                 .andExpect(status().isOk());

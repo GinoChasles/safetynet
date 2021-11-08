@@ -176,8 +176,8 @@
 				<version>0.8.5</version>
 				<configuration>
 					<excludes>
-						<exclude>com/safety/safetynet/model/**</exclude>
-						<exclude>com/safety/safetynet/dto/**</exclude>
+						<exclude>com/safety/safetynet/model/**/</exclude>
+						<exclude>com/safety/safetynet/dto/**/</exclude>
 					</excludes>
 				</configuration>
 				<executions>

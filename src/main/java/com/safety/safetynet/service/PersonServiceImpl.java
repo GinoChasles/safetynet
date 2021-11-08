@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,7 +93,10 @@ public class PersonServiceImpl implements PersonService {
             PersonInfos personInfos = new PersonInfos();
             LocalDate birthdate = medicalRecordRepository.findBirthDateByFirstNameAndLastName(person.getFirstName(), person.getLastName());
             LocalDate now = LocalDate.now();
-            int age = Period.between(birthdate,now).getYears();
+            int age = 0;
+            if(birthdate != null) {
+                age = Period.between(birthdate, now).getYears();
+            }
             personInfos.setFirstName(person.getFirstName());
             personInfos.setLastName(person.getLastName());
             personInfos.setAddress(person.getAddress());
@@ -118,8 +122,10 @@ public class PersonServiceImpl implements PersonService {
         for(Person person : personList) {
             LocalDate birthdate = medicalRecordRepository.findBirthDateByFirstNameAndLastName(person.getFirstName(), person.getLastName());
             LocalDate now = LocalDate.now();
-            int age = Period.between(birthdate,now).getYears();
-
+            int age = 0;
+            if(birthdate != null) {
+                age = Period.between(birthdate, now).getYears();
+            }
             if(age > 18) {
                 adult.add(person);
             } else {
@@ -160,8 +166,10 @@ public class PersonServiceImpl implements PersonService {
 
             LocalDate birthdate = medicalRecordRepository.findBirthDateByFirstNameAndLastName(p.getFirstName(), p.getLastName());
             LocalDate now = LocalDate.now();
-            int age = Period.between(birthdate,now).getYears();
-
+            int age = 0;
+            if(birthdate != null) {
+                age = Period.between(birthdate, now).getYears();
+            }
             result.setFirstName(p.getFirstName());
             result.setLastName(p.getLastName());
             result.setPhone(p.getPhone());
@@ -171,6 +179,9 @@ public class PersonServiceImpl implements PersonService {
             if(medicalRecord.isPresent()) {
                 result.setMedications(medicalRecord.get().getMedications());
                 result.setAllergies(medicalRecord.get().getAllergies());
+            } else {
+                result.setMedications(new ArrayList<>());
+                result.setAllergies(new HashSet<>());
             }
             resultList.add(result);
         }
