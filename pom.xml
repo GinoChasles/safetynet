@@ -129,9 +129,7 @@
 									</mainClass>
 								</manifest>
 							</archive>
-							<descriptorRefs>
-								<descriptorRef>executable-jar-with-dependencies</descriptorRef>
-							</descriptorRefs>
+								<descriptorRefs>jar-with-dependencies</descriptorRefs>
 						</configuration>
 					</execution>
 				</executions>

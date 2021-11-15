@@ -4,11 +4,10 @@ import com.safety.safetynet.model.Allergies;
 import com.safety.safetynet.model.MedicalRecords;
 import com.safety.safetynet.model.Medications;
 import com.safety.safetynet.repository.MedicalRecordRepository;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -80,20 +79,25 @@ public class MedicalRecordServiceTest {
         assertThat(medicalRecordsSave.getFirstName()).isEqualTo("TestFirstName");
     }
 
-    @Test
-    public void deleteTest() {
-//        when(medicalRecordService.delete(medicalRecords.getId()));
-    }
+//    @Test
+//    public void deleteTest() {
+//        ArgumentCaptor<MedicalRecords> argument = ArgumentCaptor.forClass(MedicalRecords.class);
+//
+//        medicalRecordService.delete(medicalRecords.getId());
+////        verify(medicalRecordRepository, times(1)).delete(medicalRecords);
+//        Mockito.verify(medicalRecordRepository, Mockito.times(1)).delete(argument.capture());
+//
+//    }
 
     @Test
     public void updateTest() {
 
     }
 
-    @Test
-    public void deleteByNameTest() {
-
-    }
+//    @Test
+//    public void deleteByNameTest() {
+//
+//    }
 
     @Test
     public void findAllTest() {
