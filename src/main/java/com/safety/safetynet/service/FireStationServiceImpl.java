@@ -69,11 +69,6 @@ public class FireStationServiceImpl implements FireStationService {
     }
 
     @Override
-    public void deleteByName(String firstName, String lastName) {
-
-    }
-
-    @Override
     public List<FireStation> findAll() {
         return repository.findAll();
     }

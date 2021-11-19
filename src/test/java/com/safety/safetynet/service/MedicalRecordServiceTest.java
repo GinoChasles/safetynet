@@ -3,6 +3,7 @@ package com.safety.safetynet.service;
 import com.safety.safetynet.model.Allergies;
 import com.safety.safetynet.model.MedicalRecords;
 import com.safety.safetynet.model.Medications;
+import com.safety.safetynet.model.Person;
 import com.safety.safetynet.repository.MedicalRecordRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,7 +57,7 @@ public class MedicalRecordServiceTest {
     }
 
     @Test
-    public void findById() {
+    public void findByIdTest() {
         when(medicalRecordRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(medicalRecords));
 
         Optional<MedicalRecords> medicalRecordsOptional = medicalRecordService.findById(1);
@@ -79,25 +80,43 @@ public class MedicalRecordServiceTest {
         assertThat(medicalRecordsSave.getFirstName()).isEqualTo("TestFirstName");
     }
 
-//    @Test
-//    public void deleteTest() {
-//        ArgumentCaptor<MedicalRecords> argument = ArgumentCaptor.forClass(MedicalRecords.class);
-//
-//        medicalRecordService.delete(medicalRecords.getId());
-////        verify(medicalRecordRepository, times(1)).delete(medicalRecords);
+    @Test
+    public void deleteTest() {
+        ArgumentCaptor<MedicalRecords> argument = ArgumentCaptor.forClass(MedicalRecords.class);
+        Optional<MedicalRecords> medicalRecordsOptional = medicalRecordRepository.findById(medicalRecords.getId());
+        MedicalRecords medicalRecordsToDelete;
+        if(medicalRecordsOptional.isPresent()) {
+            medicalRecordsToDelete = medicalRecordsOptional.get();
+            medicalRecordService.delete(medicalRecordsToDelete.getId());
+        verify(medicalRecordRepository, times(1)).delete((MedicalRecords) argument.capture());
 //        Mockito.verify(medicalRecordRepository, Mockito.times(1)).delete(argument.capture());
-//
-//    }
+        }
+    }
 
     @Test
     public void updateTest() {
-
+        Optional<MedicalRecords> medicalRecordsOptional = medicalRecordRepository.findById(medicalRecords.getId());
+        MedicalRecords medicalRecordsToUpdate;
+        if(medicalRecordsOptional.isPresent()) {
+            medicalRecordsToUpdate = medicalRecordsOptional.get();
+            medicalRecordsToUpdate.setFirstName("Update");
+        when(medicalRecordService.update(medicalRecords.getId(), medicalRecordsToUpdate)).thenReturn(medicalRecords);
+        assertThat(medicalRecords.getFirstName()).isEqualTo("Update");
+        }
     }
 
-//    @Test
-//    public void deleteByNameTest() {
-//
-//    }
+    @Test
+    public void deleteByNameTest() {
+        ArgumentCaptor<MedicalRecords> argumentCaptor = ArgumentCaptor.forClass(MedicalRecords.class);
+
+        Optional<MedicalRecords> medicalRecordsOptional = medicalRecordRepository.findByFirstNameAndLastName(medicalRecords.getFirstName(), medicalRecords.getLastName());
+        MedicalRecords medicalRecordToDelete;
+        if(medicalRecordsOptional.isPresent()) {
+            medicalRecordToDelete = medicalRecordsOptional.get();
+            medicalRecordService.deleteByName(medicalRecordToDelete.getFirstName(), medicalRecordToDelete.getLastName());
+            Mockito.verify(medicalRecordRepository, Mockito.times(1)).delete(argumentCaptor.capture());
+        }
+    }
 
     @Test
     public void findAllTest() {

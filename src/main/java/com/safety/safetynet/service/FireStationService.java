@@ -45,13 +45,6 @@ public interface FireStationService {
      */
     FireStation update(int id, FireStation fireStation);
 
-    /**
-     * Delete by name.
-     *
-     * @param firstName the first name
-     * @param lastName  the last name
-     */
-    void deleteByName(String firstName, String lastName);
 
     /**
      * Find all list.
