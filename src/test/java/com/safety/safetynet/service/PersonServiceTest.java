@@ -119,7 +119,6 @@ public class PersonServiceTest {
 
         List<String> adressList = new ArrayList<>();
         adressList.add(person.getAddress());
-        adressList.add(person.getAddress());
 
         Mockito.when(personRepository.findAllByAddressIn(adressList)).thenReturn(personList);
         assertThat(personService.findAllByAdressIn(adressList)).size().isEqualTo(2);
@@ -152,8 +151,9 @@ public class PersonServiceTest {
         List<Person> personList = new ArrayList<>();
         personList.add(person);
         personList.add(person);
-        Mockito.when(personRepository.saveAll(personList)).thenReturn(personList);
         List<Person> personList1 = personService.insertAll(personList);
+
+        Mockito.when(personRepository.saveAll(personList)).thenReturn(personList);
         assertThat(personList1.size()).isEqualTo(2);
         Mockito.verify(personRepository, Mockito.times(1)).saveAll(personList);
     }

@@ -2,28 +2,56 @@ package com.safety.safetynet.dto;
 
 import java.util.List;
 
+/**
+ * The type Phone alert.
+ */
 public class PhoneAlert {
-    private List<String> phoneList;
+  /**
+   * PhoneList.
+   */
+  private List<String> phoneList;
 
-    public PhoneAlert(List<String> phoneList) {
-        this.phoneList = phoneList;
-    }
+  /**
+   * Instantiates a new Phone alert.
+   *
+   * @param phoneList1 the phone list 1
+   */
+  public PhoneAlert(final List<String> phoneList1) {
+    this.phoneList = phoneList1;
+  }
 
-    public PhoneAlert() {
-    }
+  /**
+   * Instantiates a new Phone alert.
+   */
+  public PhoneAlert() {
+  }
 
-    public List<String> getPhoneList() {
-        return phoneList;
-    }
+  /**
+   * Gets phone list.
+   *
+   * @return the phone list
+   */
+  public List<String> getPhoneList() {
+    return phoneList;
+  }
 
-    public void setPhoneList(List<String> phoneList) {
-        this.phoneList = phoneList;
-    }
+  /**
+   * Sets phone list.
+   *
+   * @param phoneList1 the phone list 1
+   */
+  public void setPhoneList(final List<String> phoneList1) {
+    this.phoneList = phoneList1;
+  }
 
-    @Override
-    public String toString() {
-        return "PhoneAlert{" +
-                "phoneList=" + phoneList +
-                '}';
-    }
+  /**
+   * ToString method.
+   *
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "PhoneAlert{"
+        + "phoneList=" + phoneList + '}';
+  }
 }

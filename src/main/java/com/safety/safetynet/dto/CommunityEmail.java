@@ -2,28 +2,57 @@ package com.safety.safetynet.dto;
 
 import java.util.List;
 
+/**
+ * The type Community email.
+ */
 public class CommunityEmail {
-    List<String> email;
 
-    public CommunityEmail(List<String> email) {
-        this.email = email;
-    }
+  /**
+   * List of emails.
+   */
+  private List<String> email;
 
-    public CommunityEmail() {
-    }
+  /**
+   * Instantiates a new Community email.
+   *
+   * @param email1 the email 1
+   */
+  public CommunityEmail(final List<String> email1) {
+    this.email = email1;
+  }
 
-    public List<String> getEmail() {
-        return email;
-    }
+  /**
+   * Instantiates a new Community email.
+   */
+  public CommunityEmail() {
+  }
 
-    public void setEmail(List<String> email) {
-        this.email = email;
-    }
+  /**
+   * Gets email.
+   *
+   * @return the email
+   */
+  public List<String> getEmail() {
+    return email;
+  }
 
-    @Override
-    public String toString() {
-        return "CommunityEmail{" +
-                "email=" + email +
-                '}';
-    }
+  /**
+   * Sets email.
+   *
+   * @param email1 the email 1
+   */
+  public void setEmail(final List<String> email1) {
+    this.email = email1;
+  }
+
+
+  /**
+   * ToString method.
+   *
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "CommunityEmail{" + "email=" + email + '}';
+  }
 }

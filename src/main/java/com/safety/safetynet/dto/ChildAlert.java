@@ -1,44 +1,83 @@
 package com.safety.safetynet.dto;
 
-import com.safety.safetynet.dto.Child;
 import com.safety.safetynet.model.Person;
-
 import java.util.List;
 
 
+/**
+ * The type Child alert.
+ */
 public class ChildAlert {
-    List<Child> children;
-    List<Person> family;
+  /**
+   * List of children.
+   */
+  private List<Child> children;
+  /**
+   * List of adults.
+   */
+  private List<Person> family;
 
-    public ChildAlert() {
-    }
+  /**
+   * Instantiates a new Child alert.
+   */
+  public ChildAlert() {
+  }
 
-    public ChildAlert(List<Child> children, List<Person> family) {
-        this.children = children;
-        this.family = family;
-    }
+  /**
+   * Instantiates a new Child alert.
+   *
+   * @param children1 the children 1
+   * @param family1   the family 1
+   */
+  public ChildAlert(final List<Child> children1, final List<Person> family1) {
+    this.children = children1;
+    this.family = family1;
+  }
 
-    public List<Child> getChildren() {
-        return children;
-    }
+  /**
+   * Gets children.
+   *
+   * @return the children
+   */
+  public List<Child> getChildren() {
+    return children;
+  }
 
-    public void setChildren(List<Child> children) {
-        this.children = children;
-    }
+  /**
+   * Sets children.
+   *
+   * @param children1 the children 1
+   */
+  public void setChildren(final List<Child> children1) {
+    this.children = children1;
+  }
 
-    public List<Person> getFamily() {
-        return family;
-    }
+  /**
+   * Gets family.
+   *
+   * @return the family
+   */
+  public List<Person> getFamily() {
+    return family;
+  }
 
-    public void setFamily(List<Person> family) {
-        this.family = family;
-    }
+  /**
+   * Sets family.
+   *
+   * @param family1 the family 1
+   */
+  public void setFamily(final List<Person> family1) {
+    this.family = family1;
+  }
 
-    @Override
-    public String toString() {
-        return "ChildAlert{" +
-                "children=" + children.toString() +
-                ", family=" + family.toString() +
-                '}';
-    }
+  /**
+   * ToString method.
+   *
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "ChildAlert{" + "children="
+        + children.toString() + ", family=" + family.toString() + '}';
+  }
 }

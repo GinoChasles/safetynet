@@ -7,15 +7,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safety.safetynet.SafetynetApplication;
 import com.safety.safetynet.model.FireStation;
+import com.safety.safetynet.service.FireStationServiceImpl;
+import javassist.NotFoundException;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.Optional;
 
 @SpringBootTest(classes = SafetynetApplication.class)
 @AutoConfigureMockMvc
@@ -24,7 +32,8 @@ public class FireStationControllerTest {
     MockMvc mockMvc;
     @Autowired
     ObjectMapper mapper;
-
+    @Mock
+    FireStationServiceImpl fireStationService;
 
     @Test
     @Order(1)
@@ -94,4 +103,14 @@ public class FireStationControllerTest {
                 .andExpect(status().isOk());
     }
 
+//    @Test
+//    public void getAllFireStationTest_whenEmpty() throws Exception {
+////        Mockito.when(fireStationService.findById(Mockito.anyInt())).thenReturn(Optional.empty());
+//        Mockito.when(fireStationService.findById(Mockito.anyInt())).thenThrow(new NotFoundException("Not found."));
+//
+//        mockMvc.perform(get("/firestation/{id}",100)).andExpect(status().isNotFound());
+////        Assertions.assertThat(result.getResolvedException().getMessage()).isEqualTo("Not found.");
+//        Mockito.verify(fireStationService, Mockito.times(1)).findById(100);
+////        Mockito.verifyNoMoreInteractions(fireStationService);
+//    }
 }

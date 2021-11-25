@@ -89,7 +89,6 @@ public class MedicalRecordServiceTest {
             medicalRecordsToDelete = medicalRecordsOptional.get();
             medicalRecordService.delete(medicalRecordsToDelete.getId());
         verify(medicalRecordRepository, times(1)).delete((MedicalRecords) argument.capture());
-//        Mockito.verify(medicalRecordRepository, Mockito.times(1)).delete(argument.capture());
         }
     }
 

@@ -1,61 +1,116 @@
 package com.safety.safetynet.model;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import javax.persistence.*;
 import java.util.Set;
+import javax.persistence.*;
 
+/**
+ * The type Medications.
+ */
 @Entity
 public class Medications {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private int id;
 
-    String medication;
+  /**
+   * Id.
+   */
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false)
+  private int id;
 
-    @ManyToMany(targetEntity = MedicalRecords.class, mappedBy = "medications", fetch = FetchType.LAZY)
-    @JsonBackReference
-    Set<MedicalRecords> medicalRecords;
+  /**
+   * Medication.
+   */
+  private String medication;
 
-    public Medications(String medication) {
-        this.medication = medication;
-    }
+  /**
+   * MedicalRecords.
+   */
+  @ManyToMany(targetEntity = MedicalRecords.class,
+      mappedBy = "medications", fetch = FetchType.LAZY)
+  @JsonBackReference
+  private Set<MedicalRecords> medicalRecords;
 
-    public Medications() {
-    }
+  /**
+   * Instantiates a new Medications.
+   *
+   * @param medication1 the medication 1
+   */
+  public Medications(final String medication1) {
+    this.medication = medication1;
+  }
 
-
-    public String getMedication() {
-        return medication;
-    }
-
-    public void setMedication(String medication) {
-        this.medication = medication;
-    }
-
-    public Set<MedicalRecords> getMedicalRecords() {
-        return medicalRecords;
-    }
-
-    public void setMedicalRecords(Set<MedicalRecords> medicalRecords) {
-        this.medicalRecords = medicalRecords;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+  /**
+   * Instantiates a new Medications.
+   */
+  public Medications() {
+  }
 
 
+  /**
+   * Gets medication.
+   *
+   * @return the medication
+   */
+  public String getMedication() {
+    return medication;
+  }
 
-    @Override
-    public String toString() {
-        return "Medications{" +
-                "medication=" + medication +
-                '}';
-    }
+  /**
+   * Sets medication.
+   *
+   * @param medication1 the medication 1
+   */
+  public void setMedication(final String medication1) {
+    this.medication = medication1;
+  }
+
+  /**
+   * Gets medical records.
+   *
+   * @return the medical records
+   */
+  public Set<MedicalRecords> getMedicalRecords() {
+    return medicalRecords;
+  }
+
+  /**
+   * Sets medical records.
+   *
+   * @param medicalRecords1 the medical records 1
+   */
+  public void setMedicalRecords(final Set<MedicalRecords> medicalRecords1) {
+    this.medicalRecords = medicalRecords1;
+  }
+
+  /**
+   * Gets id.
+   *
+   * @return the id
+   */
+  public int getId() {
+    return id;
+  }
+
+  /**
+   * Sets id.
+   *
+   * @param id1 the id 1
+   */
+  public void setId(final int id1) {
+    this.id = id1;
+  }
+
+
+  /**
+   * ToString method.
+   *
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "Medications{"
+        + "medication=" + medication + '}';
+  }
 }

@@ -1,62 +1,128 @@
 package com.safety.safetynet.model;
 
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+/**
+ * The type Fire station.
+ */
 @Entity
 public class FireStation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private int id;
+  /**
+   * Id.
+   */
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false)
+  private int id;
 
-    private String address;
-    private int station;
+  /**
+   * Address.
+   */
+  private String address;
+  /**
+   * StationNumber.
+   */
+  private int station;
 
-    public FireStation(String address, int station) {
-        this.address = address;
-        this.station = station;
-    }
+  /**
+   * Instantiates a new Fire station.
+   *
+   * @param address1 the address 1
+   * @param station1 the station 1
+   */
+  public FireStation(final String address1, final int station1) {
+    this.address = address1;
+    this.station = station1;
+  }
 
-    public FireStation(int id, String address, int station) {
-        this.id = id;
-        this.address = address;
-        this.station = station;
-    }
+  /**
+   * Instantiates a new Fire station.
+   *
+   * @param id1      the id 1
+   * @param address1 the address 1
+   * @param station1 the station 1
+   */
+  public FireStation(final int id1, final String address1,
+                     final int station1) {
+    this.id = id1;
+    this.address = address1;
+    this.station = station1;
+  }
 
-    public FireStation() {
+  /**
+   * Instantiates a new Fire station.
+   */
+  public FireStation() {
 
-    }
+  }
 
-    public int getId() {
-        return id;
-    }
+  /**
+   * Gets id.
+   *
+   * @return the id
+   */
+  public int getId() {
+    return id;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  /**
+   * Sets id.
+   *
+   * @param id1 the id 1
+   */
+  public void setId(final int id1) {
+    this.id = id1;
+  }
 
-    public String getAddress() {
-        return address;
-    }
+  /**
+   * Gets address.
+   *
+   * @return the address
+   */
+  public String getAddress() {
+    return address;
+  }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+  /**
+   * Sets address.
+   *
+   * @param address1 the address 1
+   */
+  public void setAddress(final String address1) {
+    this.address = address1;
+  }
 
-    public int getStation() {
-        return station;
-    }
+  /**
+   * Gets station.
+   *
+   * @return the station
+   */
+  public int getStation() {
+    return station;
+  }
 
-    public void setStation(int station) {
-        this.station = station;
-    }
+  /**
+   * Sets station.
+   *
+   * @param station1 the station 1
+   */
+  public void setStation(final int station1) {
+    this.station = station1;
+  }
 
-    @Override
-    public String toString() {
-        return "FireStation{" +
-                "address='" + address + '\'' +
-                ", station=" + station +
-                '}';
-    }
+  /**
+   * ToString method.
+   *
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "FireStation{" + "address='" + address
+        + '\'' + ", station=" + station + '}';
+  }
 }

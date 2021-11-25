@@ -1,60 +1,129 @@
 package com.safety.safetynet.dto;
 
+/**
+ * The type Person infos.
+ */
 public class PersonInfos {
-    String firstName;
-    String lastName;
-    String address;
-    String phone;
+  /**
+   * Firstname.
+   */
+  private String firstName;
+  /**
+   * Lastname.
+   */
+  private String lastName;
+  /**
+   * Address.
+   */
+  private String address;
+  /**
+   * Phone.
+   */
+  private String phone;
 
-    public PersonInfos(String firstName, String lastName, String address, String phone) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phone = phone;
-    }
+  /**
+   * Instantiates a new Person infos.
+   *
+   * @param firstName1 the first name 1
+   * @param lastName1  the last name 1
+   * @param address1   the address 1
+   * @param phone1     the phone 1
+   */
+  public PersonInfos(final String firstName1, final String lastName1,
+                     final String address1, final String phone1) {
+    this.firstName = firstName1;
+    this.lastName = lastName1;
+    this.address = address1;
+    this.phone = phone1;
+  }
 
-    public PersonInfos() {
-    }
+  /**
+   * Instantiates a new Person infos.
+   */
+  public PersonInfos() {
+  }
 
-    public String getFirstName() {
-        return firstName;
-    }
+  /**
+   * Gets first name.
+   *
+   * @return the first name
+   */
+  public String getFirstName() {
+    return firstName;
+  }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+  /**
+   * Sets first name.
+   *
+   * @param firstName1 the first name 1
+   */
+  public void setFirstName(final String firstName1) {
+    this.firstName = firstName1;
+  }
 
-    public String getLastName() {
-        return lastName;
-    }
+  /**
+   * Gets last name.
+   *
+   * @return the last name
+   */
+  public String getLastName() {
+    return lastName;
+  }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+  /**
+   * Sets last name.
+   *
+   * @param lastName1 the last name 1
+   */
+  public void setLastName(final String lastName1) {
+    this.lastName = lastName1;
+  }
 
-    public String getAddress() {
-        return address;
-    }
+  /**
+   * Gets address.
+   *
+   * @return the address
+   */
+  public String getAddress() {
+    return address;
+  }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+  /**
+   * Sets address.
+   *
+   * @param address1 the address 1
+   */
+  public void setAddress(final String address1) {
+    this.address = address1;
+  }
 
-    public String getPhone() {
-        return phone;
-    }
+  /**
+   * Gets phone.
+   *
+   * @return the phone
+   */
+  public String getPhone() {
+    return phone;
+  }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+  /**
+   * Sets phone.
+   *
+   * @param phone1 the phone 1
+   */
+  public void setPhone(final String phone1) {
+    this.phone = phone1;
+  }
 
-    @Override
-    public String toString() {
-        return "PersonInfos{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
-    }
+  /**
+   * ToString method.
+   *
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "PersonInfos{" + "firstName='" + firstName
+        + '\'' + ", lastName='" + lastName + '\'' + ", address='"
+        + address + '\'' + ", phone='" + phone + '\'' + '}';
+  }
 }
