@@ -1,7 +1,14 @@
 package com.safety.safetynet.service;
 
-import com.safety.safetynet.dto.*;
-import com.safety.safetynet.model.*;
+import com.safety.safetynet.dto.Child;
+import com.safety.safetynet.dto.ChildAlert;
+import com.safety.safetynet.dto.CommunityEmail;
+import com.safety.safetynet.dto.Fire;
+import com.safety.safetynet.dto.FireStationCoverage;
+import com.safety.safetynet.dto.PersonInfos;
+import com.safety.safetynet.model.FireStation;
+import com.safety.safetynet.model.MedicalRecords;
+import com.safety.safetynet.model.Person;
 import com.safety.safetynet.repository.FireStationRepository;
 import com.safety.safetynet.repository.MedicalRecordRepository;
 import com.safety.safetynet.repository.PersonRepository;

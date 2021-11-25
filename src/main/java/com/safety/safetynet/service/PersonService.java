@@ -4,7 +4,7 @@ import com.safety.safetynet.dto.ChildAlert;
 import com.safety.safetynet.dto.CommunityEmail;
 import com.safety.safetynet.dto.Fire;
 import com.safety.safetynet.dto.FireStationCoverage;
-import com.safety.safetynet.model.*;
+import com.safety.safetynet.model.Person;
 import java.util.List;
 import java.util.Optional;
 

@@ -4,9 +4,15 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.*;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import org.hibernate.annotations.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import org.hibernate.annotations.Proxy;
 
 /**
  * The type Medical records.
