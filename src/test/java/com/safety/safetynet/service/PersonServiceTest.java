@@ -65,7 +65,7 @@ public class PersonServiceTest {
     public void deleteTest() {
         ArgumentCaptor<Person> argumentCaptor = ArgumentCaptor.forClass(Person.class);
         Optional<Person> personOptional = personRepository.findById(person.getId());
-        Person personToDelete = new Person();
+        Person personToDelete;
         if(personOptional.isPresent()) {
             personToDelete = personOptional.get();
             personService.delete(personToDelete.getId());

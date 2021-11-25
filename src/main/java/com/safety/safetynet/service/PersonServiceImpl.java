@@ -21,15 +21,15 @@ public class PersonServiceImpl implements PersonService {
   /**
    * Repo.
    */
-  private static PersonRepository repository;
+  private PersonRepository repository;
   /**
    * Repo.
    */
-  private static MedicalRecordRepository medicalRecordRepository;
+  private MedicalRecordRepository medicalRecordRepository;
   /**
    * Repo.
    */
-  private static FireStationRepository fireStationRepository;
+  private FireStationRepository fireStationRepository;
 
   /**
    * Instantiates a new Person service.

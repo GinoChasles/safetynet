@@ -131,7 +131,7 @@ public class FireStationServiceImpl implements FireStationService {
     List<FireStation> fireStations = repository
         .findAllByStation(stationNumber1);
     List<String> addresses = new ArrayList<>();
-    FireStationCoverage result = new FireStationCoverage();
+    FireStationCoverage result;
     //on ajout les adresses des stations dans une liste
     for (int i = 0; i < fireStations.size(); i++) {
       addresses.add(fireStations.get(i).getAddress());
