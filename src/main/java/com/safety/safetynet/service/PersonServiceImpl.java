@@ -6,7 +6,7 @@ import com.safety.safetynet.dto.CommunityEmail;
 import com.safety.safetynet.dto.Fire;
 import com.safety.safetynet.dto.FireStationCoverage;
 import com.safety.safetynet.dto.PersonInfos;
-import com.safety.safetynet.model.FireStation;
+import com.safety.safetynet.model.MedicalRecord;
 import com.safety.safetynet.model.MedicalRecords;
 import com.safety.safetynet.model.Person;
 import com.safety.safetynet.repository.FireStationRepository;
@@ -142,6 +142,7 @@ public class PersonServiceImpl implements PersonService {
    * @param addresses addresses
    * @return list of person
    */
+  @Override
   public List<Person> findAllByAdressIn(final List<String> addresses) {
     return repository.findAllByAddressIn(addresses);
   }
@@ -152,6 +153,7 @@ public class PersonServiceImpl implements PersonService {
    * @param personList the person list
    * @return firestationcoverage
    */
+  @Override
   public FireStationCoverage createPersonInfoToStationNumber(
       final List<Person> personList) {
     FireStationCoverage fireStationCoverage = new FireStationCoverage();
@@ -192,6 +194,7 @@ public class PersonServiceImpl implements PersonService {
    * @param address the address
    * @return childalert
    */
+  @Override
   public ChildAlert findChildAlert(final String address) {
     List<Person> personList = repository.findAllByAddress(address);
     ChildAlert result = new ChildAlert();
@@ -229,6 +232,7 @@ public class PersonServiceImpl implements PersonService {
    * @param city the city
    * @return communityMail
    */
+  @Override
   public CommunityEmail createCommunityEmail(final String city) {
     List<Person> personList = repository.findAllByCity(city);
     CommunityEmail result = new CommunityEmail();
@@ -247,6 +251,7 @@ public class PersonServiceImpl implements PersonService {
    * @param address the address
    * @return list of fire
    */
+  @Override
   public List<Fire> createFire(final String address) {
     List<Person> personList = repository.findAllByAddress(address);
     List<Fire> resultList = new ArrayList<Fire>();
@@ -262,7 +267,7 @@ public class PersonServiceImpl implements PersonService {
       if (birthdate != null) {
         age = Period.between(birthdate, now).getYears();
       }
-      FireStation fireStation =
+      MedicalRecord fireStation =
           fireStationRepository.findFireStationByAddress(address);
       result.setFirstName(p.getFirstName());
       result.setLastName(p.getLastName());
@@ -291,6 +296,7 @@ public class PersonServiceImpl implements PersonService {
    * @param personList the person list
    * @return list of person
    */
+  @Override
   public List<Person> insertAll(final List<Person> personList) {
     return repository.saveAll(personList);
   }

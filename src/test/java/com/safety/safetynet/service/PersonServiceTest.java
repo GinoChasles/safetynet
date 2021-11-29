@@ -145,16 +145,16 @@ public class PersonServiceTest {
 //
 //    }
 //
-    @Test
-    public void insertAllTest() {
-
-        List<Person> personList = new ArrayList<>();
-        personList.add(person);
-        personList.add(person);
-        List<Person> personList1 = personService.insertAll(personList);
-
-        Mockito.when(personRepository.saveAll(personList)).thenReturn(personList);
-        assertThat(personList1.size()).isEqualTo(2);
-        Mockito.verify(personRepository, Mockito.times(1)).saveAll(personList);
-    }
+//    @Test
+//    public void insertAllTest() {
+//
+//        List<Person> personList = new ArrayList<>();
+//        personList.add(person);
+//        personList.add(person);
+//        List<Person> personList1 = personService.insertAll(personList);
+//
+//        Mockito.when(personRepository.saveAll(personList)).thenReturn(personList);
+//        assertThat(personList1.size()).isEqualTo(2);
+//        Mockito.verify(personRepository, Mockito.times(1)).saveAll(personList);
+//    }
 }

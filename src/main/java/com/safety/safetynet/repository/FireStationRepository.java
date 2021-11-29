@@ -1,6 +1,6 @@
 package com.safety.safetynet.repository;
 
-import com.safety.safetynet.model.FireStation;
+import com.safety.safetynet.model.MedicalRecord;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,14 +10,14 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface FireStationRepository extends
-    JpaRepository<FireStation, Integer> {
+    JpaRepository<MedicalRecord, Integer> {
   /**
    * Find all by station list.
    *
    * @param stationNumber the station number
    * @return the list
    */
-  List<FireStation> findAllByStation(int stationNumber);
+  List<MedicalRecord> findAllByStation(int stationNumber);
 
   /**
    * Find all by address list.
@@ -25,7 +25,7 @@ public interface FireStationRepository extends
    * @param address the address
    * @return the list
    */
-  List<FireStation> findAllByAddress(String address);
+  List<MedicalRecord> findAllByAddress(String address);
 
   /**
    * Find fire station by address fire station.
@@ -33,7 +33,7 @@ public interface FireStationRepository extends
    * @param address the address
    * @return the fire station
    */
-  FireStation findFireStationByAddress(String address);
+  MedicalRecord findFireStationByAddress(String address);
 
   /**
    * Find fire station by station list.
@@ -41,5 +41,5 @@ public interface FireStationRepository extends
    * @param stationNumber the station number
    * @return the list
    */
-  List<FireStation> findFireStationByStation(int stationNumber);
+  List<MedicalRecord> findFireStationByStation(int stationNumber);
 }

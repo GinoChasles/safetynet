@@ -3,7 +3,7 @@ package com.safety.safetynet.controller;
 import com.safety.safetynet.dto.FireStationCoverage;
 import com.safety.safetynet.dto.Flood;
 import com.safety.safetynet.dto.PhoneAlert;
-import com.safety.safetynet.model.FireStation;
+import com.safety.safetynet.model.MedicalRecord;
 import com.safety.safetynet.service.FireStationServiceImpl;
 import com.safety.safetynet.service.PersonServiceImpl;
 import java.util.List;
@@ -59,11 +59,10 @@ public class FireStationController {
    * @return the response entity
    */
   @GetMapping(value = "/firestation")
-  public ResponseEntity<List<FireStation>> findAll() {
+  public ResponseEntity<List<MedicalRecord>> findAll() {
     logger.info("Recherche de la liste des fireStations.");
-    List<FireStation> result = fireStationServiceImpl.findAll();
+    List<MedicalRecord> result = fireStationServiceImpl.findAll();
     if (result.isEmpty()) {
-      logger.error("Not found.");
       logger.error("Not found.");
       return ResponseEntity.notFound().build();
     } else {
@@ -79,10 +78,10 @@ public class FireStationController {
    * @return the response entity
    */
   @GetMapping("/firestation/{id}")
-  public ResponseEntity<Optional<FireStation>>
+  public ResponseEntity<Optional<MedicalRecord>>
       findById(@PathVariable(value = "id") final int id) {
     logger.info("recherche de la caserne avec l'id: " + id);
-    Optional<FireStation> result = fireStationServiceImpl.findById(id);
+    Optional<MedicalRecord> result = fireStationServiceImpl.findById(id);
     if (result.isEmpty()) {
       logger.error("not found");
       return ResponseEntity.notFound().build();
@@ -99,8 +98,8 @@ public class FireStationController {
    * @return the response entity
    */
   @PostMapping(value = "/firestation")
-  public ResponseEntity<FireStation> addFireStation(
-          @RequestBody final FireStation fireStation) {
+  public ResponseEntity<MedicalRecord> addFireStation(
+          @RequestBody final MedicalRecord fireStation) {
     logger.info("Création d'une fireStation");
     return ResponseEntity.ok(fireStationServiceImpl.insert(fireStation));
   }
@@ -113,11 +112,11 @@ public class FireStationController {
    * @return the response entity
    */
   @PutMapping(value = "/firestation/{id}")
-  public ResponseEntity<FireStation>
+  public ResponseEntity<MedicalRecord>
       update(@PathVariable(value = "id") final int id,
-         @RequestBody final FireStation fireStation) {
+         @RequestBody final MedicalRecord fireStation) {
     logger.info("Mise à jour d'une fireStation lancée.");
-    FireStation fireStation1 = fireStationServiceImpl.update(
+    MedicalRecord fireStation1 = fireStationServiceImpl.update(
             id, fireStation);
     if (fireStation1 == null) {
       logger.error("Pas de fireStation correspondant à l'id :" + id);
@@ -135,10 +134,10 @@ public class FireStationController {
    * @return the response entity
    */
   @DeleteMapping(value = "/firestation/{id}")
-  public ResponseEntity<FireStation> delete(
+  public ResponseEntity<MedicalRecord> delete(
           @PathVariable(value = "id") final int id) {
     logger.info("Suppression en cours de la firestation: " + id);
-    Optional<FireStation> fireStation = fireStationServiceImpl.findById(id);
+    Optional<MedicalRecord> fireStation = fireStationServiceImpl.findById(id);
     if (fireStation.isEmpty()) {
       logger.error("Aucune fireStation trouvée");
       return ResponseEntity.notFound().build();

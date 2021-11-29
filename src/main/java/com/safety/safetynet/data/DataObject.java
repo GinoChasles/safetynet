@@ -1,6 +1,6 @@
 package com.safety.safetynet.data;
 
-import com.safety.safetynet.model.FireStation;
+import com.safety.safetynet.model.MedicalRecord;
 import com.safety.safetynet.model.MedicalRecords;
 import com.safety.safetynet.model.Person;
 import java.util.List;
@@ -20,7 +20,7 @@ public class DataObject {
   /**
    * List of firestations.
    */
-  private List<FireStation> firestations;
+  private List<MedicalRecord> firestations;
   /**
    * List of medicalRecords.
    */
@@ -50,7 +50,7 @@ public class DataObject {
    *
    * @return the firestations
    */
-  public List<FireStation> getFirestations() {
+  public List<MedicalRecord> getFirestations() {
     return firestations;
   }
 
@@ -59,7 +59,7 @@ public class DataObject {
    *
    * @param firestations1 the firestations
    */
-  public void setFirestations(final List<FireStation> firestations1) {
+  public void setFirestations(final List<MedicalRecord> firestations1) {
     this.firestations = firestations1;
   }
 
