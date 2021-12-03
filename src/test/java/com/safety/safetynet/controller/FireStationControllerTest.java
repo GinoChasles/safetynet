@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safety.safetynet.SafetynetApplication;
-import com.safety.safetynet.model.MedicalRecord;
+import com.safety.safetynet.model.FireStation;
 import com.safety.safetynet.service.FireStationServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -50,7 +50,7 @@ public class FireStationControllerTest {
   @Test
   @Order(3)
   public void postFireStationTest() throws Exception {
-    MedicalRecord fireStation = new MedicalRecord(14, "test", 1);
+    FireStation fireStation = new FireStation(14, "test", 1);
     String json = mapper.writeValueAsString(fireStation);
     MockHttpServletRequestBuilder mock = MockMvcRequestBuilders
         .post("/firestation")
@@ -63,7 +63,7 @@ public class FireStationControllerTest {
   @Test
   @Order(4)
   public void putFireStationTest() throws Exception {
-    MedicalRecord fireStation = new MedicalRecord(14, "test", 2);
+    FireStation fireStation = new FireStation(14, "test", 2);
     String json = mapper.writeValueAsString(fireStation);
     mockMvc.perform(MockMvcRequestBuilders
             .put("/firestation/14")
@@ -104,7 +104,7 @@ public class FireStationControllerTest {
   @Test
   public void getOneFireStationByIdTest_whenEmpty() throws Exception {
 
-    Optional<MedicalRecord> fireStation = fireStationService.findById(100);
+    Optional<FireStation> fireStation = fireStationService.findById(100);
     if (fireStation.isEmpty()) {
       mockMvc.perform(get("/firestation/{id}", 100))
           .andExpect(status().isNotFound());
@@ -114,10 +114,10 @@ public class FireStationControllerTest {
 
   @Test
   public void updateFireStationTest_whenEmpty() throws Exception {
-    MedicalRecord fireStationToUpdate = new MedicalRecord(15, "rue bidon", 1);
+    FireStation fireStationToUpdate = new FireStation(15, "rue bidon", 1);
     String json = mapper.writeValueAsString(fireStationToUpdate);
 
-    MedicalRecord fireStation =
+    FireStation fireStation =
         fireStationService.update(fireStationToUpdate.getId(), fireStationToUpdate);
     if (fireStation == null) {
       mockMvc.perform(put("/firestation/{id}", fireStationToUpdate.getId())
@@ -133,7 +133,7 @@ public class FireStationControllerTest {
   @Test
   public void deleteFireStationTest_whenEmpty() throws Exception {
     int id = 55;
-    Optional<MedicalRecord> fireStationToDelete = fireStationService.findById(id);
+    Optional<FireStation> fireStationToDelete = fireStationService.findById(id);
     if (fireStationToDelete.isEmpty()) {
       mockMvc.perform(delete("/firestation/{id}", id))
           .andExpect(status().isNotFound());

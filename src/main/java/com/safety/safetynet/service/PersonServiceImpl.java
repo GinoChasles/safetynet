@@ -6,7 +6,7 @@ import com.safety.safetynet.dto.CommunityEmail;
 import com.safety.safetynet.dto.Fire;
 import com.safety.safetynet.dto.FireStationCoverage;
 import com.safety.safetynet.dto.PersonInfos;
-import com.safety.safetynet.model.MedicalRecord;
+import com.safety.safetynet.model.FireStation;
 import com.safety.safetynet.model.MedicalRecords;
 import com.safety.safetynet.model.Person;
 import com.safety.safetynet.repository.FireStationRepository;
@@ -267,7 +267,7 @@ public class PersonServiceImpl implements PersonService {
       if (birthdate != null) {
         age = Period.between(birthdate, now).getYears();
       }
-      MedicalRecord fireStation =
+      FireStation fireStation =
           fireStationRepository.findFireStationByAddress(address);
       result.setFirstName(p.getFirstName());
       result.setLastName(p.getLastName());

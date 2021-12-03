@@ -11,7 +11,7 @@ import javax.persistence.Id;
  * The type Fire station.
  */
 @Entity
-public class MedicalRecord {
+public class FireStation {
   /**
    * Id.
    */
@@ -35,7 +35,7 @@ public class MedicalRecord {
    * @param address1 the address 1
    * @param station1 the station 1
    */
-  public MedicalRecord(final String address1, final int station1) {
+  public FireStation(final String address1, final int station1) {
     this.address = address1;
     this.station = station1;
   }
@@ -47,8 +47,8 @@ public class MedicalRecord {
    * @param address1 the address 1
    * @param station1 the station 1
    */
-  public MedicalRecord(final int id1, final String address1,
-                       final int station1) {
+  public FireStation(final int id1, final String address1,
+                     final int station1) {
     this.id = id1;
     this.address = address1;
     this.station = station1;
@@ -57,7 +57,7 @@ public class MedicalRecord {
   /**
    * Instantiates a new Fire station.
    */
-  public MedicalRecord() {
+  public FireStation() {
 
   }
 

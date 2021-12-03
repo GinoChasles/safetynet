@@ -3,7 +3,7 @@ package com.safety.safetynet.service;
 import com.safety.safetynet.dto.FireStationCoverage;
 import com.safety.safetynet.dto.Flood;
 import com.safety.safetynet.dto.PhoneAlert;
-import com.safety.safetynet.model.MedicalRecord;
+import com.safety.safetynet.model.FireStation;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -18,7 +18,7 @@ public interface FireStationService {
    * @param id the id
    * @return the optional
    */
-  Optional<MedicalRecord> findById(int id);
+  Optional<FireStation> findById(int id);
 
   /**
    * Insert fire station.
@@ -26,7 +26,7 @@ public interface FireStationService {
    * @param fireStation the fire station
    * @return the fire station
    */
-  MedicalRecord insert(MedicalRecord fireStation);
+  FireStation insert(FireStation fireStation);
 
   /**
    * Delete.
@@ -42,7 +42,7 @@ public interface FireStationService {
    * @param fireStation the fire station
    * @return the fire station
    */
-  MedicalRecord update(int id, MedicalRecord fireStation);
+  FireStation update(int id, FireStation fireStation);
 
 
   /**
@@ -50,7 +50,7 @@ public interface FireStationService {
    *
    * @return the list
    */
-  List<MedicalRecord> findAll();
+  List<FireStation> findAll();
 
   /**
    * Find all by fire station number fire station coverage.

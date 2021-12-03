@@ -3,7 +3,7 @@ package com.safety.safetynet.service;
 import com.safety.safetynet.dto.FireStationCoverage;
 import com.safety.safetynet.dto.Flood;
 import com.safety.safetynet.dto.PhoneAlert;
-import com.safety.safetynet.model.MedicalRecord;
+import com.safety.safetynet.model.FireStation;
 import com.safety.safetynet.model.MedicalRecords;
 import com.safety.safetynet.model.Person;
 import com.safety.safetynet.repository.FireStationRepository;
@@ -66,7 +66,7 @@ public class FireStationServiceImpl implements FireStationService {
    * @return Optional of FireStation
    */
   @Override
-  public Optional<MedicalRecord> findById(final int id1) {
+  public Optional<FireStation> findById(final int id1) {
     return repository.findById(id1);
   }
 
@@ -77,7 +77,7 @@ public class FireStationServiceImpl implements FireStationService {
    * @return Firestation
    */
   @Override
-  public MedicalRecord insert(final MedicalRecord fireStation1) {
+  public FireStation insert(final FireStation fireStation1) {
     return repository.save(fireStation1);
   }
 
@@ -88,7 +88,7 @@ public class FireStationServiceImpl implements FireStationService {
    */
   @Override
   public void delete(final int id1) {
-    Optional<MedicalRecord> fireStation = this.findById(id1);
+    Optional<FireStation> fireStation = this.findById(id1);
     fireStation.ifPresent(station -> repository.delete(station));
   }
 
@@ -100,10 +100,10 @@ public class FireStationServiceImpl implements FireStationService {
    * @return firestation
    */
   @Override
-  public MedicalRecord update(final int id1, final MedicalRecord fireStation1) {
-    Optional<MedicalRecord> fireStation2 = this.findById(id1);
+  public FireStation update(final int id1, final FireStation fireStation1) {
+    Optional<FireStation> fireStation2 = this.findById(id1);
     if (fireStation2.isPresent()) {
-      MedicalRecord fireStationToUpdate = fireStation2.get();
+      FireStation fireStationToUpdate = fireStation2.get();
       fireStationToUpdate.setStation(fireStation1.getStation());
       fireStationToUpdate.setAddress(fireStation1.getAddress());
 
@@ -119,7 +119,7 @@ public class FireStationServiceImpl implements FireStationService {
    * @return List of firestation
    */
   @Override
-  public List<MedicalRecord> findAll() {
+  public List<FireStation> findAll() {
     return repository.findAll();
   }
 
@@ -134,7 +134,7 @@ public class FireStationServiceImpl implements FireStationService {
   public FireStationCoverage findAllByFireStationNumber(
       final int stationNumber1) {
     //on récupère les stations dont le stationNumber correspond
-    List<MedicalRecord> fireStations = repository
+    List<FireStation> fireStations = repository
         .findAllByStation(stationNumber1);
     List<String> addresses = new ArrayList<>();
     FireStationCoverage result;
@@ -160,12 +160,12 @@ public class FireStationServiceImpl implements FireStationService {
    */
   @Override
   public PhoneAlert createPhoneAlert(final int stationNumber1) {
-    List<MedicalRecord> fireStationList = repository
+    List<FireStation> fireStationList = repository
         .findAllByStation(stationNumber1);
     List<String> phoneList = new ArrayList<>();
     List<String> addresses = new ArrayList<>();
     PhoneAlert result = new PhoneAlert();
-    for (MedicalRecord f : fireStationList) {
+    for (FireStation f : fireStationList) {
       addresses.add(f.getAddress());
     }
     List<Person> personList = personServiceImpl
@@ -191,9 +191,9 @@ public class FireStationServiceImpl implements FireStationService {
     List<Flood> floodList = new ArrayList<>();
 
     for (int el : stationNumberList1) {
-      List<MedicalRecord> fireStation = repository
+      List<FireStation> fireStation = repository
           .findFireStationByStation(el);
-      for (MedicalRecord f : fireStation) {
+      for (FireStation f : fireStation) {
         List<Person> personList = personRepository
             .findAllByAddress(f.getAddress());
 

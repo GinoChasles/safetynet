@@ -1,6 +1,6 @@
 package com.safety.safetynet.service;
 
-import com.safety.safetynet.model.MedicalRecord;
+import com.safety.safetynet.model.FireStation;
 import com.safety.safetynet.repository.FireStationRepository;
 import com.safety.safetynet.repository.MedicalRecordRepository;
 import com.safety.safetynet.repository.PersonRepository;
@@ -36,11 +36,11 @@ public class FireStationServiceTest {
     @InjectMocks
     private MedicalRecordServiceImpl medicalRecordService;
 
-    private MedicalRecord fireStation;
+    private FireStation fireStation;
 
     @BeforeEach
     void setUp() {
-        fireStation = new MedicalRecord();
+        fireStation = new FireStation();
         fireStation.setId(1);
         fireStation.setAddress("3 Test");
         fireStation.setStation(2);
@@ -49,8 +49,8 @@ public class FireStationServiceTest {
     @Test
     public void findByIdTest() {
         Mockito.when(fireStationRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(fireStation));
-        Optional<MedicalRecord> fireStationOptional = fireStationService.findById(1);
-        MedicalRecord fireStation = new MedicalRecord();
+        Optional<FireStation> fireStationOptional = fireStationService.findById(1);
+        FireStation fireStation = new FireStation();
         if(fireStationOptional.isPresent()) {
             fireStation = fireStationOptional.get();
         }
@@ -60,8 +60,8 @@ public class FireStationServiceTest {
 
     @Test
     public void insertTest() {
-        Mockito.when(fireStationRepository.save(Mockito.any(MedicalRecord.class))).thenReturn(fireStation);
-        MedicalRecord fireStation1 = fireStationService.insert(fireStation);
+        Mockito.when(fireStationRepository.save(Mockito.any(FireStation.class))).thenReturn(fireStation);
+        FireStation fireStation1 = fireStationService.insert(fireStation);
 
         assertThat(fireStation1.getId()).isNotNull();
         assertThat(fireStation1.getAddress()).isEqualTo("3 Test");
@@ -69,9 +69,9 @@ public class FireStationServiceTest {
 
     @Test
     public void deleteTest() {
-        ArgumentCaptor<MedicalRecord> argumentCaptor = ArgumentCaptor.forClass(MedicalRecord.class);
-        Optional<MedicalRecord> fireStationOptional = fireStationRepository.findById(fireStation.getId());
-        MedicalRecord fireStationToDelete;
+        ArgumentCaptor<FireStation> argumentCaptor = ArgumentCaptor.forClass(FireStation.class);
+        Optional<FireStation> fireStationOptional = fireStationRepository.findById(fireStation.getId());
+        FireStation fireStationToDelete;
         if(fireStationOptional.isPresent()) {
             fireStationToDelete = fireStationOptional.get();
             fireStationService.delete(fireStationToDelete.getId());
@@ -81,8 +81,8 @@ public class FireStationServiceTest {
 
     @Test
     public void updateTest() {
-        Optional<MedicalRecord> fireStationOptional = fireStationRepository.findById(fireStation.getId());
-        MedicalRecord fireStationToUpdate;
+        Optional<FireStation> fireStationOptional = fireStationRepository.findById(fireStation.getId());
+        FireStation fireStationToUpdate;
         if(fireStationOptional.isPresent()) {
             fireStationToUpdate = fireStationOptional.get();
             fireStationToUpdate.setAddress("Test");
@@ -93,13 +93,13 @@ public class FireStationServiceTest {
 
     @Test
     public void findAllTest() {
-        List<MedicalRecord> fireStationList = new ArrayList<>();
+        List<FireStation> fireStationList = new ArrayList<>();
         fireStationList.add(fireStation);
 
         Mockito.when(fireStationRepository.findAll()).thenReturn(fireStationList);
 
-        Iterable<MedicalRecord> fireStationIterable = fireStationService.findAll();
-        MedicalRecord fireStation1 = fireStationIterable.iterator().next();
+        Iterable<FireStation> fireStationIterable = fireStationService.findAll();
+        FireStation fireStation1 = fireStationIterable.iterator().next();
         assertThat(fireStation1.getAddress()).isEqualTo("3 Test");
         Mockito.verify(fireStationRepository, Mockito.times(1)).findAll();
 
