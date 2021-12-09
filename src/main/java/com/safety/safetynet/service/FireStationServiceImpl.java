@@ -97,7 +97,7 @@ public class FireStationServiceImpl implements FireStationService {
   /**
    * Update.
    *
-   * @param id1 id
+   * @param id1          id
    * @param fireStation1 firestation
    * @return firestation
    */
@@ -192,43 +192,46 @@ public class FireStationServiceImpl implements FireStationService {
       final List<Integer> stationNumberList1) {
     List<Map<String, List<Flood>>> result2 = new ArrayList<>();
     Map<String, List<Flood>> result = new HashMap<>();
-    List<Flood> floodList = new ArrayList<>();
+    List<FireStation> fireStation = new ArrayList<>();
 
     for (int el : stationNumberList1) {
-      List<FireStation> fireStation = repository
+      List<FireStation> fireStation2 = repository
           .findFireStationByStation(el);
-      for (FireStation f : fireStation) {
-        List<Person> personList = personRepository
-            .findAllByAddress(f.getAddress());
+      fireStation.addAll(fireStation2);
+    }
+    for (FireStation f : fireStation) {
+      List<Person> personList = personRepository
+          .findAllByAddress(f.getAddress());
+      List<Flood> floodList = new ArrayList<>();
 
-        for (Person p : personList) {
-          Flood flood = new Flood();
+      for (Person p : personList) {
 
-          LocalDate birthdate = medicalRecordRepository
-              .findBirthDateByFirstNameAndLastName(
-                  p.getFirstName(), p.getLastName());
-          LocalDate now = LocalDate.now();
-          int age = Period.between(birthdate, now).getYears();
+        Flood flood = new Flood();
 
-          flood.setFirstName(p.getFirstName());
-          flood.setLastName(p.getLastName());
-          flood.setPhone(p.getPhone());
-          flood.setAge(age);
+        LocalDate birthdate = medicalRecordRepository
+            .findBirthDateByFirstNameAndLastName(
+                p.getFirstName(), p.getLastName());
+        LocalDate now = LocalDate.now();
+        int age = Period.between(birthdate, now).getYears();
 
-          Optional<MedicalRecords> medicalRecord =
-              medicalRecordRepository
-                  .findByFirstNameAndLastName(
-                      p.getFirstName(), p.getLastName());
-          if (medicalRecord.isPresent()) {
-            flood.setAllergies(medicalRecord.get().getAllergies());
-            flood.setMedications(
-                medicalRecord.get().getMedications());
-          }
-          floodList.add(flood);
+        flood.setFirstName(p.getFirstName());
+        flood.setLastName(p.getLastName());
+        flood.setPhone(p.getPhone());
+        flood.setAge(age);
+
+        Optional<MedicalRecords> medicalRecord =
+            medicalRecordRepository
+                .findByFirstNameAndLastName(
+                    p.getFirstName(), p.getLastName());
+        if (medicalRecord.isPresent()) {
+          flood.setAllergies(medicalRecord.get().getAllergies());
+          flood.setMedications(
+              medicalRecord.get().getMedications());
         }
-
+        floodList.add(flood);
         result.put(f.getAddress(), floodList);
       }
+
     }
     result2.add(result);
     return result2;
