@@ -49,4 +49,12 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
    */
   List<Person> findAllByCity(String city);
 
+  /**
+   * Find all by last name list.
+   *
+   * @param lastName the last name
+   * @return the list
+   */
+  List<Person> findAllByLastName(String lastName);
+
 }

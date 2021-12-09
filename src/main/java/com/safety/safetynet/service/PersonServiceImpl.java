@@ -5,7 +5,8 @@ import com.safety.safetynet.dto.ChildAlert;
 import com.safety.safetynet.dto.CommunityEmail;
 import com.safety.safetynet.dto.Fire;
 import com.safety.safetynet.dto.FireStationCoverage;
-import com.safety.safetynet.dto.PersonInfos;
+import com.safety.safetynet.dto.PersonInfo;
+import com.safety.safetynet.dto.PersonInfosForCoverage;
 import com.safety.safetynet.model.FireStation;
 import com.safety.safetynet.model.MedicalRecords;
 import com.safety.safetynet.model.Person;
@@ -158,10 +159,11 @@ public class PersonServiceImpl implements PersonService {
   public FireStationCoverage createPersonInfoToStationNumber(
       final List<Person> personList) {
     FireStationCoverage fireStationCoverage = new FireStationCoverage();
-    List<PersonInfos> result = new ArrayList<>();
+    List<PersonInfosForCoverage> result = new ArrayList<>();
 
     for (Person person : personList) {
-      PersonInfos personInfos = new PersonInfos();
+      PersonInfosForCoverage personInfosForCoverageLocal =
+          new PersonInfosForCoverage();
       LocalDate birthdate =
           medicalRecordRepository.findBirthDateByFirstNameAndLastName(
               person.getFirstName(), person.getLastName());
@@ -170,11 +172,11 @@ public class PersonServiceImpl implements PersonService {
       if (birthdate != null) {
         age = Period.between(birthdate, now).getYears();
       }
-      personInfos.setFirstName(person.getFirstName());
-      personInfos.setLastName(person.getLastName());
-      personInfos.setAddress(person.getAddress());
-      personInfos.setPhone(person.getPhone());
-      result.add(personInfos);
+      personInfosForCoverageLocal.setFirstName(person.getFirstName());
+      personInfosForCoverageLocal.setLastName(person.getLastName());
+      personInfosForCoverageLocal.setAddress(person.getAddress());
+      personInfosForCoverageLocal.setPhone(person.getPhone());
+      result.add(personInfosForCoverageLocal);
       System.out.print("age de " + person + " est de " + age);
       if (age < 18) {
         fireStationCoverage.setChild(
@@ -303,4 +305,51 @@ public class PersonServiceImpl implements PersonService {
   public List<Person> insertAll(final List<Person> personList) {
     return repository.saveAll(personList);
   }
+
+  /**
+   * Create person info list.
+   *
+   * @param firstName the first name
+   * @param lastName  the last name
+   * @return the list
+   */
+  @Override
+  public List<PersonInfo> createPersonInfoList(final String firstName,
+                                               final String lastName) {
+    List<PersonInfo> result = new ArrayList<>();
+    List<Person> personList = repository.findAllByLastName(lastName);
+
+
+    for (Person p : personList) {
+      PersonInfo personInfo = new PersonInfo();
+
+      personInfo.setLastName(p.getLastName());
+      personInfo.setAddress(p.getAddress());
+      personInfo.setEmail(p.getEmail());
+
+      LocalDate birthdate =
+          medicalRecordRepository.findBirthDateByFirstNameAndLastName(
+              p.getFirstName(), p.getLastName());
+      LocalDate now = LocalDate.now();
+      int age = 0;
+      if (birthdate != null) {
+        age = Period.between(birthdate, now).getYears();
+      }
+
+      personInfo.setAge(age);
+      Optional<MedicalRecords> medicalRecord =
+          medicalRecordRepository.findByFirstNameAndLastName(
+              p.getFirstName(), p.getLastName());
+      if (medicalRecord.isPresent()) {
+        personInfo.setMedications(medicalRecord.get().getMedications());
+        personInfo.setAllergies(medicalRecord.get().getAllergies());
+      } else {
+        personInfo.setMedications(new ArrayList<>());
+        personInfo.setAllergies(new HashSet<>());
+      }
+      result.add(personInfo);
+    }
+    return result;
+  }
+
 }

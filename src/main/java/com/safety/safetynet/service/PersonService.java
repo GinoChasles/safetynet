@@ -4,6 +4,7 @@ import com.safety.safetynet.dto.ChildAlert;
 import com.safety.safetynet.dto.CommunityEmail;
 import com.safety.safetynet.dto.Fire;
 import com.safety.safetynet.dto.FireStationCoverage;
+import com.safety.safetynet.dto.PersonInfo;
 import com.safety.safetynet.model.Person;
 import java.util.List;
 import java.util.Optional;
@@ -107,4 +108,13 @@ public interface PersonService {
    * @return the list
    */
   List<Person> insertAll(List<Person> personList);
+
+  /**
+   * Create person info list.
+   *
+   * @param firstName the first name
+   * @param lastName  the last name
+   * @return the list
+   */
+  List<PersonInfo> createPersonInfoList(String firstName, String lastName);
 }

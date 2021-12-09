@@ -108,12 +108,12 @@ public class FireStationServiceTest {
 //    @Test
 //    public void findAllByFireStationNumberTest() {
 //        FireStationCoverage fireStationCoverage = new FireStationCoverage();
-//        List<PersonInfos> personInfosList = new ArrayList<>();
+//        List<PersonInfosForCoverage> personInfosList = new ArrayList<>();
 //        fireStationCoverage.setAdult(1);
 //        fireStationCoverage.setChild(1);
 //
-//        PersonInfos personInfos1 = new PersonInfos("FirstTest1", "LastTest1", "3 Test", "1234");
-//        PersonInfos personInfos2 = new PersonInfos("FirstTest2", "LastTest2", "3 Test", "1234");
+//        PersonInfosForCoverage personInfos1 = new PersonInfosForCoverage("FirstTest1", "LastTest1", "3 Test", "1234");
+//        PersonInfosForCoverage personInfos2 = new PersonInfosForCoverage("FirstTest2", "LastTest2", "3 Test", "1234");
 //        personInfosList.add(personInfos1);
 //        personInfosList.add(personInfos2);
 //        fireStationCoverage.setPersonInfosList(personInfosList);

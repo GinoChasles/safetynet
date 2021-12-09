@@ -3,6 +3,7 @@ package com.safety.safetynet.controller;
 import com.safety.safetynet.dto.ChildAlert;
 import com.safety.safetynet.dto.CommunityEmail;
 import com.safety.safetynet.dto.Fire;
+import com.safety.safetynet.dto.PersonInfo;
 import com.safety.safetynet.model.Person;
 import com.safety.safetynet.service.PersonServiceImpl;
 import java.util.List;
@@ -203,6 +204,29 @@ public class PersonController {
     } else {
       logger.info("Liste des personnes habitant à l'adresse: " + address
           + ": " + result);
+      return ResponseEntity.ok(result);
+    }
+  }
+
+  /**
+   * Gets person info.
+   *
+   * @param firstName the first name
+   * @param lastName  the last name
+   * @return the person info
+   */
+  @GetMapping(value = "personInfo", params = {"firstName", "lastName"})
+  public ResponseEntity<List<PersonInfo>> getPersonInfo(
+      @RequestParam("firstName") final String firstName,
+      @RequestParam("lastName") final String lastName) {
+    logger.info("Recherche des infos d'une personne");
+    List<PersonInfo> result = personServiceImpl
+        .createPersonInfoList(firstName, lastName);
+    if (result.isEmpty()) {
+      logger.error("Not found.");
+      return ResponseEntity.notFound().build();
+    } else {
+      logger.info("Infos d'une personne ou de celles portant le même nom");
       return ResponseEntity.ok(result);
     }
   }

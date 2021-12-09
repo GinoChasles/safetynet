@@ -3,7 +3,7 @@ package com.safety.safetynet.dto;
 /**
  * The type Person infos.
  */
-public class PersonInfos {
+public class PersonInfosForCoverage {
   /**
    * Firstname.
    */
@@ -29,8 +29,8 @@ public class PersonInfos {
    * @param address1   the address 1
    * @param phone1     the phone 1
    */
-  public PersonInfos(final String firstName1, final String lastName1,
-                     final String address1, final String phone1) {
+  public PersonInfosForCoverage(final String firstName1, final String lastName1,
+                                final String address1, final String phone1) {
     this.firstName = firstName1;
     this.lastName = lastName1;
     this.address = address1;
@@ -40,7 +40,7 @@ public class PersonInfos {
   /**
    * Instantiates a new Person infos.
    */
-  public PersonInfos() {
+  public PersonInfosForCoverage() {
   }
 
   /**
@@ -122,7 +122,7 @@ public class PersonInfos {
    */
   @Override
   public String toString() {
-    return "PersonInfos{" + "firstName='" + firstName
+    return "PersonInfosForCoverage{" + "firstName='" + firstName
         + '\'' + ", lastName='" + lastName + '\'' + ", address='"
         + address + '\'' + ", phone='" + phone + '\'' + '}';
   }

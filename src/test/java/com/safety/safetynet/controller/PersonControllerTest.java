@@ -1,22 +1,14 @@
 package com.safety.safetynet.controller;
-import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safety.safetynet.SafetynetApplication;
-import com.safety.safetynet.model.Allergies;
-import com.safety.safetynet.model.MedicalRecords;
-import com.safety.safetynet.model.Medications;
+import com.safety.safetynet.dto.PersonInfo;
 import com.safety.safetynet.model.Person;
 import com.safety.safetynet.service.PersonServiceImpl;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -144,5 +136,20 @@ public class PersonControllerTest {
                 .andExpect(status().isNotFound());
         }
 
+    }
+
+    @Test
+    public void getPersonInfoTest() throws Exception {
+        mockMvc.perform(get("/personInfo?firstName=Jonanathan&lastName=Marrack"))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getPersonInfoTest_whenNoExist() throws Exception {
+        List<PersonInfo> personInfoList = personService.createPersonInfoList("Bidon", "Test");
+        if (personInfoList.isEmpty()) {
+            mockMvc.perform(get("/personInfo?firstName=Bidon&lastName=Test"))
+                .andExpect(status().isNotFound());
+        }
     }
 }

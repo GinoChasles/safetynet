@@ -9,7 +9,7 @@ public class FireStationCoverage {
   /**
    * PersonInfosList.
    */
-  private List<PersonInfos> personInfosList;
+  private List<PersonInfosForCoverage> personInfosForCoverageList;
   /**
    * Number of child.
    */
@@ -22,13 +22,14 @@ public class FireStationCoverage {
   /**
    * Instantiates a new Fire station coverage.
    *
-   * @param personInfosList1 the person infos list 1
+   * @param personInfosForCoverageList1Param the person infos list 1
    * @param child1           the child 1
    * @param adult1           the adult 1
    */
-  public FireStationCoverage(final List<PersonInfos> personInfosList1,
+  public FireStationCoverage(final List<PersonInfosForCoverage>
+      personInfosForCoverageList1Param,
                              final int child1, final int adult1) {
-    this.personInfosList = personInfosList1;
+    this.personInfosForCoverageList = personInfosForCoverageList1Param;
     this.child = child1;
     this.adult = adult1;
   }
@@ -44,17 +45,18 @@ public class FireStationCoverage {
    *
    * @return the person infos list
    */
-  public List<PersonInfos> getPersonInfosList() {
-    return personInfosList;
+  public List<PersonInfosForCoverage> getPersonInfosList() {
+    return personInfosForCoverageList;
   }
 
   /**
    * Sets person infos list.
    *
-   * @param personInfosList1 the person infos list 1
+   * @param personInfosForCoverageList1Param the person infos list 1
    */
-  public void setPersonInfosList(final List<PersonInfos> personInfosList1) {
-    this.personInfosList = personInfosList1;
+  public void setPersonInfosList(final List<PersonInfosForCoverage>
+      personInfosForCoverageList1Param) {
+    this.personInfosForCoverageList = personInfosForCoverageList1Param;
   }
 
   /**
@@ -101,7 +103,7 @@ public class FireStationCoverage {
   @Override
   public String toString() {
     return "FireStationCoverage{"
-        + "personInfosList=" + personInfosList.toString()
+        + "personInfosForCoverageList=" + personInfosForCoverageList.toString()
         + ", child=" + child + ", adult=" + adult + '}';
   }
 

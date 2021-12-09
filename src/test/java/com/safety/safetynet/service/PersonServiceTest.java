@@ -157,4 +157,8 @@ public class PersonServiceTest {
 //        assertThat(personList1.size()).isEqualTo(2);
 //        Mockito.verify(personRepository, Mockito.times(1)).saveAll(personList);
 //    }
+//    @Test
+//    public void createPersonInfoListTest() {
+//
+//    }
 }
