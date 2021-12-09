@@ -13,9 +13,11 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.stereotype.Service;
 
 /**
@@ -173,7 +175,9 @@ public class FireStationServiceImpl implements FireStationService {
     for (Person p : personList) {
       phoneList.add(p.getPhone());
     }
-    result.setPhoneList(phoneList);
+    Set<String> mySet = new HashSet<String>(phoneList);
+    List<String> filterPhoneList = new ArrayList<String>(mySet);
+    result.setPhoneList(filterPhoneList);
     return result;
   }
 
