@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.stereotype.Service;
 
 /**
@@ -241,7 +242,9 @@ public class PersonServiceImpl implements PersonService {
     for (Person p : personList) {
       email.add(p.getEmail());
     }
-    result.setEmail(email);
+    Set<String> mySet = new HashSet<String>(email);
+    List<String> filterEmail = new ArrayList<String>(mySet);
+    result.setEmail(filterEmail);
     return result;
   }
 
