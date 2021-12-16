@@ -10,7 +10,10 @@ import java.util.Set;
  */
 public class PersonInfo {
 
-
+  /**
+   * FirstName.
+   */
+  private String firstName;
   /**
    * LastName.
    */
@@ -45,6 +48,7 @@ public class PersonInfo {
   /**
    * Instantiates a new Person info.
    *
+   * @param firstNameParam   the first name param
    * @param lastNameParam    the last name param
    * @param addressParam     the address param
    * @param ageParam         the age param
@@ -52,17 +56,37 @@ public class PersonInfo {
    * @param medicationsParam the medications param
    * @param allergiesParam   the allergies param
    */
-  public PersonInfo(final String lastNameParam, final String addressParam,
+  public PersonInfo(final String firstNameParam,
+                    final String lastNameParam, final String addressParam,
                     final int ageParam,
                     final String emailParam,
                     final List<Medications> medicationsParam,
                     final Set<Allergies> allergiesParam) {
+    firstName = firstNameParam;
     lastName = lastNameParam;
     address = addressParam;
     age = ageParam;
     email = emailParam;
     medications = medicationsParam;
     allergies = allergiesParam;
+  }
+
+  /**
+   * Gets first name.
+   *
+   * @return the first name
+   */
+  public String getFirstName() {
+    return firstName;
+  }
+
+  /**
+   * Sets first name.
+   *
+   * @param firstNameParam the first name param
+   */
+  public void setFirstName(final String firstNameParam) {
+    firstName = firstNameParam;
   }
 
   /**

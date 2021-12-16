@@ -6,10 +6,7 @@ import java.util.List;
  * The type Fire station coverage.
  */
 public class FireStationCoverage {
-  /**
-   * PersonInfosList.
-   */
-  private List<PersonInfosForCoverage> personInfosForCoverageList;
+
   /**
    * Number of child.
    */
@@ -18,6 +15,10 @@ public class FireStationCoverage {
    * Number of adults.
    */
   private int adult;
+  /**
+   * PersonInfosList.
+   */
+  private List<PersonInfosForCoverage> personInfosForCoverageList;
 
   /**
    * Instantiates a new Fire station coverage.

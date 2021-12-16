@@ -1,9 +1,14 @@
 package com.safety.safetynet.service;
 
+import com.safety.safetynet.dto.FireStationCoverage;
+import com.safety.safetynet.dto.PersonInfosForCoverage;
 import com.safety.safetynet.model.FireStation;
+import com.safety.safetynet.model.MedicalRecords;
+import com.safety.safetynet.model.Person;
 import com.safety.safetynet.repository.FireStationRepository;
 import com.safety.safetynet.repository.MedicalRecordRepository;
 import com.safety.safetynet.repository.PersonRepository;
+import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -105,46 +110,48 @@ public class FireStationServiceTest {
 
     }
 
-//    @Test
-//    public void findAllByFireStationNumberTest() {
-//        FireStationCoverage fireStationCoverage = new FireStationCoverage();
-//        List<PersonInfosForCoverage> personInfosList = new ArrayList<>();
-//        fireStationCoverage.setAdult(1);
-//        fireStationCoverage.setChild(1);
-//
-//        PersonInfosForCoverage personInfos1 = new PersonInfosForCoverage("FirstTest1", "LastTest1", "3 Test", "1234");
-//        PersonInfosForCoverage personInfos2 = new PersonInfosForCoverage("FirstTest2", "LastTest2", "3 Test", "1234");
-//        personInfosList.add(personInfos1);
-//        personInfosList.add(personInfos2);
-//        fireStationCoverage.setPersonInfosList(personInfosList);
-//
-//        List<FireStation> fireStationList = new ArrayList<>();
-//        fireStationList.add(fireStation);
-//
-//        List<String> address = new ArrayList<>();
-//        address.add(fireStation.getAddress());
-//
-//        List<Person> personList = new ArrayList<>();
-//        Person person = new Person(1, "FirstTest1", "LastTest1", "3 Test", "city", 12345, "1234", "TEST");
-//        Person person2 = new Person(2, "FirstTest2", "LastTest2", "3 Test", "city", 12345, "1234", "TEST");
-//
-//        personList.add(person);
-//        personList.add(person2);
-//
-//        MedicalRecords medicalRecords1 = new MedicalRecords(1,"FirstTest1","LastTest1", LocalDate.of(2012,12,12), null, null);
-//        MedicalRecords medicalRecords2 = new MedicalRecords(2,"FirstTest2","LastTest2", LocalDate.of(2000,12,12), null, null);
-//
-//
-//        Mockito.when(fireStationRepository.findAllByStation(1)).thenReturn(fireStationList);
-//        Mockito.when(personService.findAllByAdressIn(address)).thenReturn(personList);
-////        Mockito.when(medicalRecordRepository.findBirthDateByFirstNameAndLastName(person.getFirstName(), person.getLastName())).thenReturn(LocalDate.of(2012,12,12));
-//        Mockito.when(personService.createPersonInfoToStationNumber(personList)).thenReturn(fireStationCoverage);
-//
-//        FireStationCoverage result = fireStationService.findAllByFireStationNumber(1);
-//        assertThat(result.getAdult()).isEqualTo(1);
-//        assertThat(result.getChild()).isEqualTo(1);
-//        assertThat(result.getPersonInfosList()).isEqualTo(personInfosList);
-//    }
+    @Test
+    public void findAllByFireStationNumberTest() {
+        FireStationCoverage fireStationCoverage = new FireStationCoverage();
+        List<PersonInfosForCoverage> personInfosList = new ArrayList<>();
+        fireStationCoverage.setAdult(1);
+        fireStationCoverage.setChild(1);
+
+        PersonInfosForCoverage personInfos1 = new PersonInfosForCoverage("FirstTest1", "LastTest1", "3 Test", "1234");
+        PersonInfosForCoverage personInfos2 = new PersonInfosForCoverage("FirstTest2", "LastTest2", "3 Test", "1234");
+        personInfosList.add(personInfos1);
+        personInfosList.add(personInfos2);
+        fireStationCoverage.setPersonInfosList(personInfosList);
+
+        List<FireStation> fireStationList = new ArrayList<>();
+        fireStationList.add(fireStation);
+
+        List<String> address = new ArrayList<>();
+        address.add(fireStation.getAddress());
+
+        List<Person> personList = new ArrayList<>();
+        Person person = new Person(1, "FirstTest1", "LastTest1", "3 Test", "city", 12345, "1234", "TEST");
+        Person person2 = new Person(2, "FirstTest2", "LastTest2", "3 Test", "city", 12345, "1234", "TEST");
+
+        personList.add(person);
+        personList.add(person2);
+
+        MedicalRecords
+            medicalRecords1 = new MedicalRecords(1,"FirstTest1","LastTest1", LocalDate.of(2012,12,12), null, null);
+        MedicalRecords medicalRecords2 = new MedicalRecords(2,"FirstTest2","LastTest2", LocalDate.of(2001,12,12), null, null);
+
+
+        Mockito.when(fireStationRepository.findAllByStation(2)).thenReturn(fireStationList);
+        Mockito.when(personService.findAllByAdressIn(address)).thenReturn(personList);
+        Mockito.when(medicalRecordRepository.findBirthDateByFirstNameAndLastName(person.getFirstName(), person.getLastName())).thenReturn(medicalRecords1.getBirthdate());
+        Mockito.when(medicalRecordRepository.findBirthDateByFirstNameAndLastName(person2.getFirstName(), person2.getLastName())).thenReturn(medicalRecords2.getBirthdate());
+        Mockito.when(personService.createPersonInfoToStationNumber(personList)).thenReturn(fireStationCoverage);
+
+        FireStationCoverage result = fireStationService.findAllByFireStationNumber(1);
+        assertThat(result.getAdult()).isEqualTo(1);
+        assertThat(result.getChild()).isEqualTo(1);
+        assertThat(result.getPersonInfosList()).isEqualTo(personInfosList);
+    }
 //
 //    @Test
 //    public void createPhoneAlertTest() {

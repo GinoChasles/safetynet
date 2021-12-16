@@ -322,7 +322,7 @@ public class PersonServiceImpl implements PersonService {
 
     for (Person p : personList) {
       PersonInfo personInfo = new PersonInfo();
-
+      personInfo.setFirstName(p.getFirstName());
       personInfo.setLastName(p.getLastName());
       personInfo.setAddress(p.getAddress());
       personInfo.setEmail(p.getEmail());

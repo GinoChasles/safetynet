@@ -148,17 +148,11 @@ public class PersonController {
   @GetMapping(value = "/childAlert", params = "address")
   public ResponseEntity<ChildAlert> getChildAlert(
       @RequestParam(value = "address") final String address) {
-    logger.info("recherche des enfants habitant à l'addresse: " + address);
     ChildAlert result = personServiceImpl.findChildAlert(address);
-    if (!result.getChildren().isEmpty()) {
-      logger.info(
-          "Liste d'enfant habitant à l'adresse " + address + " : "
-              + result);
+    logger.info("Liste d'enfant habitant à l'adresse "
+        + address + " : " + result);
       return ResponseEntity.ok().body(result);
-    } else {
-      logger.error("not found");
-      return ResponseEntity.notFound().build();
-    }
+
   }
 
   /**
