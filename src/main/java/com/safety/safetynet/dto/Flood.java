@@ -179,8 +179,6 @@ public class Flood {
   public String toString() {
     return "Flood{" + "firstName='" + firstName + '\''
         + ", lastName='" + lastName + '\'' + ", age="
-        + age + ", phone='" + phone + '\'' + ", medications="
-        + medications.toString() + ", allergies="
-        + allergies.toString() + '}';
+        + age + ", phone='" + phone + '\'';
   }
 }
