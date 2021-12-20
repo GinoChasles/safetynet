@@ -177,7 +177,6 @@ public class PersonServiceImpl implements PersonService {
       personInfosForCoverageLocal.setAddress(person.getAddress());
       personInfosForCoverageLocal.setPhone(person.getPhone());
       result.add(personInfosForCoverageLocal);
-      System.out.print("age de " + person + " est de " + age);
       if (age < 18) {
         fireStationCoverage.setChild(
             fireStationCoverage.getChild() + 1);

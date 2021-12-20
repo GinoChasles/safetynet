@@ -48,8 +48,6 @@ public class FireStationServiceTest {
     private FireStationServiceImpl fireStationService;
     @Mock
     private PersonServiceImpl personService;
-    @Mock
-    private MedicalRecordServiceImpl medicalRecordService;
 
     private static FireStation fireStation;
     private static List<FireStation> fireStationList = new ArrayList<>();
