@@ -16,16 +16,17 @@ import com.safety.safetynet.repository.PersonRepository;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runners.MethodSorters;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonServiceTest {
 
     @Mock
@@ -44,26 +46,25 @@ public class PersonServiceTest {
     @InjectMocks
     private PersonServiceImpl personService;
 
-    private Person person;
-    private Person person2;
-    private Person person3;
+    private static final Person person = new Person();
+    private static Person person2 = new Person();
+    private static Person person3 = new Person();
     private static MedicalRecords medicalRecords1 = new MedicalRecords();
     private static MedicalRecords medicalRecords2 = new MedicalRecords();
     private static MedicalRecords medicalRecords3 = new MedicalRecords();
-    private static List<Person> personList = new ArrayList<>();
-    private static List<Person> personListFire = new ArrayList<>();
-    private static FireStation fireStation = new FireStation();
-    private static List<Medications> medicationsList = new ArrayList<>();
-    private static Set<Allergies> allergiesSet = new HashSet<>();
-    Medications medications = new Medications();
-    Allergies allergies = new Allergies();
-    List<Medications> emptyMedication = new ArrayList<>();
-    Set<Allergies> emptyAllergies = new HashSet<>();
+    private static final List<Person> personList = new ArrayList<>();
+    private static final List<Person> personListFire = new ArrayList<>();
+    private static final FireStation fireStation = new FireStation();
+    private static final List<Medications> medicationsList = new ArrayList<>();
+    private static final Set<Allergies> allergiesSet = new HashSet<>();
+    private static final Medications medications = new Medications();
+    private static final Allergies allergies = new Allergies();
+    private static final List<Medications> emptyMedication = new ArrayList<>();
+    private static final Set<Allergies> emptyAllergies = new HashSet<>();
 
 
     @BeforeEach
     void setUp() {
-        person = new Person();
         person.setId(1);
         person.setFirstName("TestFirstName");
         person.setLastName("TestLastName");
@@ -204,14 +205,20 @@ public class PersonServiceTest {
         result.setChildren(children);
         result.setFamily(personListLocal);
 
-        lenient().when(personRepository.findAllByAddress("3 Rue bidon")).thenReturn(personList);
-        lenient().when(medicalRecordRepository.findBirthDateByFirstNameAndLastName(person.getFirstName(), person.getFirstName())).thenReturn(medicalRecords1.getBirthdate());
-        lenient().when(medicalRecordRepository.findBirthDateByFirstNameAndLastName(person2.getFirstName(), person2.getFirstName())).thenReturn(medicalRecords2.getBirthdate());
+        when(personRepository.findAllByAddress("3 Rue bidon")).thenReturn(personList);
+        when(medicalRecordRepository.findBirthDateByFirstNameAndLastName(person.getFirstName(), person.getLastName())).thenReturn(medicalRecords1.getBirthdate());
+        when(medicalRecordRepository.findBirthDateByFirstNameAndLastName(person2.getFirstName(), person2.getLastName())).thenReturn(medicalRecords2.getBirthdate());
 
         ChildAlert mock = personService.findChildAlert("3 Rue bidon");
-    System.out.println(mock);
-        assertThat(mock.getChildren()).isEqualTo(result.getChildren());
-        assertThat(mock.getFamily()).isEqualTo(result.getFamily());
+        assertThat(mock.getFamily().get(0).getFirstName()).isEqualTo(result.getFamily().get(0).getFirstName());
+        assertThat(mock.getFamily().get(0).getLastName()).isEqualTo(result.getFamily().get(0).getLastName());
+        assertThat(mock.getFamily().get(0).getAddress()).isEqualTo(result.getFamily().get(0).getAddress());
+        assertThat(mock.getFamily().get(0).getEmail()).isEqualTo(result.getFamily().get(0).getEmail());
+        assertThat(mock.getFamily().get(0).getPhone()).isEqualTo(result.getFamily().get(0).getPhone());
+
+        assertThat(mock.getChildren().get(0).getFirstName()).isEqualTo(result.getChildren().get(0).getFirstName());
+        assertThat(mock.getChildren().get(0).getLastName()).isEqualTo(result.getChildren().get(0).getLastName());
+        assertThat(mock.getChildren().get(0).getAge()).isEqualTo(result.getChildren().get(0).getAge());
 
     }
 
